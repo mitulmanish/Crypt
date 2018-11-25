@@ -10,40 +10,53 @@
 import Foundation
 
 class BasicOperation: Operation {
-    
-    private var _executing = false {
-        willSet {
-            willChangeValue(forKey: "isExecuting")
-        }
-        
-        didSet {
-            didChangeValue(forKey: "isExecuting")
+
+    enum State: String {
+        case ready, executing, finished
+
+        fileprivate var keyPath: String {
+            return "is" + rawValue.capitalized
         }
     }
-    
+
+    var state = State.ready {
+        willSet {
+            willChangeValue(forKey: newValue.keyPath)
+            willChangeValue(forKey: state.keyPath)
+        }
+
+        didSet {
+            willChangeValue(forKey: oldValue.keyPath)
+            didChangeValue(forKey: state.keyPath)
+        }
+    }
+
     override var isExecuting: Bool {
-        return _executing
+        return state == .executing
     }
-    
-    func executing(_ executing: Bool) {
-        _executing = executing
+
+    override var isReady: Bool {
+        return super.isReady && state == .ready
     }
-    
-    private var _finished = false {
-        willSet {
-            willChangeValue(forKey: "isFinished")
-        }
-        
-        didSet {
-            didChangeValue(forKey: "isFinished")
-        }
-    }
-    
+
     override var isFinished: Bool {
-        return _finished
+        return state == .finished
+    }
+
+    func setExecuting() {
+        state = .executing
     }
     
-    func finish(_ finished: Bool) {
-        _finished = finished
+    func setFinished() {
+        state = .finished
+    }
+
+    override func start() {
+        if isCancelled {
+            setFinished()
+            return
+        }
+        main()
+        setExecuting()
     }
 }

@@ -40,12 +40,11 @@ class HistoricalDataNetworkOperationManager {
         latestPriceOperation.addDependency(oldPriceOperation)
         
         let opeartionQueue = OperationQueue()
-        opeartionQueue.addOperations([oldPriceOperation, latestPriceOperation], waitUntilFinished: true)
+        opeartionQueue.addOperations([latestPriceOperation, oldPriceOperation], waitUntilFinished: false)
         
         oldPriceOperation.completionBlock = {
             if let oldPriceData = oldPriceOperation.serverData, let historicalData = try? JSONDecoder().decode(CryptoHistoricalData.self, from: oldPriceData) {
                 self.oldPrice = historicalData.price
-                print("xxx old \(historicalData.price)")
             } else {
                 self.completionHandler?(nil, HistoricalPriceError.cantFetchOldPrice)
             }
@@ -55,7 +54,6 @@ class HistoricalDataNetworkOperationManager {
             if let latestPriceData = latestPriceOperation.serverData, let historicalData = try? JSONDecoder().decode(CryptoHistoricalData.self, from: latestPriceData) {
                 self.currentPrice = historicalData.price
                 let price = CoinPrice(old: self.oldPrice ?? 0.0, latest: self.currentPrice ?? 0)
-                print("xxx latest \(price)")
                 OperationQueue.main.addOperation {
                     self.completionHandler?(price, nil)
                 }

@@ -8,12 +8,16 @@
 
 import Foundation
 
-class NetworkOperation: AsyncOperation {
+class NetworkOperation: BasicOperation {
     private let session: URLSession
     private let urlRequest: URLRequest
     
     var serverData: Data?
     var errorReason: String?
+
+    override var isAsynchronous: Bool {
+        return true
+    }
     
     init(session: URLSession, urlRequest: URLRequest) {
         self.session = session
@@ -26,17 +30,14 @@ class NetworkOperation: AsyncOperation {
             switch networkResult {
             case .success(let data):
                 self.serverData = data
-                self.state = .finished
-                self.completionBlock?()
+                self.setFinished()
             case .error(let reason):
                 self.errorReason = reason
-                self.state = .finished
-                self.completionBlock?()
+                self.setFinished()
             case .unexpected:
                 self.serverData = nil
                 self.errorReason = "unexpected error"
-                self.state = .finished
-                self.completionBlock?()
+                self.setFinished()
             }
         }
     }

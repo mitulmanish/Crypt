@@ -12,8 +12,11 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .gray
-        
+        view.backgroundColor = .green
+    }
+
+    
+    @IBAction func buttonTounched(_ sender: UIButton) {
         let coin = Coin(id: 363, name: "Bitcoin", code: "BTC")
         let historicalDataNetworkOperationManager = HistoricalDataNetworkOperationManager()
         historicalDataNetworkOperationManager.completionHandler = { (price, error) in
