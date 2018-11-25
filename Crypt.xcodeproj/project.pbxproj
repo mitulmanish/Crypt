@@ -15,6 +15,7 @@
 		013A471A208F616900DBAEAE /* CryptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013A4719208F616900DBAEAE /* CryptTests.swift */; };
 		013A4725208F616900DBAEAE /* CryptUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013A4724208F616900DBAEAE /* CryptUITests.swift */; };
 		013A47352090CB7800DBAEAE /* CoinsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013A47342090CB7800DBAEAE /* CoinsTableViewController.swift */; };
+		01445F8421AA9D9B00752F45 /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01445F8321AA9D9B00752F45 /* AsyncOperation.swift */; };
 		01C259CA217C4F5E0084617B /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C259C9217C4F5E0084617B /* DataModel.swift */; };
 		01C259CD217C569D0084617B /* URLSession+SanitizedResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C259CC217C569D0084617B /* URLSession+SanitizedResponse.swift */; };
 		01C259D0217C60A10084617B /* EndpointConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C259CF217C60A10084617B /* EndpointConstructor.swift */; };
@@ -56,6 +57,7 @@
 		013A4724208F616900DBAEAE /* CryptUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptUITests.swift; sourceTree = "<group>"; };
 		013A4726208F616900DBAEAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		013A47342090CB7800DBAEAE /* CoinsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinsTableViewController.swift; sourceTree = "<group>"; };
+		01445F8321AA9D9B00752F45 /* AsyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
 		01C259C9217C4F5E0084617B /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		01C259CC217C569D0084617B /* URLSession+SanitizedResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+SanitizedResponse.swift"; sourceTree = "<group>"; };
 		01C259CF217C60A10084617B /* EndpointConstructor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointConstructor.swift; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 			children = (
 				01C259D4217C64CC0084617B /* BasicOpeartion.swift */,
 				01C259D6217C65DC0084617B /* NetworkOpeartion.swift */,
+				01445F8321AA9D9B00752F45 /* AsyncOperation.swift */,
 			);
 			path = Opeartion;
 			sourceTree = "<group>";
@@ -313,6 +316,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				01C259CD217C569D0084617B /* URLSession+SanitizedResponse.swift in Sources */,
+				01445F8421AA9D9B00752F45 /* AsyncOperation.swift in Sources */,
 				013A4707208F616700DBAEAE /* ViewController.swift in Sources */,
 				01C259D9217C83810084617B /* HistoricalDataNetworkOperationManager.swift in Sources */,
 				01C259D5217C64CC0084617B /* BasicOpeartion.swift in Sources */,
