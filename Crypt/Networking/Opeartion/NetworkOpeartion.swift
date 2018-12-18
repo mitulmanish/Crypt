@@ -8,11 +8,34 @@
 
 import Foundation
 
-class NetworkOperation: BasicOperation {
+protocol DecodableOperationType: class {
+    associatedtype T: Decodable
+}
+
+class DecodingOperation<Element>: BasicOperation, DecodableOperationType where Element: Decodable {
+    typealias T = Element
+    private(set) var decodedObject: T?
+
+    override var isAsynchronous: Bool {
+        return true
+    }
+
+    override func main() {
+        let dataToDecode = (dependencies.first { $0 is DecodingDataProvider } as? DecodingDataProvider)?.data
+        decodedObject = try? JSONDecoder().decode(T.self, from: dataToDecode ?? Data())
+        setFinished()
+    }
+}
+
+protocol DecodingDataProvider: class {
+    var data: Data? { get }
+}
+
+class NetworkOperation: BasicOperation, DecodingDataProvider {
     private let session: URLSession
     private let urlRequest: URLRequest
     
-    var serverData: Data?
+    var data: Data?
     var errorReason: String?
 
     override var isAsynchronous: Bool {
@@ -29,13 +52,14 @@ class NetworkOperation: BasicOperation {
             guard let self = self else { return }
             switch networkResult {
             case .success(let data):
-                self.serverData = data
+                self.data = data
+                let str = String(data: data, encoding: .utf8)
                 self.setFinished()
             case .error(let reason):
                 self.errorReason = reason
                 self.setFinished()
             case .unexpected:
-                self.serverData = nil
+                self.data = nil
                 self.errorReason = "unexpected error"
                 self.setFinished()
             }

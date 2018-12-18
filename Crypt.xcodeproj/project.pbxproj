@@ -15,7 +15,6 @@
 		013A471A208F616900DBAEAE /* CryptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013A4719208F616900DBAEAE /* CryptTests.swift */; };
 		013A4725208F616900DBAEAE /* CryptUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013A4724208F616900DBAEAE /* CryptUITests.swift */; };
 		013A47352090CB7800DBAEAE /* CoinsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013A47342090CB7800DBAEAE /* CoinsTableViewController.swift */; };
-		01445F8421AA9D9B00752F45 /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01445F8321AA9D9B00752F45 /* AsyncOperation.swift */; };
 		01C259CA217C4F5E0084617B /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C259C9217C4F5E0084617B /* DataModel.swift */; };
 		01C259CD217C569D0084617B /* URLSession+SanitizedResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C259CC217C569D0084617B /* URLSession+SanitizedResponse.swift */; };
 		01C259D0217C60A10084617B /* EndpointConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C259CF217C60A10084617B /* EndpointConstructor.swift */; };
@@ -23,6 +22,12 @@
 		01C259D5217C64CC0084617B /* BasicOpeartion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C259D4217C64CC0084617B /* BasicOpeartion.swift */; };
 		01C259D7217C65DC0084617B /* NetworkOpeartion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C259D6217C65DC0084617B /* NetworkOpeartion.swift */; };
 		01C259D9217C83810084617B /* HistoricalDataNetworkOperationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C259D8217C83810084617B /* HistoricalDataNetworkOperationManager.swift */; };
+		DDB5159521C4FC3C009B9483 /* UIViiew+roundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB5159421C4FC3C009B9483 /* UIViiew+roundedCorners.swift */; };
+		DDB5159721C6008C009B9483 /* AllCoinsNetworkOperationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB5159621C6008C009B9483 /* AllCoinsNetworkOperationManager.swift */; };
+		DDB5159A21C651E2009B9483 /* DraggableTransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB5159921C651E2009B9483 /* DraggableTransitionDelegate.swift */; };
+		DDB5159C21C65731009B9483 /* UIWindow+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB5159B21C65731009B9483 /* UIWindow+Extensions.swift */; };
+		DDE1488F21BB9C3700CF8182 /* SelectCoinsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE1488D21BB9C3700CF8182 /* SelectCoinsTableViewController.swift */; };
+		DDE1489321BB9E9000CF8182 /* CoinTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE1489121BB9E9000CF8182 /* CoinTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,7 +62,6 @@
 		013A4724208F616900DBAEAE /* CryptUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptUITests.swift; sourceTree = "<group>"; };
 		013A4726208F616900DBAEAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		013A47342090CB7800DBAEAE /* CoinsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinsTableViewController.swift; sourceTree = "<group>"; };
-		01445F8321AA9D9B00752F45 /* AsyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
 		01C259C9217C4F5E0084617B /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		01C259CC217C569D0084617B /* URLSession+SanitizedResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+SanitizedResponse.swift"; sourceTree = "<group>"; };
 		01C259CF217C60A10084617B /* EndpointConstructor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointConstructor.swift; sourceTree = "<group>"; };
@@ -65,6 +69,12 @@
 		01C259D4217C64CC0084617B /* BasicOpeartion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicOpeartion.swift; sourceTree = "<group>"; };
 		01C259D6217C65DC0084617B /* NetworkOpeartion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkOpeartion.swift; sourceTree = "<group>"; };
 		01C259D8217C83810084617B /* HistoricalDataNetworkOperationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalDataNetworkOperationManager.swift; sourceTree = "<group>"; };
+		DDB5159421C4FC3C009B9483 /* UIViiew+roundedCorners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViiew+roundedCorners.swift"; sourceTree = "<group>"; };
+		DDB5159621C6008C009B9483 /* AllCoinsNetworkOperationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllCoinsNetworkOperationManager.swift; sourceTree = "<group>"; };
+		DDB5159921C651E2009B9483 /* DraggableTransitionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggableTransitionDelegate.swift; sourceTree = "<group>"; };
+		DDB5159B21C65731009B9483 /* UIWindow+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+Extensions.swift"; sourceTree = "<group>"; };
+		DDE1488D21BB9C3700CF8182 /* SelectCoinsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCoinsTableViewController.swift; sourceTree = "<group>"; };
+		DDE1489121BB9E9000CF8182 /* CoinTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +125,7 @@
 		013A4703208F616700DBAEAE /* Crypt */ = {
 			isa = PBXGroup;
 			children = (
+				DDB5159821C651A9009B9483 /* Presentation Animation */,
 				01C259CE217C60800084617B /* Networking */,
 				01C259CB217C56620084617B /* Extensions */,
 				01C259C8217C4F370084617B /* Data Structure */,
@@ -125,6 +136,8 @@
 				013A470D208F616900DBAEAE /* LaunchScreen.storyboard */,
 				013A4710208F616900DBAEAE /* Info.plist */,
 				013A47342090CB7800DBAEAE /* CoinsTableViewController.swift */,
+				DDE1488D21BB9C3700CF8182 /* SelectCoinsTableViewController.swift */,
+				DDE1489121BB9E9000CF8182 /* CoinTableViewCell.swift */,
 			);
 			path = Crypt;
 			sourceTree = "<group>";
@@ -159,6 +172,8 @@
 			isa = PBXGroup;
 			children = (
 				01C259CC217C569D0084617B /* URLSession+SanitizedResponse.swift */,
+				DDB5159421C4FC3C009B9483 /* UIViiew+roundedCorners.swift */,
+				DDB5159B21C65731009B9483 /* UIWindow+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -170,6 +185,7 @@
 				01C259CF217C60A10084617B /* EndpointConstructor.swift */,
 				01C259D1217C61050084617B /* RequestFactory.swift */,
 				01C259D8217C83810084617B /* HistoricalDataNetworkOperationManager.swift */,
+				DDB5159621C6008C009B9483 /* AllCoinsNetworkOperationManager.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -179,9 +195,16 @@
 			children = (
 				01C259D4217C64CC0084617B /* BasicOpeartion.swift */,
 				01C259D6217C65DC0084617B /* NetworkOpeartion.swift */,
-				01445F8321AA9D9B00752F45 /* AsyncOperation.swift */,
 			);
 			path = Opeartion;
+			sourceTree = "<group>";
+		};
+		DDB5159821C651A9009B9483 /* Presentation Animation */ = {
+			isa = PBXGroup;
+			children = (
+				DDB5159921C651E2009B9483 /* DraggableTransitionDelegate.swift */,
+			);
+			path = "Presentation Animation";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -316,16 +339,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				01C259CD217C569D0084617B /* URLSession+SanitizedResponse.swift in Sources */,
-				01445F8421AA9D9B00752F45 /* AsyncOperation.swift in Sources */,
 				013A4707208F616700DBAEAE /* ViewController.swift in Sources */,
 				01C259D9217C83810084617B /* HistoricalDataNetworkOperationManager.swift in Sources */,
 				01C259D5217C64CC0084617B /* BasicOpeartion.swift in Sources */,
 				01C259CA217C4F5E0084617B /* DataModel.swift in Sources */,
+				DDB5159C21C65731009B9483 /* UIWindow+Extensions.swift in Sources */,
 				01C259D2217C61050084617B /* RequestFactory.swift in Sources */,
+				DDE1489321BB9E9000CF8182 /* CoinTableViewCell.swift in Sources */,
+				DDB5159521C4FC3C009B9483 /* UIViiew+roundedCorners.swift in Sources */,
 				01C259D7217C65DC0084617B /* NetworkOpeartion.swift in Sources */,
 				01C259D0217C60A10084617B /* EndpointConstructor.swift in Sources */,
+				DDE1488F21BB9C3700CF8182 /* SelectCoinsTableViewController.swift in Sources */,
 				013A4705208F616700DBAEAE /* AppDelegate.swift in Sources */,
 				013A47352090CB7800DBAEAE /* CoinsTableViewController.swift in Sources */,
+				DDB5159721C6008C009B9483 /* AllCoinsNetworkOperationManager.swift in Sources */,
+				DDB5159A21C651E2009B9483 /* DraggableTransitionDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -499,14 +527,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = RNF8E69GKB;
+				DEVELOPMENT_TEAM = R294DGM4NL;
 				INFOPLIST_FILE = Crypt/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "mitul-manish.Crypt2";
+				PRODUCT_BUNDLE_IDENTIFIER = "mitul-manish.Crypt3";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -518,14 +546,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = RNF8E69GKB;
+				DEVELOPMENT_TEAM = R294DGM4NL;
 				INFOPLIST_FILE = Crypt/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "mitul-manish.Crypt2";
+				PRODUCT_BUNDLE_IDENTIFIER = "mitul-manish.Crypt3";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

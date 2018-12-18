@@ -6,21 +6,27 @@ struct CoinPrice {
 }
 
 struct Coin: Codable {
-    var id: Int
-    var name: String
-    var code: String
+    let id: Int
+    let name: String
+    let code: String
+
+    init(id: Int, name: String, code: String) {
+        self.id = id
+        self.name = name
+        self.code = code
+    }
 }
 
 struct CoinCollection: Codable {
-    var coins: [Coin]
+    let coins: [Coin]
 }
 
 struct CryptoHistoricalData: Codable {
-    var id: Int
-    var baseCurrency: String
+    let id: Int
+    let baseCurrency: String
     
-    private var date: String
-    private var rawPrice: String
+    private let date: String
+    private let rawPrice: String
     
     var price: Float? {
         return Float(rawPrice)
@@ -30,8 +36,8 @@ struct CryptoHistoricalData: Codable {
         return date(fromString: date)
     }
     
-    var firstData: String
-    var mostRecentData: String
+    let firstData: String
+    let mostRecentData: String
     
     enum HistoryKeys: String, CodingKey {
         case coin

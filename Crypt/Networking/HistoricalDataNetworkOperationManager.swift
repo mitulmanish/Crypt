@@ -1,64 +1,53 @@
-//
-//  HistoricalDataNetworkOperationManager.swift
-//  Crypt
-//
-//  Created by Mitul Manish on 21/10/18.
-//  Copyright © 2018 Mitul Manish. All rights reserved.
-//
-
 import Foundation
-
-
 
 enum HistoricalPriceError: Error {
     case cantFetchOldPrice
     case cantFetchLatestPrice
 }
 
-class HistoricalDataNetworkOperationManager {
+struct HistoricalDataNetworkOperationManager {
     private(set) var oldPrice: Float?
     private(set) var currentPrice: Float?
-    
-    var completionHandler: ((CoinPrice?, HistoricalPriceError?) -> ())?
+
     func requestCoinHistoricalData(
         forDates dates: (old: Date, latest: Date),
         forCoin coin: Coin,
-        forCurrency currency: String
+        forCurrency currency: String,
+        completionHandler: @escaping ((CoinPrice?, HistoricalPriceError?) -> ())
         ) {
         
         let oldPriceEndpoint = EndPointConstructor.historicalData(coin: coin, date: dates.old, currency: currency)
         let latestPriceEndpoint = EndPointConstructor.historicalData(coin: coin, date: dates.latest, currency: currency)
         
-        guard let oldPriceRequest = RequestFactory.getHistoricalDataRequest(endpointType: oldPriceEndpoint),
-            let latestPriceRequest = RequestFactory.getHistoricalDataRequest(endpointType: latestPriceEndpoint) else {
+        guard let oldPriceRequest = RequestFactory.getRequest(endpointType: oldPriceEndpoint),
+            let latestPriceRequest = RequestFactory.getRequest(endpointType: latestPriceEndpoint) else {
                 return
         }
         
         let oldPriceOperation = NetworkOperation(session: URLSession(configuration: .default), urlRequest: oldPriceRequest)
+
+        let oldPriceDecodingOperation = DecodingOperation<CryptoHistoricalData>()
+        oldPriceDecodingOperation.addDependency(oldPriceOperation)
+
         let latestPriceOperation = NetworkOperation(session: URLSession(configuration: .default), urlRequest: latestPriceRequest)
-        
-        latestPriceOperation.addDependency(oldPriceOperation)
+        latestPriceOperation.addDependency(oldPriceDecodingOperation)
+
+        let latestPriceDecodingOperation = DecodingOperation<CryptoHistoricalData>()
+        latestPriceDecodingOperation.addDependency(latestPriceOperation)
         
         let opeartionQueue = OperationQueue()
-        opeartionQueue.addOperations([latestPriceOperation, oldPriceOperation], waitUntilFinished: false)
-        
-        oldPriceOperation.completionBlock = {
-            if let oldPriceData = oldPriceOperation.serverData, let historicalData = try? JSONDecoder().decode(CryptoHistoricalData.self, from: oldPriceData) {
-                self.oldPrice = historicalData.price
-            } else {
-                self.completionHandler?(nil, HistoricalPriceError.cantFetchOldPrice)
-            }
-        }
-        
-        latestPriceOperation.completionBlock = {
-            if let latestPriceData = latestPriceOperation.serverData, let historicalData = try? JSONDecoder().decode(CryptoHistoricalData.self, from: latestPriceData) {
-                self.currentPrice = historicalData.price
-                let price = CoinPrice(old: self.oldPrice ?? 0.0, latest: self.currentPrice ?? 0)
+        opeartionQueue.addOperations([oldPriceOperation, oldPriceDecodingOperation, latestPriceOperation, latestPriceDecodingOperation], waitUntilFinished: false)
+
+        latestPriceDecodingOperation.completionBlock = {
+            if let oldPrice = oldPriceDecodingOperation.decodedObject?.price, let latestPrice = latestPriceDecodingOperation.decodedObject?.price {
+                let price = CoinPrice(old: oldPrice, latest: latestPrice)
                 OperationQueue.main.addOperation {
-                    self.completionHandler?(price, nil)
+                    completionHandler(price, nil)
                 }
             } else {
-                self.completionHandler?(nil, HistoricalPriceError.cantFetchLatestPrice)
+                OperationQueue.main.addOperation {
+                    completionHandler(nil, HistoricalPriceError.cantFetchLatestPrice)
+                }
             }
         }
     }

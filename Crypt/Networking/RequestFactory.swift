@@ -1,7 +1,7 @@
 import Foundation
 
 struct RequestFactory {
-    static func getHistoricalDataRequest(endpointType: EndPointConstructor) -> URLRequest? {
+    static func getRequest(endpointType: EndPointConstructor) -> URLRequest? {
         guard let baseURL = URL(string: "https://www.cryptocurrencychart.com/api") else {
             return nil
         }
