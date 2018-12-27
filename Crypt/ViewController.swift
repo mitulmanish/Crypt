@@ -8,7 +8,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var contentScrollView: UIScrollView!
 
     @IBOutlet weak var quantityTextField: UITextField!
-
+    
+    @IBOutlet weak var customView: CustomView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -53,3 +55,12 @@ class ViewController: UIViewController {
     }
 }
 
+class CustomView: UIView {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+}

@@ -8,14 +8,12 @@ class DraggableTransitionDelegate: NSObject, UIViewControllerTransitioningDelega
 }
 
 private extension CGFloat {
-    // Spring animation
     static let springDampingRatio: CGFloat = 0.7
     static let springInitialVelocityY: CGFloat =  10
 }
 
 private extension Double {
-    // Spring animation
-    static let animationDuration: Double = 0.2
+    static let animationDuration: Double = 0.3
 }
 
 enum DragDirection {
@@ -24,16 +22,16 @@ enum DragDirection {
 }
 
 enum DraggablePosition {
-    case collapsed
     case open
     case midway
+    case collapsed
 
     var heightMulitiplier: CGFloat {
         switch self {
         case .collapsed:
             return 0.2
         case .open:
-            return 0.95
+            return 0.80
         case .midway:
             return 0.5
         }
@@ -61,36 +59,8 @@ enum DraggablePosition {
         }
     }
 
-    var dimAplha: CGFloat {
-        switch self {
-        case .collapsed:
-            return 0.0
-        case .open:
-            return 0.45
-        case .midway:
-            return 0.2
-        }
-    }
-
     func yOrigin(for maxHeight: CGFloat) -> CGFloat {
         return maxHeight - (maxHeight * heightMulitiplier)
-    }
-
-    func nextPosition(for direction: DragDirection) -> DraggablePosition {
-        switch(self, direction) {
-        case (.collapsed, .up):
-            return .midway
-        case (.collapsed, .down):
-            return .collapsed
-        case (.open, .up):
-            return .open
-        case (.open, .down):
-            return .midway
-        case (.midway, .up):
-            return .open
-        case (.midway, .down):
-            return .collapsed
-        }
     }
 }
 
@@ -100,9 +70,16 @@ final class DraggablePresentationController: UIPresentationController {
         return presentedViewController as? DraggableViewType
     }
 
+    private var presentedViewOriginY: CGFloat {
+        return presentedView?.frame.origin.y ?? 0
+    }
+
     // MARK: Private
     private var dimmingView = UIView()
-    private var draggablePosition: DraggablePosition = .midway {
+
+    private var dragDirection: DragDirection = .up
+
+    private var draggablePosition: DraggablePosition = .open {
         didSet {
             if draggablePosition == .open {
                 draggableView?.handleInteraction(enabled: true)
@@ -110,55 +87,62 @@ final class DraggablePresentationController: UIPresentationController {
                 draggableView?.handleInteraction(enabled: false)
             }
 
-            switch (oldValue, draggablePosition) {
-            case (.midway, .collapsed):
-                presentedViewController.dismiss(animated: true, completion: nil)
-            default:
-                break
-            }
+//            switch (oldValue, draggablePosition) {
+//            case (.midway, .collapsed), (.open, .collapsed):
+//                presentedViewController.dismiss(animated: true, completion: nil)
+//            default:
+//                break
+//            }
         }
     }
 
     private let springTiming = UISpringTimingParameters(dampingRatio: .springDampingRatio, initialVelocity: CGVector(dx: 0, dy: .springInitialVelocityY))
     private var animator: UIViewPropertyAnimator?
 
-    private var dragDirection: DragDirection = .up
-    private let maxFrame = CGRect(x: 0, y: 0, width: UIWindow.root.bounds.width, height: UIWindow.root.bounds.height + UIWindow.key.safeAreaInsets.bottom)
-    private var panOnPresented = UIGestureRecognizer()
+    private var maxFrame: CGRect {
+        return CGRect(x: 0, y: 0, width: containerView?.bounds.width ?? 0, height: containerView?.bounds.height ?? 0)
+    }
+
+    private var panOnPresented = UIPanGestureRecognizer()
+
+    private var containerViewGestureRecognizer = UITapGestureRecognizer()
 
     override var frameOfPresentedViewInContainerView: CGRect {
         let presentedViewOrigin = CGPoint(x: 0, y: draggablePosition.yOrigin(for: maxFrame.height))
-        let presentedViewSize = CGSize(width: maxFrame.width, height: maxFrame.height)
+        let presentedViewSize = CGSize(width: containerView?.bounds.width ?? 0,
+                                       height: containerView?.bounds.height ?? 0)
         return CGRect(origin: presentedViewOrigin, size: presentedViewSize)
     }
 
     override func presentationTransitionWillBegin() {
-        guard let containerView = containerView else { return }
-
-        containerView.insertSubview(dimmingView, at: 1)
-        dimmingView.alpha = 0
-        dimmingView.backgroundColor = .black
-        dimmingView.frame = containerView.frame
-        draggableView?.handleInteraction(enabled: false)
+        draggableView?.handleInteraction(enabled: true)
     }
 
     override func presentationTransitionDidEnd(_ completed: Bool) {
+        draggableView?.scrollView.delegate = self
         animator = UIViewPropertyAnimator(duration: .animationDuration, timingParameters: self.springTiming)
         animator?.isInterruptible = true
         panOnPresented = UIPanGestureRecognizer(target: self, action: #selector(userDidPan(panRecognizer:)))
         presentedView?.addGestureRecognizer(panOnPresented)
+        containerViewGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(receivedTouch))
+        containerViewGestureRecognizer.delegate = self
+        containerView?.addGestureRecognizer(containerViewGestureRecognizer)
+        animate(to: .open)
     }
 
-    override func containerViewWillLayoutSubviews() {
-        presentedView?.frame = frameOfPresentedViewInContainerView
+    @objc func receivedTouch(tapRecognizer: UITapGestureRecognizer) {
+        presentedViewController.dismiss(animated: true, completion: nil)
     }
 
     @objc private func userDidPan(panRecognizer: UIPanGestureRecognizer) {
         draggableView?.dismissKeyboard()
+        draggableView?.scrollView.setContentOffset(.zero, animated: false)
         let translationPoint = panRecognizer.translation(in: presentedView)
         let currentOriginY = draggablePosition.yOrigin(for: maxFrame.height)
         let newOffset = translationPoint.y + currentOriginY
-        dragDirection = newOffset > currentOriginY ? .down : .up
+        let adjustedOffset = (newOffset < 0) ? -1 * newOffset : newOffset
+
+        dragDirection = adjustedOffset > currentOriginY ? .down : .up
 
         let canDragInProposedDirection = dragDirection == .up &&
             draggablePosition == .open ? false : true
@@ -166,9 +150,9 @@ final class DraggablePresentationController: UIPresentationController {
         if newOffset >= 0 && canDragInProposedDirection {
             switch panRecognizer.state {
             case .began, .changed:
-                presentedView?.frame.origin.y = newOffset
+                presentedView?.frame.origin.y = max(DraggablePosition.open.yOrigin(for: maxFrame.height), adjustedOffset)//adjustedOffset
             case .ended:
-                animate(newOffset)
+                animate(max(DraggablePosition.open.yOrigin(for: maxFrame.height), adjustedOffset))
             default:
                 break
             }
@@ -196,31 +180,68 @@ final class DraggablePresentationController: UIPresentationController {
                 animate(to: .collapsed)
             }
         }
-
     }
+
+    func getDraggablePosition() -> DraggablePosition {
+        let distanceFromBottom = maxFrame.height - presentedViewOriginY
+
+        switch dragDirection {
+        case .up:
+            if distanceFromBottom > (maxFrame.height * DraggablePosition.open.upBoundary) {
+                return .open
+            } else if distanceFromBottom > (maxFrame.height * DraggablePosition.midway.upBoundary) {
+                return .midway
+            } else {
+                return .collapsed
+            }
+        case .down:
+            if distanceFromBottom > (maxFrame.height * DraggablePosition.open.downBoundary) {
+                return .open
+            } else if distanceFromBottom > (maxFrame.height * DraggablePosition.midway.downBoundary) {
+                return .midway
+            } else {
+                return .collapsed
+            }
+        }
+    }
+
     private func animate(to position: DraggablePosition) {
         guard let animator = animator else { return }
 
         animator.addAnimations {
             self.presentedView?.frame.origin.y = position.yOrigin(for: self.maxFrame.height)
-            self.dimmingView.alpha = position.dimAplha
         }
 
-        animator.addCompletion { (animationPosition) in
-            switch animationPosition {
-            case .end:
-                self.draggablePosition = position
-            default: break
-            }
+        animator.addCompletion { _ in
+            self.draggablePosition = position
         }
         animator.startAnimation()
     }
+
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        presentedViewController.dismiss(animated: true)
+    }
 }
 
-// MARK: Public
-extension DraggablePresentationController {
-    func animateToOpen() {
-        animate(to: .open)
+extension DraggablePresentationController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        let touchPoint = touch.location(in: presentedView)
+        return presentedView?.bounds.contains(touchPoint) == false
+    }
+}
+
+extension DraggablePresentationController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y <= 0, draggablePosition == .open {
+            var yOrigin = presentedViewOriginY + (scrollView.contentOffset.y * -0.35)
+            let downboundary = maxFrame.height - 84
+            yOrigin = yOrigin < downboundary ? yOrigin : downboundary
+            presentedView?.frame.origin.y = yOrigin
+        }
+    }
+
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        animate(to: getDraggablePosition())
     }
 }
 

@@ -3,6 +3,7 @@ import UIKit
 protocol DraggableViewType: class {
     func dismissKeyboard()
     func handleInteraction(enabled: Bool)
+    var scrollView: UIScrollView { get }
 }
 
 class SelectCoinsTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
@@ -160,6 +161,11 @@ class SelectCoinsTableViewController: UIViewController, UITableViewDataSource, U
 }
 
 extension SelectCoinsTableViewController: DraggableViewType {
+    
+    var scrollView: UIScrollView {
+        return tableView
+    }
+
     func handleInteraction(enabled: Bool) {
         tableView.isUserInteractionEnabled = enabled
         searchBar.isUserInteractionEnabled = enabled
