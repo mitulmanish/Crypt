@@ -6,11 +6,11 @@ struct AllCoinsNetworkOperationManager {
             completionHandler(nil)
             return
         }
-        let allCoinsOPeration = NetworkOperation(session: URLSession(configuration: .default), urlRequest: request)
+        let allCoinsOperation = NetworkOperation(session: URLSession(configuration: .default), urlRequest: request)
         let dataDecodingOperation = DecodingOperation<CoinCollection>()
-        dataDecodingOperation.addDependency(allCoinsOPeration)
+        dataDecodingOperation.addDependency(allCoinsOperation)
         let operationQueue = OperationQueue()
-        operationQueue.addOperations([allCoinsOPeration, dataDecodingOperation], waitUntilFinished: false)
+        operationQueue.addOperations([allCoinsOperation, dataDecodingOperation], waitUntilFinished: false)
 
         dataDecodingOperation.completionBlock = {
             completionHandler(dataDecodingOperation.decodedObject ?? nil)

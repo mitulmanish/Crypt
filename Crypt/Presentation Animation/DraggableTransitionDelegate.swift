@@ -86,13 +86,6 @@ final class DraggablePresentationController: UIPresentationController {
             } else {
                 draggableView?.handleInteraction(enabled: false)
             }
-
-//            switch (oldValue, draggablePosition) {
-//            case (.midway, .collapsed), (.open, .collapsed):
-//                presentedViewController.dismiss(animated: true, completion: nil)
-//            default:
-//                break
-//            }
         }
     }
 
@@ -150,7 +143,7 @@ final class DraggablePresentationController: UIPresentationController {
         if newOffset >= 0 && canDragInProposedDirection {
             switch panRecognizer.state {
             case .began, .changed:
-                presentedView?.frame.origin.y = max(DraggablePosition.open.yOrigin(for: maxFrame.height), adjustedOffset)//adjustedOffset
+                presentedView?.frame.origin.y = max(DraggablePosition.open.yOrigin(for: maxFrame.height), adjustedOffset)
             case .ended:
                 animate(max(DraggablePosition.open.yOrigin(for: maxFrame.height), adjustedOffset))
             default:
@@ -233,7 +226,7 @@ extension DraggablePresentationController: UIGestureRecognizerDelegate {
 extension DraggablePresentationController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.y <= 0, draggablePosition == .open {
-            var yOrigin = presentedViewOriginY + (scrollView.contentOffset.y * -0.35)
+            var yOrigin = presentedViewOriginY + (scrollView.contentOffset.y * -0.10)
             let downboundary = maxFrame.height - 84
             yOrigin = yOrigin < downboundary ? yOrigin : downboundary
             presentedView?.frame.origin.y = yOrigin

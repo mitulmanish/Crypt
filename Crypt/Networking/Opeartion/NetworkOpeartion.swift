@@ -53,7 +53,6 @@ class NetworkOperation: BasicOperation, DecodingDataProvider {
             switch networkResult {
             case .success(let data):
                 self.data = data
-                let str = String(data: data, encoding: .utf8)
                 self.setFinished()
             case .error(let reason):
                 self.errorReason = reason
