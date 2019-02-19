@@ -7,6 +7,8 @@ protocol DraggableViewType: class {
 }
 
 class SelectCoinsTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
+    let selection = UISelectionFeedbackGenerator()
+    var coinSelected: ((Coin) -> ())?
 
     var filteredCoinCollection: CoinCollection? {
         didSet {
@@ -33,7 +35,7 @@ class SelectCoinsTableViewController: UIViewController, UITableViewDataSource, U
     lazy var searchBar: UISearchBar = {
         let searchBar = UISearchBar()
         searchBar.backgroundImage = UIImage()
-        searchBar.barTintColor = .white
+        searchBar.barTintColor = .darkGray
         (searchBar.value(forKey: "_searchField") as? UITextField)?.backgroundColor = .groupTableViewBackground
         searchBar.isTranslucent = false
         searchBar.searchBarStyle = .default
@@ -56,8 +58,8 @@ class SelectCoinsTableViewController: UIViewController, UITableViewDataSource, U
     }
     
     override func viewDidLoad() {
-        view.backgroundColor = .white
-        containerView.backgroundColor = .white
+        view.backgroundColor = .darkGray
+        containerView.backgroundColor = .darkGray
 
         containerView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -96,6 +98,7 @@ class SelectCoinsTableViewController: UIViewController, UITableViewDataSource, U
             ].forEach { $0.isActive = true }
 
         tableView.register(CoinTableViewCell.self, forCellReuseIdentifier: CoinTableViewCell.identifier)
+        tableView.backgroundColor = .darkGray
         tableView.separatorStyle = .none
         tableView.delegate = self
         tableView.dataSource = self
@@ -134,11 +137,26 @@ class SelectCoinsTableViewController: UIViewController, UITableViewDataSource, U
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CoinTableViewCell.identifier, for: indexPath) as? CoinTableViewCell
         cell?.primaryLabel.text = filteredCoinCollection?.coins[indexPath.row].name
+        cell?.selectionStyle = .none
         return cell ?? UITableViewCell()
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let selectedCoin = filteredCoinCollection?.coins[indexPath.row] else {
+            return
+        }
+        selection.selectionChanged()
+        coinSelected?(selectedCoin)
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 44
+    }
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if searchBar.isFirstResponder {
+            searchBar.resignFirstResponder()
+        }
     }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -170,6 +188,7 @@ extension SelectCoinsTableViewController: DraggableViewType {
         tableView.isUserInteractionEnabled = enabled
         searchBar.isUserInteractionEnabled = enabled
     }
+    
     func dismissKeyboard() {
         guard searchBar.isFirstResponder else { return }
         searchBar.resignFirstResponder()

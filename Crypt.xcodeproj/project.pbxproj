@@ -22,6 +22,10 @@
 		01C259D5217C64CC0084617B /* BasicOpeartion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C259D4217C64CC0084617B /* BasicOpeartion.swift */; };
 		01C259D7217C65DC0084617B /* NetworkOpeartion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C259D6217C65DC0084617B /* NetworkOpeartion.swift */; };
 		01C259D9217C83810084617B /* HistoricalDataNetworkOperationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C259D8217C83810084617B /* HistoricalDataNetworkOperationManager.swift */; };
+		DD2D8AAB21F5F4530065FB50 /* SelectDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2D8AA921F5F4530065FB50 /* SelectDateViewController.swift */; };
+		DD2D8AAC21F5F4530065FB50 /* SelectDateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD2D8AAA21F5F4530065FB50 /* SelectDateViewController.xib */; };
+		DD2D8AAE21F5FB400065FB50 /* CurvedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2D8AAD21F5FB400065FB50 /* CurvedButton.swift */; };
+		DDB0EA2421F2E096002EF027 /* SelectDatePresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB0EA2321F2E096002EF027 /* SelectDatePresentationController.swift */; };
 		DDB5159521C4FC3C009B9483 /* UIViiew+roundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB5159421C4FC3C009B9483 /* UIViiew+roundedCorners.swift */; };
 		DDB5159721C6008C009B9483 /* AllCoinsNetworkOperationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB5159621C6008C009B9483 /* AllCoinsNetworkOperationManager.swift */; };
 		DDB5159A21C651E2009B9483 /* DraggableTransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB5159921C651E2009B9483 /* DraggableTransitionDelegate.swift */; };
@@ -69,6 +73,10 @@
 		01C259D4217C64CC0084617B /* BasicOpeartion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicOpeartion.swift; sourceTree = "<group>"; };
 		01C259D6217C65DC0084617B /* NetworkOpeartion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkOpeartion.swift; sourceTree = "<group>"; };
 		01C259D8217C83810084617B /* HistoricalDataNetworkOperationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalDataNetworkOperationManager.swift; sourceTree = "<group>"; };
+		DD2D8AA921F5F4530065FB50 /* SelectDateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDateViewController.swift; sourceTree = "<group>"; };
+		DD2D8AAA21F5F4530065FB50 /* SelectDateViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectDateViewController.xib; sourceTree = "<group>"; };
+		DD2D8AAD21F5FB400065FB50 /* CurvedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurvedButton.swift; sourceTree = "<group>"; };
+		DDB0EA2321F2E096002EF027 /* SelectDatePresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDatePresentationController.swift; sourceTree = "<group>"; };
 		DDB5159421C4FC3C009B9483 /* UIViiew+roundedCorners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViiew+roundedCorners.swift"; sourceTree = "<group>"; };
 		DDB5159621C6008C009B9483 /* AllCoinsNetworkOperationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllCoinsNetworkOperationManager.swift; sourceTree = "<group>"; };
 		DDB5159921C651E2009B9483 /* DraggableTransitionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggableTransitionDelegate.swift; sourceTree = "<group>"; };
@@ -138,6 +146,9 @@
 				013A47342090CB7800DBAEAE /* CoinsTableViewController.swift */,
 				DDE1488D21BB9C3700CF8182 /* SelectCoinsTableViewController.swift */,
 				DDE1489121BB9E9000CF8182 /* CoinTableViewCell.swift */,
+				DD2D8AA921F5F4530065FB50 /* SelectDateViewController.swift */,
+				DD2D8AAA21F5F4530065FB50 /* SelectDateViewController.xib */,
+				DD2D8AAD21F5FB400065FB50 /* CurvedButton.swift */,
 			);
 			path = Crypt;
 			sourceTree = "<group>";
@@ -203,6 +214,7 @@
 			isa = PBXGroup;
 			children = (
 				DDB5159921C651E2009B9483 /* DraggableTransitionDelegate.swift */,
+				DDB0EA2321F2E096002EF027 /* SelectDatePresentationController.swift */,
 			);
 			path = "Presentation Animation";
 			sourceTree = "<group>";
@@ -314,6 +326,7 @@
 				013A470F208F616900DBAEAE /* LaunchScreen.storyboard in Resources */,
 				013A470C208F616900DBAEAE /* Assets.xcassets in Resources */,
 				013A470A208F616700DBAEAE /* Main.storyboard in Resources */,
+				DD2D8AAC21F5F4530065FB50 /* SelectDateViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -342,6 +355,7 @@
 				013A4707208F616700DBAEAE /* ViewController.swift in Sources */,
 				01C259D9217C83810084617B /* HistoricalDataNetworkOperationManager.swift in Sources */,
 				01C259D5217C64CC0084617B /* BasicOpeartion.swift in Sources */,
+				DD2D8AAB21F5F4530065FB50 /* SelectDateViewController.swift in Sources */,
 				01C259CA217C4F5E0084617B /* DataModel.swift in Sources */,
 				DDB5159C21C65731009B9483 /* UIWindow+Extensions.swift in Sources */,
 				01C259D2217C61050084617B /* RequestFactory.swift in Sources */,
@@ -350,8 +364,10 @@
 				01C259D7217C65DC0084617B /* NetworkOpeartion.swift in Sources */,
 				01C259D0217C60A10084617B /* EndpointConstructor.swift in Sources */,
 				DDE1488F21BB9C3700CF8182 /* SelectCoinsTableViewController.swift in Sources */,
+				DD2D8AAE21F5FB400065FB50 /* CurvedButton.swift in Sources */,
 				013A4705208F616700DBAEAE /* AppDelegate.swift in Sources */,
 				013A47352090CB7800DBAEAE /* CoinsTableViewController.swift in Sources */,
+				DDB0EA2421F2E096002EF027 /* SelectDatePresentationController.swift in Sources */,
 				DDB5159721C6008C009B9483 /* AllCoinsNetworkOperationManager.swift in Sources */,
 				DDB5159A21C651E2009B9483 /* DraggableTransitionDelegate.swift in Sources */,
 			);

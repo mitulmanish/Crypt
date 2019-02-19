@@ -46,16 +46,18 @@ class NetworkOperation: BasicOperation, DecodingDataProvider {
         self.session = session
         self.urlRequest = urlRequest
     }
+
+    // look at https://williamboles.me/building-a-networking-layer-with-operations/
     
     override func main() {
-        session.getData(request: urlRequest) { [weak self] (networkResult) in
+        session.getData(request: urlRequest) { [weak self] networkResult in
             guard let self = self else { return }
             switch networkResult {
             case .success(let data):
                 self.data = data
                 self.setFinished()
-            case .error(let reason):
-                self.errorReason = reason
+            case .error(let cause):
+                self.errorReason = cause.localizedDescription
                 self.setFinished()
             case .unexpected:
                 self.data = nil

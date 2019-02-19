@@ -107,13 +107,16 @@ final class DraggablePresentationController: UIPresentationController {
         return CGRect(origin: presentedViewOrigin, size: presentedViewSize)
     }
 
+    override func containerViewDidLayoutSubviews() {
+        presentedView?.frame = frameOfPresentedViewInContainerView
+    }
+
     override func presentationTransitionWillBegin() {
         draggableView?.handleInteraction(enabled: true)
     }
 
     override func presentationTransitionDidEnd(_ completed: Bool) {
-        draggableView?.scrollView.delegate = self
-        animator = UIViewPropertyAnimator(duration: .animationDuration, timingParameters: self.springTiming)
+        animator = UIViewPropertyAnimator(duration: .animationDuration, curve: .easeInOut)
         animator?.isInterruptible = true
         panOnPresented = UIPanGestureRecognizer(target: self, action: #selector(userDidPan(panRecognizer:)))
         presentedView?.addGestureRecognizer(panOnPresented)
@@ -129,7 +132,6 @@ final class DraggablePresentationController: UIPresentationController {
 
     @objc private func userDidPan(panRecognizer: UIPanGestureRecognizer) {
         draggableView?.dismissKeyboard()
-        draggableView?.scrollView.setContentOffset(.zero, animated: false)
         let translationPoint = panRecognizer.translation(in: presentedView)
         let currentOriginY = draggablePosition.yOrigin(for: maxFrame.height)
         let newOffset = translationPoint.y + currentOriginY
@@ -210,31 +212,12 @@ final class DraggablePresentationController: UIPresentationController {
         }
         animator.startAnimation()
     }
-
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        presentedViewController.dismiss(animated: true)
-    }
 }
 
 extension DraggablePresentationController: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         let touchPoint = touch.location(in: presentedView)
         return presentedView?.bounds.contains(touchPoint) == false
-    }
-}
-
-extension DraggablePresentationController: UIScrollViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.contentOffset.y <= 0, draggablePosition == .open {
-            var yOrigin = presentedViewOriginY + (scrollView.contentOffset.y * -0.10)
-            let downboundary = maxFrame.height - 84
-            yOrigin = yOrigin < downboundary ? yOrigin : downboundary
-            presentedView?.frame.origin.y = yOrigin
-        }
-    }
-
-    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        animate(to: getDraggablePosition())
     }
 }
 

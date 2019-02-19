@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SelectDateViewController" customModule="Crypt" customModuleProvider="target">
+            <connections>
+                <outlet property="datePicker" destination="Hfl-AP-2wD" id="yLT-I6-hnG"/>
+                <outlet property="doneButton" destination="uXn-L4-9Vb" id="PT5-jX-E9G"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="450" height="343"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uXn-L4-9Vb" customClass="CurvedButton" customModule="Crypt" customModuleProvider="target">
+                    <rect key="frame" x="185" y="287" width="80" height="40"/>
+                    <color key="backgroundColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57254901960000004" alpha="0.4277878853" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="KeJ-Ni-qyh"/>
+                        <constraint firstAttribute="width" constant="80" id="rHc-kx-1jo"/>
+                    </constraints>
+                    <state key="normal" title="Done">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <variation key="heightClass=regular-widthClass=regular">
+                        <mask key="constraints">
+                            <exclude reference="rHc-kx-1jo"/>
+                        </mask>
+                    </variation>
+                    <connections>
+                        <action selector="doneButtonPressed:" destination="-1" eventType="touchUpInside" id="NmE-ej-tYK"/>
+                    </connections>
+                </button>
+                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="Hfl-AP-2wD">
+                    <rect key="frame" x="0.0" y="16" width="450" height="255"/>
+                    <date key="date" timeIntervalSinceReferenceDate="569767249.80128598">
+                        <!--2019-01-21 12:40:49 +0000-->
+                    </date>
+                    <connections>
+                        <action selector="dateChanged:" destination="-1" eventType="valueChanged" id="irR-B1-Kcv"/>
+                    </connections>
+                </datePicker>
+            </subviews>
+            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="uXn-L4-9Vb" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="0Dy-Jt-dSK"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="uXn-L4-9Vb" secondAttribute="bottom" constant="16" id="8ey-Su-EDo"/>
+                <constraint firstItem="uXn-L4-9Vb" firstAttribute="top" secondItem="Hfl-AP-2wD" secondAttribute="bottom" constant="16" id="DSe-Oh-uj8"/>
+                <constraint firstItem="Hfl-AP-2wD" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="Nps-tj-pV2"/>
+                <constraint firstItem="uXn-L4-9Vb" firstAttribute="width" secondItem="fnl-2z-Ty3" secondAttribute="width" multiplier="0.5" id="XSe-OZ-idD"/>
+                <constraint firstItem="Hfl-AP-2wD" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="duV-ZG-6cM"/>
+                <constraint firstItem="Hfl-AP-2wD" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="vXQ-Mg-iFK"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="XSe-OZ-idD"/>
+                </mask>
+            </variation>
+            <variation key="heightClass=regular-widthClass=regular">
+                <mask key="constraints">
+                    <include reference="XSe-OZ-idD"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="113.59999999999999" y="183.95802098950526"/>
+        </view>
+    </objects>
+</document>

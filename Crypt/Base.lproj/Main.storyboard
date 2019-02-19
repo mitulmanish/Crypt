@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -45,11 +45,13 @@
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="100" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wG6-45-lMg">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="100" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wG6-45-lMg">
                                                         <rect key="frame" x="35" y="0.0" width="324" height="50"/>
-                                                        <nil key="textColor"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="44"/>
-                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                        <color key="backgroundColor" red="0.12984204290000001" green="0.12984612579999999" blue="0.12984395030000001" alpha="0.86130136986301364" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="tintColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="47"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad" textContentType="location"/>
                                                         <connections>
                                                             <action selector="didBeginEditing:" destination="BYZ-38-t0r" eventType="editingDidBegin" id="hyw-6u-2gQ"/>
                                                         </connections>
@@ -83,27 +85,42 @@
                                                     <constraint firstAttribute="height" constant="50" id="yUR-MM-Bam"/>
                                                 </constraints>
                                             </stackView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I would've made:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VFT-og-56K">
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Zht-lM-iz9">
                                                 <rect key="frame" x="8" y="214" width="359" height="50"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="44"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="on" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rVC-qu-ddx">
+                                                        <rect key="frame" x="0.0" y="0.0" width="47.5" height="50"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="44"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nZX-Ee-g6j">
+                                                        <rect key="frame" x="55.5" y="0.0" width="303.5" height="50"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="44"/>
+                                                        <state key="normal" title="Date">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="dateSelected:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mwg-DW-0uZ"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
                                         </subviews>
                                         <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <constraints>
+                                            <constraint firstItem="Zht-lM-iz9" firstAttribute="width" secondItem="aax-uN-rJM" secondAttribute="width" id="2Ln-j1-vz6"/>
                                             <constraint firstAttribute="trailing" secondItem="YDs-9s-vIl" secondAttribute="trailing" constant="8" id="4Gc-av-SG7"/>
                                             <constraint firstItem="aax-uN-rJM" firstAttribute="leading" secondItem="NbS-3o-5XC" secondAttribute="leading" constant="8" id="6cY-8c-nyg"/>
                                             <constraint firstAttribute="trailing" secondItem="aax-uN-rJM" secondAttribute="trailing" constant="8" id="7xr-y5-8An"/>
+                                            <constraint firstItem="Zht-lM-iz9" firstAttribute="top" secondItem="aax-uN-rJM" secondAttribute="bottom" constant="16" id="Dga-kO-7d2"/>
                                             <constraint firstItem="aax-uN-rJM" firstAttribute="top" secondItem="YDs-9s-vIl" secondAttribute="bottom" constant="16" id="FbU-lF-8Xs"/>
-                                            <constraint firstItem="VFT-og-56K" firstAttribute="top" secondItem="aax-uN-rJM" secondAttribute="bottom" constant="16" id="OBQ-kW-Gnb"/>
-                                            <constraint firstItem="VFT-og-56K" firstAttribute="width" secondItem="aax-uN-rJM" secondAttribute="width" id="SBf-gc-fZX"/>
                                             <constraint firstItem="Tw6-RK-ueN" firstAttribute="top" secondItem="NbS-3o-5XC" secondAttribute="top" constant="16" id="al1-z2-fn7"/>
-                                            <constraint firstItem="VFT-og-56K" firstAttribute="centerX" secondItem="aax-uN-rJM" secondAttribute="centerX" id="icK-CU-sBd"/>
                                             <constraint firstItem="Tw6-RK-ueN" firstAttribute="leading" secondItem="NbS-3o-5XC" secondAttribute="leading" constant="8" id="kPp-MS-mDj"/>
                                             <constraint firstAttribute="trailing" secondItem="Tw6-RK-ueN" secondAttribute="trailing" constant="8" id="kvA-0e-7U3"/>
-                                            <constraint firstItem="VFT-og-56K" firstAttribute="height" secondItem="aax-uN-rJM" secondAttribute="height" id="nxH-Nm-qCq"/>
+                                            <constraint firstItem="Zht-lM-iz9" firstAttribute="centerX" secondItem="aax-uN-rJM" secondAttribute="centerX" id="qyN-83-r7c"/>
                                             <constraint firstItem="YDs-9s-vIl" firstAttribute="top" secondItem="Tw6-RK-ueN" secondAttribute="bottom" constant="16" id="rHC-Bq-GwA"/>
+                                            <constraint firstItem="Zht-lM-iz9" firstAttribute="height" secondItem="aax-uN-rJM" secondAttribute="height" id="xKB-n6-82v"/>
                                             <constraint firstItem="YDs-9s-vIl" firstAttribute="leading" secondItem="NbS-3o-5XC" secondAttribute="leading" constant="8" id="y7O-yM-RfQ"/>
                                         </constraints>
                                     </view>
@@ -130,7 +147,10 @@
                     </view>
                     <navigationItem key="navigationItem" id="kOr-Y8-SMt"/>
                     <connections>
+                        <outlet property="amountTextField" destination="wG6-45-lMg" id="N2L-Xg-zKI"/>
+                        <outlet property="coinButton" destination="lFb-mh-sSj" id="Jrp-bp-sWI"/>
                         <outlet property="contentScrollView" destination="xvt-Ae-tTL" id="7HN-FV-9J8"/>
+                        <outlet property="dateButton" destination="nZX-Ee-g6j" id="Asw-OW-mYa"/>
                         <outlet property="quantityTextField" destination="wG6-45-lMg" id="hOA-IR-Tq8"/>
                     </connections>
                 </viewController>

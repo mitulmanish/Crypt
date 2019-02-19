@@ -15,11 +15,13 @@ class CoinTableViewCell: UITableViewCell {
     lazy var primaryLabel: UILabel = {
         let label = UILabel()
         label.font = label.font.withSize(24)
+        label.textColor = .white
         return label
     }()
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        backgroundColor = .darkGray
     }
 
     override func layoutSubviews() {
@@ -32,12 +34,12 @@ class CoinTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        primaryLabel.textColor = selected ? .purple : .black
+        primaryLabel.textColor = selected ? .gray : .white
     }
 
     override var isSelected: Bool {
         didSet {
-            primaryLabel.textColor = isSelected ? .purple : .black
+            primaryLabel.textColor = isSelected ? .gray : .white
         }
     }
 

@@ -59,4 +59,9 @@ class BasicOperation: Operation {
         main()
         setExecuting()
     }
+
+    override func cancel() {
+        super.cancel()
+        state = .finished
+    }
 }
