@@ -287,13 +287,16 @@
 				TargetAttributes = {
 					013A4700208F616700DBAEAE = {
 						CreatedOnToolsVersion = 9.3;
+						LastSwiftMigration = 1010;
 					};
 					013A4714208F616900DBAEAE = {
 						CreatedOnToolsVersion = 9.3;
+						LastSwiftMigration = 1010;
 						TestTargetID = 013A4700208F616700DBAEAE;
 					};
 					013A471F208F616900DBAEAE = {
 						CreatedOnToolsVersion = 9.3;
+						LastSwiftMigration = 1010;
 						TestTargetID = 013A4700208F616700DBAEAE;
 					};
 				};
@@ -552,7 +555,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "mitul-manish.Crypt3";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -571,7 +574,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "mitul-manish.Crypt3";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -591,7 +594,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "mitul-manish.CryptTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Crypt.app/Crypt";
 			};
@@ -612,7 +615,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "mitul-manish.CryptTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Crypt.app/Crypt";
 			};
@@ -632,7 +635,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "mitul-manish.CryptUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = Crypt;
 			};
@@ -652,7 +655,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "mitul-manish.CryptUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = Crypt;
 			};

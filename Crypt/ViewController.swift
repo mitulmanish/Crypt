@@ -17,7 +17,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         let tapGesturerecognizer = UITapGestureRecognizer(target: self, action: #selector(screenTapped))
         view.addGestureRecognizer(tapGesturerecognizer)
-        amountTextField.attributedPlaceholder = NSAttributedString(string: "", attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
+        amountTextField.attributedPlaceholder = NSAttributedString(string: "", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
         amountTextField.keyboardType = .decimalPad
     }
 
