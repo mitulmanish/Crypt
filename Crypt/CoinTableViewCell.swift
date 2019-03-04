@@ -14,6 +14,7 @@ class CoinTableViewCell: UITableViewCell {
 
     lazy var primaryLabel: UILabel = {
         let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.font = label.font.withSize(24)
         label.textColor = .white
         return label
@@ -23,28 +24,21 @@ class CoinTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         backgroundColor = .darkGray
     }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
 
     override func layoutSubviews() {
         setupPrimaryLabel()
     }
 
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        primaryLabel.textColor = selected ? .gray : .white
-    }
-
-    override var isSelected: Bool {
-        didSet {
-            primaryLabel.textColor = isSelected ? .gray : .white
-        }
+        primaryLabel.textColor = selected ? .green : .white
     }
 
     private func setupPrimaryLabel() {
-        primaryLabel.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(primaryLabel)
         primaryLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16).isActive = true
         primaryLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16).isActive = true

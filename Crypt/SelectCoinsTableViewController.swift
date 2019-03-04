@@ -7,13 +7,21 @@ protocol DraggableViewType: class {
 }
 
 class SelectCoinsTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
+    
+    private var selectedCoin: Coin?
     let selection = UISelectionFeedbackGenerator()
     var coinSelected: ((Coin) -> ())?
 
     var filteredCoinCollection: CoinCollection? {
         didSet {
-            OperationQueue.main.addOperation { [weak self] in
-                self?.tableView.reloadData()
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.tableView.reloadData()
+                if let coin = self.selectedCoin, let indexPath = self.indexPath(of: coin) {
+                    self.tableView.reloadRows(at: [indexPath], with: .none)
+                    self.tableView.scrollToRow(at: indexPath, at: .top, animated: false)
+                    self.tableView.selectRow(at: indexPath, animated: false, scrollPosition: .top)
+                }
             }
         }
     }
@@ -49,7 +57,8 @@ class SelectCoinsTableViewController: UIViewController, UITableViewDataSource, U
         return view
     }()
 
-    init() {
+    init(selectedCoin: Coin?) {
+        self.selectedCoin = selectedCoin
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -126,17 +135,23 @@ class SelectCoinsTableViewController: UIViewController, UITableViewDataSource, U
     // MARK: - Table view data source
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return filteredCoinCollection?.coins.count ?? 0
     }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard let coin = filteredCoinCollection?.coins[indexPath.row],
+            let cell = cell as? CoinTableViewCell else {
+            return
+        }
+        cell.primaryLabel.text = coin.name
+    }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CoinTableViewCell.identifier, for: indexPath) as? CoinTableViewCell
-        cell?.primaryLabel.text = filteredCoinCollection?.coins[indexPath.row].name
         cell?.selectionStyle = .none
         return cell ?? UITableViewCell()
     }
@@ -145,6 +160,7 @@ class SelectCoinsTableViewController: UIViewController, UITableViewDataSource, U
         guard let selectedCoin = filteredCoinCollection?.coins[indexPath.row] else {
             return
         }
+        self.selectedCoin = selectedCoin
         selection.selectionChanged()
         coinSelected?(selectedCoin)
     }
@@ -160,21 +176,29 @@ class SelectCoinsTableViewController: UIViewController, UITableViewDataSource, U
     }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        selectedCoin = nil
         let searchString = searchText.lowercased()
         if searchText.isEmpty {
             self.filteredCoinCollection = originalCoinCollection
         } else {
             self.filteredCoinCollection = filteredCoins(searchString: searchString)
         }
-        tableView.reloadData()
     }
 
     func filteredCoins(searchString: String) -> CoinCollection {
         let filteredCoins = originalCoinCollection?.coins.filter {
-            $0.code.lowercased().hasPrefix(searchString) ||
-                $0.name.lowercased().hasPrefix(searchString)
+            $0.name == searchString.lowercased()
+                || $0.name.lowercased().hasPrefix(searchString.lowercased())
         }
         return CoinCollection(coins: filteredCoins ?? [])
+    }
+    
+    func indexPath(of coin: Coin) -> IndexPath? {
+        guard let index = filteredCoinCollection?.coins.firstIndex(of: coin) else {
+            return nil
+        }
+        let indexPath = IndexPath(item: index, section: 0)
+        return indexPath
     }
 }
 

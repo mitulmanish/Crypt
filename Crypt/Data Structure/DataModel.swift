@@ -1,11 +1,11 @@
 import Foundation
 
 struct CoinPrice {
-    var old: Float
-    var latest: Float
+    let old: Float
+    let latest: Float
 }
 
-struct Coin: Codable {
+struct Coin: Codable, Equatable {
     let id: Int
     let name: String
     let code: String

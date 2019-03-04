@@ -16,10 +16,22 @@ class SelectDateViewController: UIViewController {
     @IBOutlet weak var datePicker: UIDatePicker!
 
     let selection = UISelectionFeedbackGenerator()
-
+    private let selectedDate: Date
+    
+    init(selectedDate: Date) {
+        self.selectedDate = selectedDate
+        super.init(nibName: nil, bundle: .main)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         datePicker.setValue(UIColor.white, forKey: "textColor")
+        datePicker.setDate(selectedDate, animated: false)
+        datePicker.maximumDate = Date()
     }
 
     override func viewDidLayoutSubviews() {
