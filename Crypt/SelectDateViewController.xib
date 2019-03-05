@@ -24,7 +24,7 @@
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uXn-L4-9Vb" customClass="CurvedButton" customModule="Crypt" customModuleProvider="target">
                     <rect key="frame" x="185" y="287" width="80" height="40"/>
-                    <color key="backgroundColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57254901960000004" alpha="0.4277878853" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57254901960000004" alpha="0.42999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="KeJ-Ni-qyh"/>
                         <constraint firstAttribute="width" constant="80" id="rHc-kx-1jo"/>

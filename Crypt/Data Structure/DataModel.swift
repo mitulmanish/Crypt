@@ -9,12 +9,6 @@ struct Coin: Codable, Equatable {
     let id: Int
     let name: String
     let code: String
-
-    init(id: Int, name: String, code: String) {
-        self.id = id
-        self.name = name
-        self.code = code
-    }
 }
 
 struct CoinCollection: Codable {
@@ -27,6 +21,8 @@ struct CryptoHistoricalData: Codable {
     
     private let date: String
     private let rawPrice: String
+    let firstData: String
+    let mostRecentData: String
     
     var price: Float? {
         return Float(rawPrice)
@@ -35,9 +31,6 @@ struct CryptoHistoricalData: Codable {
     var requestedDate: Date? {
         return date(fromString: date)
     }
-    
-    let firstData: String
-    let mostRecentData: String
     
     enum HistoryKeys: String, CodingKey {
         case coin

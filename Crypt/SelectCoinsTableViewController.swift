@@ -6,8 +6,8 @@ protocol DraggableViewType: class {
     var scrollView: UIScrollView { get }
 }
 
-class SelectCoinsTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
-    
+class SelectCoinsTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, ViewDismissalNotifier {
+    var viewDismissed: (() -> Void)?
     private var selectedCoin: Coin?
     let selection = UISelectionFeedbackGenerator()
     var coinSelected: ((Coin) -> ())?
@@ -187,7 +187,8 @@ class SelectCoinsTableViewController: UIViewController, UITableViewDataSource, U
 
     func filteredCoins(searchString: String) -> CoinCollection {
         let filteredCoins = originalCoinCollection?.coins.filter {
-            $0.name == searchString.lowercased()
+            ($0.name == searchString.lowercased())
+                || ($0.code.lowercased() == searchString.lowercased())
                 || $0.name.lowercased().hasPrefix(searchString.lowercased())
         }
         return CoinCollection(coins: filteredCoins ?? [])
@@ -199,6 +200,11 @@ class SelectCoinsTableViewController: UIViewController, UITableViewDataSource, U
         }
         let indexPath = IndexPath(item: index, section: 0)
         return indexPath
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        viewDismissed?()
     }
 }
 

@@ -8,8 +8,8 @@
 
 import UIKit
 
-class SelectDateViewController: UIViewController {
-
+class SelectDateViewController: UIViewController, ViewDismissalNotifier {
+    var viewDismissed: (() -> Void)?
     var dateChanged: ((Date) -> ())?
 
     @IBOutlet weak var doneButton: CurvedButton!
@@ -45,5 +45,10 @@ class SelectDateViewController: UIViewController {
 
     @IBAction func doneButtonPressed(_ sender: Any) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        viewDismissed?()
     }
 }

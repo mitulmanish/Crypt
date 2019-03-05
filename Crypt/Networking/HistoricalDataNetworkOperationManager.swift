@@ -6,8 +6,6 @@ enum HistoricalPriceError: Error {
 }
 
 struct HistoricalDataNetworkOperationManager {
-    private(set) var oldPrice: Float?
-    private(set) var currentPrice: Float?
 
     func requestCoinHistoricalData(
         forDates dates: (old: Date, latest: Date),

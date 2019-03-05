@@ -1,43 +1,17 @@
 import UIKit
 
-enum PortfolioType {
-    case profit(amount: Float, currentValue: Float)
-    case loss(amount: Float, currentValue: Float)
-    case neutral
-}
-
-struct ProfitCalculator {
-    let moneySpent: Float
-    let currectPrice: Float
-    let oldPrice: Float
-    
-    func computePortfolio() -> PortfolioType {
-        let unitsBoughtAtPrice = ((1.0 / oldPrice) * moneySpent)
-        
-        let valueAtCurentRate = unitsBoughtAtPrice * currectPrice
-        
-        let difference = (currectPrice - oldPrice) * unitsBoughtAtPrice
-        guard difference != 0.0 else {
-            return .neutral
-        }
-        return difference > 0 ?
-            .profit(amount: difference, currentValue: valueAtCurentRate)
-            : .loss(amount: difference, currentValue: valueAtCurentRate)
-    }
-}
-class ViewController: UIViewController {
+class HomeViewController: UIViewController {
 
     private var animator: UIViewControllerTransitioningDelegate?
     private var selectDateTransitionDelegate: UIViewControllerTransitioningDelegate?
+    private var resultsViewTransitionDelegate: UIViewControllerTransitioningDelegate?
     
     private var selectCoinsTableViewController: SelectCoinsTableViewController?
 
     @IBOutlet weak var amountTextField: UITextField!
     @IBOutlet weak var coinButton: UIButton!
     @IBOutlet weak var dateButton: UIButton!
-
     @IBOutlet weak var contentScrollView: UIScrollView!
-
     @IBOutlet weak var quantityTextField: UITextField!
     
     private var currentCoin: Coin?
@@ -86,7 +60,7 @@ class ViewController: UIViewController {
             currectPrice: currentPrice,
             oldPrice: oldPrice
             ).computePortfolio()
-        
+
         switch portfolio {
         case .profit(let amount, let currentValue):
             print(">> Profit: \(amount) currentValue: \(currentValue)")
@@ -95,10 +69,20 @@ class ViewController: UIViewController {
         case .neutral:
             print(">> Neutal")
         }
+        
+        let resultsViewController = ResultsViewController(portfolioType: portfolio)
+        resultsViewTransitionDelegate = HalfScreenPresentationTransitionDelegate(portraitHeight: 150, landscapeHeight: 170)
+        resultsViewController.modalPresentationStyle = .custom
+        resultsViewController.transitioningDelegate = resultsViewTransitionDelegate
+        present(resultsViewController, animated: true, completion: .none)
     }
 
     func getHistoricalData() {
-        guard let coin = self.currentCoin, let date = self.concernedDate else {
+        guard let coin = self.currentCoin,
+            let date = self.concernedDate,
+            quantityBought != nil,
+            isBeingPresented == false
+        else {
             return
         }
         let historicalDataNetworkOperationManager = HistoricalDataNetworkOperationManager()
@@ -113,14 +97,17 @@ class ViewController: UIViewController {
     @IBAction func selectCoin(_ sender: UIButton) {
         dismissKeyboard()
         guard isBeingPresented == false else { return }
-        let vc = SelectCoinsTableViewController(selectedCoin: currentCoin)
+        let selectCoinViewController = SelectCoinsTableViewController(selectedCoin: currentCoin)
         animator = DraggableTransitionDelegate()
-        vc.modalPresentationStyle = .custom
-        vc.transitioningDelegate = animator
-        present(vc, animated: true, completion: nil)
-        vc.coinSelected = { [weak self] coin in
+        selectCoinViewController.modalPresentationStyle = .custom
+        selectCoinViewController.transitioningDelegate = animator
+        present(selectCoinViewController, animated: true, completion: nil)
+        selectCoinViewController.coinSelected = { [weak self] coin in
             self?.currentCoin = coin
             self?.coinButton.setTitle(coin.name, for: .normal)
+        }
+        selectCoinViewController.viewDismissed = { [weak self] in
+            self?.getHistoricalData()
         }
     }
 
@@ -132,13 +119,16 @@ class ViewController: UIViewController {
     
     @IBAction func dateSelected(_ sender: UIButton) {
         let selectDateViewController = SelectDateViewController(selectedDate: concernedDate ?? Date())
-        selectDateTransitionDelegate = SelectDateTransitionDelegate()
+        selectDateTransitionDelegate = HalfScreenPresentationTransitionDelegate(portraitHeight: 250, landscapeHeight: 270)
         selectDateViewController.transitioningDelegate = selectDateTransitionDelegate
         selectDateViewController.modalPresentationStyle = .custom
         present(selectDateViewController, animated: true, completion: nil)
         selectDateViewController.dateChanged = { [weak self] date in
             self?.concernedDate = date
             self?.formatDate(date: date)
+        }
+        selectDateViewController.viewDismissed = { [weak self] in
+            self?.getHistoricalData()
         }
     }
     

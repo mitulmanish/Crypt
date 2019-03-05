@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		013A4705208F616700DBAEAE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013A4704208F616700DBAEAE /* AppDelegate.swift */; };
-		013A4707208F616700DBAEAE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013A4706208F616700DBAEAE /* ViewController.swift */; };
+		013A4707208F616700DBAEAE /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013A4706208F616700DBAEAE /* HomeViewController.swift */; };
 		013A470A208F616700DBAEAE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 013A4708208F616700DBAEAE /* Main.storyboard */; };
 		013A470C208F616900DBAEAE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 013A470B208F616900DBAEAE /* Assets.xcassets */; };
 		013A470F208F616900DBAEAE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 013A470D208F616900DBAEAE /* LaunchScreen.storyboard */; };
@@ -24,7 +24,13 @@
 		DD2D8AAB21F5F4530065FB50 /* SelectDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2D8AA921F5F4530065FB50 /* SelectDateViewController.swift */; };
 		DD2D8AAC21F5F4530065FB50 /* SelectDateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD2D8AAA21F5F4530065FB50 /* SelectDateViewController.xib */; };
 		DD2D8AAE21F5FB400065FB50 /* CurvedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2D8AAD21F5FB400065FB50 /* CurvedButton.swift */; };
-		DDB0EA2421F2E096002EF027 /* SelectDatePresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB0EA2321F2E096002EF027 /* SelectDatePresentationController.swift */; };
+		DD97D2BC222E6E75004A72B5 /* ProfitCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD97D2BB222E6E75004A72B5 /* ProfitCalculator.swift */; };
+		DD97D2BF222E8830004A72B5 /* ProfitCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD97D2BE222E8830004A72B5 /* ProfitCalculatorTests.swift */; };
+		DD97D2C1222E94CE004A72B5 /* HalfScreenPresentationTransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD97D2C0222E94CE004A72B5 /* HalfScreenPresentationTransitionDelegate.swift */; };
+		DD97D2C4222E9CCE004A72B5 /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD97D2C2222E9CCE004A72B5 /* ResultsViewController.swift */; };
+		DD97D2C5222E9CCE004A72B5 /* ResultsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD97D2C3222E9CCE004A72B5 /* ResultsViewController.xib */; };
+		DD97D2C7222EA657004A72B5 /* ViewDismissalNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD97D2C6222EA657004A72B5 /* ViewDismissalNotifier.swift */; };
+		DDB0EA2421F2E096002EF027 /* CustomPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB0EA2321F2E096002EF027 /* CustomPresentationController.swift */; };
 		DDB5159521C4FC3C009B9483 /* UIViiew+roundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB5159421C4FC3C009B9483 /* UIViiew+roundedCorners.swift */; };
 		DDB5159721C6008C009B9483 /* AllCoinsNetworkOperationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB5159621C6008C009B9483 /* AllCoinsNetworkOperationManager.swift */; };
 		DDB5159A21C651E2009B9483 /* DraggableTransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB5159921C651E2009B9483 /* DraggableTransitionDelegate.swift */; };
@@ -53,7 +59,7 @@
 /* Begin PBXFileReference section */
 		013A4701208F616700DBAEAE /* Crypt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Crypt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		013A4704208F616700DBAEAE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		013A4706208F616700DBAEAE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		013A4706208F616700DBAEAE /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		013A4709208F616700DBAEAE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		013A470B208F616900DBAEAE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		013A470E208F616900DBAEAE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -74,7 +80,13 @@
 		DD2D8AA921F5F4530065FB50 /* SelectDateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDateViewController.swift; sourceTree = "<group>"; };
 		DD2D8AAA21F5F4530065FB50 /* SelectDateViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectDateViewController.xib; sourceTree = "<group>"; };
 		DD2D8AAD21F5FB400065FB50 /* CurvedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurvedButton.swift; sourceTree = "<group>"; };
-		DDB0EA2321F2E096002EF027 /* SelectDatePresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDatePresentationController.swift; sourceTree = "<group>"; };
+		DD97D2BB222E6E75004A72B5 /* ProfitCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfitCalculator.swift; sourceTree = "<group>"; };
+		DD97D2BE222E8830004A72B5 /* ProfitCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfitCalculatorTests.swift; sourceTree = "<group>"; };
+		DD97D2C0222E94CE004A72B5 /* HalfScreenPresentationTransitionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfScreenPresentationTransitionDelegate.swift; sourceTree = "<group>"; };
+		DD97D2C2222E9CCE004A72B5 /* ResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
+		DD97D2C3222E9CCE004A72B5 /* ResultsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ResultsViewController.xib; sourceTree = "<group>"; };
+		DD97D2C6222EA657004A72B5 /* ViewDismissalNotifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDismissalNotifier.swift; sourceTree = "<group>"; };
+		DDB0EA2321F2E096002EF027 /* CustomPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPresentationController.swift; sourceTree = "<group>"; };
 		DDB5159421C4FC3C009B9483 /* UIViiew+roundedCorners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViiew+roundedCorners.swift"; sourceTree = "<group>"; };
 		DDB5159621C6008C009B9483 /* AllCoinsNetworkOperationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllCoinsNetworkOperationManager.swift; sourceTree = "<group>"; };
 		DDB5159921C651E2009B9483 /* DraggableTransitionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggableTransitionDelegate.swift; sourceTree = "<group>"; };
@@ -136,7 +148,7 @@
 				01C259CB217C56620084617B /* Extensions */,
 				01C259C8217C4F370084617B /* Data Structure */,
 				013A4704208F616700DBAEAE /* AppDelegate.swift */,
-				013A4706208F616700DBAEAE /* ViewController.swift */,
+				013A4706208F616700DBAEAE /* HomeViewController.swift */,
 				013A4708208F616700DBAEAE /* Main.storyboard */,
 				013A470B208F616900DBAEAE /* Assets.xcassets */,
 				013A470D208F616900DBAEAE /* LaunchScreen.storyboard */,
@@ -146,6 +158,11 @@
 				DD2D8AA921F5F4530065FB50 /* SelectDateViewController.swift */,
 				DD2D8AAA21F5F4530065FB50 /* SelectDateViewController.xib */,
 				DD2D8AAD21F5FB400065FB50 /* CurvedButton.swift */,
+				DD97D2BD222E6E98004A72B5 /* Business Logic */,
+				DD97D2C0222E94CE004A72B5 /* HalfScreenPresentationTransitionDelegate.swift */,
+				DD97D2C2222E9CCE004A72B5 /* ResultsViewController.swift */,
+				DD97D2C3222E9CCE004A72B5 /* ResultsViewController.xib */,
+				DD97D2C6222EA657004A72B5 /* ViewDismissalNotifier.swift */,
 			);
 			path = Crypt;
 			sourceTree = "<group>";
@@ -155,6 +172,7 @@
 			children = (
 				013A4719208F616900DBAEAE /* CryptTests.swift */,
 				013A471B208F616900DBAEAE /* Info.plist */,
+				DD97D2BE222E8830004A72B5 /* ProfitCalculatorTests.swift */,
 			);
 			path = CryptTests;
 			sourceTree = "<group>";
@@ -207,11 +225,19 @@
 			path = Opeartion;
 			sourceTree = "<group>";
 		};
+		DD97D2BD222E6E98004A72B5 /* Business Logic */ = {
+			isa = PBXGroup;
+			children = (
+				DD97D2BB222E6E75004A72B5 /* ProfitCalculator.swift */,
+			);
+			path = "Business Logic";
+			sourceTree = "<group>";
+		};
 		DDB5159821C651A9009B9483 /* Presentation Animation */ = {
 			isa = PBXGroup;
 			children = (
 				DDB5159921C651E2009B9483 /* DraggableTransitionDelegate.swift */,
-				DDB0EA2321F2E096002EF027 /* SelectDatePresentationController.swift */,
+				DDB0EA2321F2E096002EF027 /* CustomPresentationController.swift */,
 			);
 			path = "Presentation Animation";
 			sourceTree = "<group>";
@@ -325,6 +351,7 @@
 			files = (
 				013A470F208F616900DBAEAE /* LaunchScreen.storyboard in Resources */,
 				013A470C208F616900DBAEAE /* Assets.xcassets in Resources */,
+				DD97D2C5222E9CCE004A72B5 /* ResultsViewController.xib in Resources */,
 				013A470A208F616700DBAEAE /* Main.storyboard in Resources */,
 				DD2D8AAC21F5F4530065FB50 /* SelectDateViewController.xib in Resources */,
 			);
@@ -351,8 +378,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD97D2C7222EA657004A72B5 /* ViewDismissalNotifier.swift in Sources */,
 				01C259CD217C569D0084617B /* URLSession+SanitizedResponse.swift in Sources */,
-				013A4707208F616700DBAEAE /* ViewController.swift in Sources */,
+				013A4707208F616700DBAEAE /* HomeViewController.swift in Sources */,
 				01C259D9217C83810084617B /* HistoricalDataNetworkOperationManager.swift in Sources */,
 				01C259D5217C64CC0084617B /* BasicOpeartion.swift in Sources */,
 				DD2D8AAB21F5F4530065FB50 /* SelectDateViewController.swift in Sources */,
@@ -361,12 +389,15 @@
 				01C259D2217C61050084617B /* RequestFactory.swift in Sources */,
 				DDE1489321BB9E9000CF8182 /* CoinTableViewCell.swift in Sources */,
 				DDB5159521C4FC3C009B9483 /* UIViiew+roundedCorners.swift in Sources */,
+				DD97D2BC222E6E75004A72B5 /* ProfitCalculator.swift in Sources */,
 				01C259D7217C65DC0084617B /* NetworkOpeartion.swift in Sources */,
 				01C259D0217C60A10084617B /* EndpointConstructor.swift in Sources */,
+				DD97D2C1222E94CE004A72B5 /* HalfScreenPresentationTransitionDelegate.swift in Sources */,
 				DDE1488F21BB9C3700CF8182 /* SelectCoinsTableViewController.swift in Sources */,
 				DD2D8AAE21F5FB400065FB50 /* CurvedButton.swift in Sources */,
 				013A4705208F616700DBAEAE /* AppDelegate.swift in Sources */,
-				DDB0EA2421F2E096002EF027 /* SelectDatePresentationController.swift in Sources */,
+				DD97D2C4222E9CCE004A72B5 /* ResultsViewController.swift in Sources */,
+				DDB0EA2421F2E096002EF027 /* CustomPresentationController.swift in Sources */,
 				DDB5159721C6008C009B9483 /* AllCoinsNetworkOperationManager.swift in Sources */,
 				DDB5159A21C651E2009B9483 /* DraggableTransitionDelegate.swift in Sources */,
 			);
@@ -377,6 +408,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				013A471A208F616900DBAEAE /* CryptTests.swift in Sources */,
+				DD97D2BF222E8830004A72B5 /* ProfitCalculatorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

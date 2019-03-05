@@ -35,8 +35,8 @@ class NetworkOperation: BasicOperation, DecodingDataProvider {
     private let session: URLSession
     private let urlRequest: URLRequest
     
-    var data: Data?
-    var errorReason: String?
+    private (set) var data: Data?
+    private (set) var error: Error?
 
     override var isAsynchronous: Bool {
         return true
@@ -46,8 +46,6 @@ class NetworkOperation: BasicOperation, DecodingDataProvider {
         self.session = session
         self.urlRequest = urlRequest
     }
-
-    // look at https://williamboles.me/building-a-networking-layer-with-operations/
     
     override func main() {
         session.getData(request: urlRequest) { [weak self] networkResult in
@@ -57,11 +55,11 @@ class NetworkOperation: BasicOperation, DecodingDataProvider {
                 self.data = data
                 self.setFinished()
             case .error(let cause):
-                self.errorReason = cause.localizedDescription
+                self.error = cause
                 self.setFinished()
             case .unexpected:
                 self.data = nil
-                self.errorReason = "unexpected error"
+                self.error = nil
                 self.setFinished()
             }
         }
