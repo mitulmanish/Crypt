@@ -60,18 +60,9 @@ class HomeViewController: UIViewController {
             currectPrice: currentPrice,
             oldPrice: oldPrice
             ).computePortfolio()
-
-        switch portfolio {
-        case .profit(let amount, let currentValue):
-            print(">> Profit: \(amount) currentValue: \(currentValue)")
-        case .loss(let amount, let currentValue):
-            print(">> Loss: \(amount) currentValue: \(currentValue)")
-        case .neutral:
-            print(">> Neutal")
-        }
         
         let resultsViewController = ResultsViewController(portfolioType: portfolio)
-        resultsViewTransitionDelegate = HalfScreenPresentationTransitionDelegate(portraitHeight: 150, landscapeHeight: 170)
+        resultsViewTransitionDelegate = HalfScreenPresentationTransitionDelegate(portraitHeight: 150, landscapeHeight: 170, verticalMargin: 8, horizontalMargin: 8)
         resultsViewController.modalPresentationStyle = .custom
         resultsViewController.transitioningDelegate = resultsViewTransitionDelegate
         present(resultsViewController, animated: true, completion: .none)
@@ -119,7 +110,7 @@ class HomeViewController: UIViewController {
     
     @IBAction func dateSelected(_ sender: UIButton) {
         let selectDateViewController = SelectDateViewController(selectedDate: concernedDate ?? Date())
-        selectDateTransitionDelegate = HalfScreenPresentationTransitionDelegate(portraitHeight: 250, landscapeHeight: 270)
+        selectDateTransitionDelegate = HalfScreenPresentationTransitionDelegate(portraitHeight: 250, landscapeHeight: 270, verticalMargin: 8, horizontalMargin: 8)
         selectDateViewController.transitioningDelegate = selectDateTransitionDelegate
         selectDateViewController.modalPresentationStyle = .custom
         present(selectDateViewController, animated: true, completion: nil)
