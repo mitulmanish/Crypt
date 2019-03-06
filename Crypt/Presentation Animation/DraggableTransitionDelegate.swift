@@ -64,7 +64,7 @@ enum DraggablePosition {
     }
 }
 
-final class DraggablePresentationController: UIPresentationController {
+class DraggablePresentationController: UIPresentationController {
 
     private var draggableView: DraggableViewType? {
         return presentedViewController as? DraggableViewType
@@ -73,11 +73,6 @@ final class DraggablePresentationController: UIPresentationController {
     private var presentedViewOriginY: CGFloat {
         return presentedView?.frame.origin.y ?? 0
     }
-
-    // MARK: Private
-    private var dimmingView = UIView()
-
-    private var dragDirection: DragDirection = .up
 
     private var draggablePosition: DraggablePosition = .open {
         didSet {
@@ -88,8 +83,8 @@ final class DraggablePresentationController: UIPresentationController {
             }
         }
     }
-
-    private let springTiming = UISpringTimingParameters(dampingRatio: .springDampingRatio, initialVelocity: CGVector(dx: 0, dy: .springInitialVelocityY))
+    
+    private var dragDirection: DragDirection = .up
     private var animator: UIViewPropertyAnimator?
 
     private var maxFrame: CGRect {

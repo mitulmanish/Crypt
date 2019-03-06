@@ -9,7 +9,7 @@
 import UIKit
 
 class CustomPresentationController: UIPresentationController{
-    var tapGestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer()
+    private var tapGestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer()
     
     private let portraitHeight: CGFloat
     private let landscapeHeight: CGFloat
