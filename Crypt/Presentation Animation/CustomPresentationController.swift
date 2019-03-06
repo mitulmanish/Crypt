@@ -29,15 +29,29 @@ class CustomPresentationController: UIPresentationController{
     }
 
     override var frameOfPresentedViewInContainerView: CGRect {
+        let sideMargin = presentingViewController.view.safeAreaInsets.right +  presentingViewController.view.safeAreaInsets.left + 8
+        let verticalMargin = presentingViewController.view.safeAreaInsets.bottom
+            + presentingViewController.view.safeAreaInsets.top
+        
         guard let containerView = self.containerView,
             let traitCollection = presentedView?.traitCollection else {
             return .zero
         }
         switch (traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass) {
         case (.regular, .compact), (.compact, .compact):
-            return CGRect(origin: CGPoint(x: 8, y: containerView.frame.height - landscapeHeight - 44), size: CGSize(width: containerView.frame.width - 16, height: landscapeHeight))
+            let point = CGPoint(
+                x: sideMargin,
+                y: containerView.frame.height - verticalMargin - landscapeHeight
+            )
+            return CGRect(origin: point, size: CGSize(width: containerView.frame.width - (2 * sideMargin), height: landscapeHeight))
         case (.compact, .regular), (.regular, .regular):
-            return CGRect(origin: CGPoint(x: 8, y: containerView.frame.height - 44 - portraitHeight), size: CGSize(width: containerView.frame.width - 16, height: portraitHeight))
+            let point = CGPoint(
+                x: sideMargin,
+                y: containerView.frame.height - verticalMargin - portraitHeight
+            )
+            return CGRect(origin: point,
+                          size: CGSize(width: containerView.frame.width - (2 * sideMargin),
+                                       height: portraitHeight))
         case (.unspecified, .unspecified),
              (.unspecified, .compact),
              (.unspecified, .regular),
