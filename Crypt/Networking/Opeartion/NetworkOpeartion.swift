@@ -8,27 +8,32 @@
 
 import Foundation
 
-protocol DecodableOperationType: class {
-    associatedtype T: Decodable
+protocol DecodingDataProvider: class {
+    var data: Data? { get }
 }
 
-class DecodingOperation<Element>: BasicOperation, DecodableOperationType where Element: Decodable {
-    typealias T = Element
-    private(set) var decodedObject: T?
+protocol DecodableOperationType: class {
+    associatedtype DataType: Decodable
+    associatedtype Provider: DecodingDataProvider
+}
+
+class DecodingOperation<Element, DataProvider>: BasicOperation, DecodableOperationType
+where Element: Decodable, DataProvider: DecodingDataProvider {
+    
+    typealias Provider = DataProvider
+    typealias DataType = Element
+    
+    private(set) var decodedObject: DataType?
 
     override var isAsynchronous: Bool {
         return true
     }
 
     override func main() {
-        let dataToDecode = (dependencies.first { $0 is DecodingDataProvider } as? DecodingDataProvider)?.data
-        decodedObject = try? JSONDecoder().decode(T.self, from: dataToDecode ?? Data())
+        let dataToDecode = (dependencies.first { $0 is Provider } as? Provider)?.data
+        decodedObject = try? JSONDecoder().decode(DataType.self, from: dataToDecode ?? Data())
         setFinished()
     }
-}
-
-protocol DecodingDataProvider: class {
-    var data: Data? { get }
 }
 
 class NetworkOperation: BasicOperation, DecodingDataProvider {

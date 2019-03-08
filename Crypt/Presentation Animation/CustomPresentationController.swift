@@ -36,9 +36,21 @@ class CustomPresentationController: UIPresentationController{
     }
 
     override var frameOfPresentedViewInContainerView: CGRect {
-        let sideMargin = presentingViewController.view.safeAreaInsets.right +  presentingViewController.view.safeAreaInsets.left + horizontalMargin
-        let margin = presentingViewController.view.safeAreaInsets.bottom
-            + presentingViewController.view.safeAreaInsets.top + verticalMargin
+        var sideMargin: CGFloat = 0
+        if #available(iOS 11, *) {
+            sideMargin = presentingViewController.view.directionalLayoutMargins.leading +  presentingViewController.view.directionalLayoutMargins.trailing + horizontalMargin
+        } else {
+            sideMargin = presentingViewController.view.layoutMargins.right +  presentingViewController.view.layoutMargins.left + horizontalMargin
+        }
+        
+        var totalVerticalMargin: CGFloat = 0
+        if #available(iOS 11, *) {
+            totalVerticalMargin = presentingViewController.view.directionalLayoutMargins.bottom
+                + presentingViewController.view.directionalLayoutMargins.top + verticalMargin
+        } else {
+            totalVerticalMargin = presentingViewController.view.layoutMargins.top
+                + presentingViewController.view.layoutMargins.bottom + verticalMargin
+        }
         
         guard let containerView = self.containerView,
             let traitCollection = presentedView?.traitCollection else {
@@ -48,13 +60,13 @@ class CustomPresentationController: UIPresentationController{
         case (.regular, .compact), (.compact, .compact):
             let point = CGPoint(
                 x: sideMargin,
-                y: containerView.frame.height - margin - landscapeHeight
+                y: containerView.frame.height - totalVerticalMargin - landscapeHeight
             )
             return CGRect(origin: point, size: CGSize(width: containerView.frame.width - (2 * sideMargin), height: landscapeHeight))
         case (.compact, .regular), (.regular, .regular):
             let point = CGPoint(
                 x: sideMargin,
-                y: containerView.frame.height - margin - portraitHeight
+                y: containerView.frame.height - totalVerticalMargin - portraitHeight
             )
             return CGRect(origin: point,
                           size: CGSize(width: containerView.frame.width - (2 * sideMargin),
