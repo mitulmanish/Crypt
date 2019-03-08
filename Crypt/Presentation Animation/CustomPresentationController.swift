@@ -13,7 +13,6 @@ class CustomPresentationController: UIPresentationController{
     
     private let portraitHeight: CGFloat
     private let landscapeHeight: CGFloat
-    
     private let verticalMargin: CGFloat
     private let horizontalMargin: CGFloat
     
@@ -30,32 +29,66 @@ class CustomPresentationController: UIPresentationController{
         super.init(presentedViewController: presentedViewController, presenting: presentingViewController)
         tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismiss))
     }
-
-    @objc func dismiss(){
-        presentedViewController.dismiss(animated: true, completion: nil)
-    }
-
+    
     override var frameOfPresentedViewInContainerView: CGRect {
-        var sideMargin: CGFloat = 0
-        if #available(iOS 11, *) {
-            sideMargin = presentingViewController.view.directionalLayoutMargins.leading +  presentingViewController.view.directionalLayoutMargins.trailing + horizontalMargin
-        } else {
-            sideMargin = presentingViewController.view.layoutMargins.right +  presentingViewController.view.layoutMargins.left + horizontalMargin
-        }
-        
-        var totalVerticalMargin: CGFloat = 0
-        if #available(iOS 11, *) {
-            totalVerticalMargin = presentingViewController.view.directionalLayoutMargins.bottom
-                + presentingViewController.view.directionalLayoutMargins.top + verticalMargin
-        } else {
-            totalVerticalMargin = presentingViewController.view.layoutMargins.top
-                + presentingViewController.view.layoutMargins.bottom + verticalMargin
-        }
+        let sideMargin = computeSideMargin()
+        let totalVerticalMargin = computTotalVerticalMargin()
         
         guard let containerView = self.containerView,
             let traitCollection = presentedView?.traitCollection else {
             return .zero
         }
+        return computePresentedViewRect(
+            traitCollection: traitCollection,
+            sideMargin: sideMargin,
+            containerView: containerView,
+            totalVerticalMargin: totalVerticalMargin
+        )
+    }
+
+    override func presentationTransitionDidEnd(_ completed: Bool) {
+        super.presentationTransitionDidEnd(completed)
+        containerView?.addGestureRecognizer(tapGestureRecognizer)
+    }
+
+    override func dismissalTransitionWillBegin() {
+        super.dismissalTransitionWillBegin()
+        containerView?.removeGestureRecognizer(tapGestureRecognizer)
+    }
+
+    override func containerViewWillLayoutSubviews() {
+        super.containerViewWillLayoutSubviews()
+    }
+
+    override func containerViewDidLayoutSubviews() {
+        super.containerViewDidLayoutSubviews()
+        self.presentedView?.frame = frameOfPresentedViewInContainerView
+    }
+    
+    private func computeSideMargin() -> CGFloat {
+        if #available(iOS 11, *) {
+            return presentingViewController.view.directionalLayoutMargins.leading +  presentingViewController.view.directionalLayoutMargins.trailing + horizontalMargin
+        } else {
+            return presentingViewController.view.layoutMargins.right +  presentingViewController.view.layoutMargins.left + horizontalMargin
+        }
+    }
+    
+    private func computTotalVerticalMargin() -> CGFloat {
+        if #available(iOS 11, *) {
+            return presentingViewController.view.directionalLayoutMargins.bottom
+                + presentingViewController.view.directionalLayoutMargins.top + verticalMargin
+        } else {
+            return presentingViewController.view.layoutMargins.top
+                + presentingViewController.view.layoutMargins.bottom + verticalMargin
+        }
+    }
+    
+    @objc func dismiss(){
+        presentedViewController.dismiss(animated: true, completion: nil)
+    }
+    
+    private func computePresentedViewRect(traitCollection: UITraitCollection, sideMargin: CGFloat,
+                                          containerView: UIView, totalVerticalMargin: CGFloat) -> CGRect {
         switch (traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass) {
         case (.regular, .compact), (.compact, .compact):
             let point = CGPoint(
@@ -78,24 +111,5 @@ class CustomPresentationController: UIPresentationController{
              (.regular, .unspecified):
             return CGRect(origin: CGPoint(x: 0, y: containerView.frame.height/2), size: CGSize(width: containerView.frame.width, height: containerView.frame.height/2))
         }
-    }
-
-    override func presentationTransitionDidEnd(_ completed: Bool) {
-        super.presentationTransitionDidEnd(completed)
-        containerView?.addGestureRecognizer(tapGestureRecognizer)
-    }
-
-    override func dismissalTransitionWillBegin() {
-        super.dismissalTransitionWillBegin()
-        containerView?.removeGestureRecognizer(tapGestureRecognizer)
-    }
-
-    override func containerViewWillLayoutSubviews() {
-        super.containerViewWillLayoutSubviews()
-    }
-
-    override func containerViewDidLayoutSubviews() {
-        super.containerViewDidLayoutSubviews()
-        self.presentedView?.frame = frameOfPresentedViewInContainerView
     }
 }
