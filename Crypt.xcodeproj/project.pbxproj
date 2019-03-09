@@ -30,7 +30,7 @@
 		DD97D2C4222E9CCE004A72B5 /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD97D2C2222E9CCE004A72B5 /* ResultsViewController.swift */; };
 		DD97D2C5222E9CCE004A72B5 /* ResultsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD97D2C3222E9CCE004A72B5 /* ResultsViewController.xib */; };
 		DD97D2C7222EA657004A72B5 /* ViewDismissalNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD97D2C6222EA657004A72B5 /* ViewDismissalNotifier.swift */; };
-		DDB0EA2421F2E096002EF027 /* CustomPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB0EA2321F2E096002EF027 /* CustomPresentationController.swift */; };
+		DDB0EA2421F2E096002EF027 /* ModalViewControllerPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB0EA2321F2E096002EF027 /* ModalViewControllerPresentationController.swift */; };
 		DDB5159521C4FC3C009B9483 /* UIViiew+roundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB5159421C4FC3C009B9483 /* UIViiew+roundedCorners.swift */; };
 		DDB5159721C6008C009B9483 /* AllCoinsNetworkOperationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB5159621C6008C009B9483 /* AllCoinsNetworkOperationManager.swift */; };
 		DDB5159A21C651E2009B9483 /* DraggableTransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB5159921C651E2009B9483 /* DraggableTransitionDelegate.swift */; };
@@ -86,7 +86,7 @@
 		DD97D2C2222E9CCE004A72B5 /* ResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
 		DD97D2C3222E9CCE004A72B5 /* ResultsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ResultsViewController.xib; sourceTree = "<group>"; };
 		DD97D2C6222EA657004A72B5 /* ViewDismissalNotifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDismissalNotifier.swift; sourceTree = "<group>"; };
-		DDB0EA2321F2E096002EF027 /* CustomPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPresentationController.swift; sourceTree = "<group>"; };
+		DDB0EA2321F2E096002EF027 /* ModalViewControllerPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalViewControllerPresentationController.swift; sourceTree = "<group>"; };
 		DDB5159421C4FC3C009B9483 /* UIViiew+roundedCorners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViiew+roundedCorners.swift"; sourceTree = "<group>"; };
 		DDB5159621C6008C009B9483 /* AllCoinsNetworkOperationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllCoinsNetworkOperationManager.swift; sourceTree = "<group>"; };
 		DDB5159921C651E2009B9483 /* DraggableTransitionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggableTransitionDelegate.swift; sourceTree = "<group>"; };
@@ -237,7 +237,7 @@
 			isa = PBXGroup;
 			children = (
 				DDB5159921C651E2009B9483 /* DraggableTransitionDelegate.swift */,
-				DDB0EA2321F2E096002EF027 /* CustomPresentationController.swift */,
+				DDB0EA2321F2E096002EF027 /* ModalViewControllerPresentationController.swift */,
 			);
 			path = "Presentation Animation";
 			sourceTree = "<group>";
@@ -397,7 +397,7 @@
 				DD2D8AAE21F5FB400065FB50 /* CurvedButton.swift in Sources */,
 				013A4705208F616700DBAEAE /* AppDelegate.swift in Sources */,
 				DD97D2C4222E9CCE004A72B5 /* ResultsViewController.swift in Sources */,
-				DDB0EA2421F2E096002EF027 /* CustomPresentationController.swift in Sources */,
+				DDB0EA2421F2E096002EF027 /* ModalViewControllerPresentationController.swift in Sources */,
 				DDB5159721C6008C009B9483 /* AllCoinsNetworkOperationManager.swift in Sources */,
 				DDB5159A21C651E2009B9483 /* DraggableTransitionDelegate.swift in Sources */,
 			);

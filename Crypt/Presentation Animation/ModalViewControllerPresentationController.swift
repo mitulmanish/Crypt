@@ -8,31 +8,31 @@
 
 import UIKit
 
-class CustomPresentationController: UIPresentationController{
+class ModalViewControllerPresentationController: UIPresentationController {
     private var tapGestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer()
     
     private let portraitHeight: CGFloat
     private let landscapeHeight: CGFloat
-    private let verticalMargin: CGFloat
-    private let horizontalMargin: CGFloat
+    private let marginFromBottom: CGFloat
+    private let sideMargin: CGFloat
     
     init(portraitHeight: CGFloat,
          landscapeHeight: CGFloat,
-         verticalMargin: CGFloat,
-         horizontalMargin: CGFloat,
+         marginFromBottom: CGFloat,
+         sideMargin: CGFloat,
          presentedViewController: UIViewController,
          presentingViewController: UIViewController) {
         self.portraitHeight = portraitHeight
         self.landscapeHeight = landscapeHeight
-        self.verticalMargin = verticalMargin
-        self.horizontalMargin = horizontalMargin
+        self.marginFromBottom = marginFromBottom
+        self.sideMargin = sideMargin
         super.init(presentedViewController: presentedViewController, presenting: presentingViewController)
         tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismiss))
     }
     
     override var frameOfPresentedViewInContainerView: CGRect {
         let sideMargin = computeSideMargin()
-        let totalVerticalMargin = computTotalVerticalMargin()
+        let totalVerticalMargin = computeTotalVerticalMargin()
         
         guard let containerView = self.containerView,
             let traitCollection = presentedView?.traitCollection else {
@@ -67,19 +67,19 @@ class CustomPresentationController: UIPresentationController{
     
     private func computeSideMargin() -> CGFloat {
         if #available(iOS 11, *) {
-            return presentingViewController.view.directionalLayoutMargins.leading +  presentingViewController.view.directionalLayoutMargins.trailing + horizontalMargin
+            return presentingViewController.view.directionalLayoutMargins.leading +  presentingViewController.view.directionalLayoutMargins.trailing + sideMargin
         } else {
-            return presentingViewController.view.layoutMargins.right +  presentingViewController.view.layoutMargins.left + horizontalMargin
+            return presentingViewController.view.layoutMargins.right +  presentingViewController.view.layoutMargins.left + sideMargin
         }
     }
     
-    private func computTotalVerticalMargin() -> CGFloat {
+    private func computeTotalVerticalMargin() -> CGFloat {
         if #available(iOS 11, *) {
             return presentingViewController.view.directionalLayoutMargins.bottom
-                + presentingViewController.view.directionalLayoutMargins.top + verticalMargin
+                + presentingViewController.view.directionalLayoutMargins.top + marginFromBottom
         } else {
             return presentingViewController.view.layoutMargins.top
-                + presentingViewController.view.layoutMargins.bottom + verticalMargin
+                + presentingViewController.view.layoutMargins.bottom + marginFromBottom
         }
     }
     
@@ -90,26 +90,30 @@ class CustomPresentationController: UIPresentationController{
     private func computePresentedViewRect(traitCollection: UITraitCollection, sideMargin: CGFloat,
                                           containerView: UIView, totalVerticalMargin: CGFloat) -> CGRect {
         switch (traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass) {
-        case (.regular, .compact), (.compact, .compact):
-            let point = CGPoint(
-                x: sideMargin,
-                y: containerView.frame.height - totalVerticalMargin - landscapeHeight
-            )
-            return CGRect(origin: point, size: CGSize(width: containerView.frame.width - (2 * sideMargin), height: landscapeHeight))
         case (.compact, .regular), (.regular, .regular):
             let point = CGPoint(
                 x: sideMargin,
                 y: containerView.frame.height - totalVerticalMargin - portraitHeight
             )
-            return CGRect(origin: point,
-                          size: CGSize(width: containerView.frame.width - (2 * sideMargin),
-                                       height: portraitHeight))
+            return CGRect(
+                origin: point,
+                size: CGSize(width: containerView.frame.width - (2 * sideMargin), height: portraitHeight)
+            )
+        case (.regular, .compact), (.compact, .compact):
+            let point = CGPoint(
+                x: sideMargin,
+                y: containerView.frame.height - totalVerticalMargin - landscapeHeight
+            )
+            return CGRect(
+                origin: point,
+                size: CGSize(width: containerView.frame.width - (2 * sideMargin), height: landscapeHeight)
+            )
         case (.unspecified, .unspecified),
              (.unspecified, .compact),
              (.unspecified, .regular),
              (.compact, .unspecified),
              (.regular, .unspecified):
-            return CGRect(origin: CGPoint(x: 0, y: containerView.frame.height/2), size: CGSize(width: containerView.frame.width, height: containerView.frame.height/2))
+            return CGRect(origin: CGPoint(x: 0, y: containerView.frame.height / 2), size: CGSize(width: containerView.frame.width, height: containerView.frame.height / 2))
         }
     }
 }

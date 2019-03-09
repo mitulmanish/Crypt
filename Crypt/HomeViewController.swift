@@ -62,7 +62,7 @@ class HomeViewController: UIViewController {
             ).computePortfolio()
         
         let resultsViewController = ResultsViewController(portfolioType: portfolio)
-        resultsViewTransitionDelegate = HalfScreenPresentationTransitionDelegate(portraitHeight: 150, landscapeHeight: 170, verticalMargin: 8, horizontalMargin: 8)
+        resultsViewTransitionDelegate = HalfScreenPresentationTransitionDelegate(portraitHeight: 150, landscapeHeight: 170, verticalMargin: 0, horizontalMargin: 0)
         resultsViewController.modalPresentationStyle = .custom
         resultsViewController.transitioningDelegate = resultsViewTransitionDelegate
         present(resultsViewController, animated: true, completion: .none)
@@ -110,7 +110,7 @@ class HomeViewController: UIViewController {
     
     @IBAction func dateSelected(_ sender: UIButton) {
         let selectDateViewController = SelectDateViewController(selectedDate: concernedDate ?? Date())
-        selectDateTransitionDelegate = HalfScreenPresentationTransitionDelegate(portraitHeight: 250, landscapeHeight: 270, verticalMargin: 8, horizontalMargin: 8)
+        selectDateTransitionDelegate = HalfScreenPresentationTransitionDelegate(portraitHeight: 250, landscapeHeight: 270, verticalMargin: 8, horizontalMargin: 0)
         selectDateViewController.transitioningDelegate = selectDateTransitionDelegate
         selectDateViewController.modalPresentationStyle = .custom
         present(selectDateViewController, animated: true, completion: nil)

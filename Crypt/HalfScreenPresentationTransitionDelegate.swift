@@ -11,17 +11,24 @@ class HalfScreenPresentationTransitionDelegate: NSObject, UIViewControllerTransi
     
     private let portraitHeight: CGFloat
     private let landscapeHeight: CGFloat
-    private let verticalMargin: CGFloat
-    private let horizontalMargin: CGFloat
+    private let marginFromBottom: CGFloat
+    private let sideMargin: CGFloat
     
     init(portraitHeight: CGFloat, landscapeHeight: CGFloat, verticalMargin: CGFloat, horizontalMargin: CGFloat) {
         self.portraitHeight = portraitHeight
         self.landscapeHeight = landscapeHeight
-        self.verticalMargin = verticalMargin
-        self.horizontalMargin = horizontalMargin
+        self.marginFromBottom = verticalMargin
+        self.sideMargin = horizontalMargin
     }
     
     func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
-        return CustomPresentationController(portraitHeight: portraitHeight, landscapeHeight: landscapeHeight, verticalMargin: verticalMargin, horizontalMargin: horizontalMargin, presentedViewController: presented, presentingViewController: source)
+        return ModalViewControllerPresentationController(
+            portraitHeight: portraitHeight,
+            landscapeHeight: landscapeHeight,
+            marginFromBottom: marginFromBottom,
+            sideMargin: sideMargin,
+            presentedViewController: presented,
+            presentingViewController: source
+        )
     }
 }
