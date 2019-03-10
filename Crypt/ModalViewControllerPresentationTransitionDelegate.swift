@@ -7,7 +7,7 @@
 //
 import UIKit
 
-class HalfScreenPresentationTransitionDelegate: NSObject, UIViewControllerTransitioningDelegate {
+class ModalViewControllerPresentationTransitionDelegate: NSObject, UIViewControllerTransitioningDelegate {
     
     private let portraitHeight: CGFloat
     private let landscapeHeight: CGFloat

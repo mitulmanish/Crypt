@@ -45,7 +45,7 @@ class ModalViewControllerPresentationController: UIPresentationController {
             totalVerticalMargin: totalVerticalMargin
         )
     }
-
+    
     override func presentationTransitionDidEnd(_ completed: Bool) {
         super.presentationTransitionDidEnd(completed)
         containerView?.addGestureRecognizer(tapGestureRecognizer)
@@ -68,7 +68,7 @@ class ModalViewControllerPresentationController: UIPresentationController {
     private func computeSideMargin() -> CGFloat {
         if #available(iOS 11, *) {
             return presentingViewController.view.directionalLayoutMargins.leading +  presentingViewController.view.directionalLayoutMargins.trailing + sideMargin
-        } else {
+        } else { 
             return presentingViewController.view.layoutMargins.right +  presentingViewController.view.layoutMargins.left + sideMargin
         }
     }

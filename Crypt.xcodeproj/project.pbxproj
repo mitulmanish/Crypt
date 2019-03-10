@@ -26,7 +26,7 @@
 		DD2D8AAE21F5FB400065FB50 /* CurvedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2D8AAD21F5FB400065FB50 /* CurvedButton.swift */; };
 		DD97D2BC222E6E75004A72B5 /* ProfitCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD97D2BB222E6E75004A72B5 /* ProfitCalculator.swift */; };
 		DD97D2BF222E8830004A72B5 /* ProfitCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD97D2BE222E8830004A72B5 /* ProfitCalculatorTests.swift */; };
-		DD97D2C1222E94CE004A72B5 /* HalfScreenPresentationTransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD97D2C0222E94CE004A72B5 /* HalfScreenPresentationTransitionDelegate.swift */; };
+		DD97D2C1222E94CE004A72B5 /* ModalViewControllerPresentationTransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD97D2C0222E94CE004A72B5 /* ModalViewControllerPresentationTransitionDelegate.swift */; };
 		DD97D2C4222E9CCE004A72B5 /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD97D2C2222E9CCE004A72B5 /* ResultsViewController.swift */; };
 		DD97D2C5222E9CCE004A72B5 /* ResultsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD97D2C3222E9CCE004A72B5 /* ResultsViewController.xib */; };
 		DD97D2C7222EA657004A72B5 /* ViewDismissalNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD97D2C6222EA657004A72B5 /* ViewDismissalNotifier.swift */; };
@@ -82,7 +82,7 @@
 		DD2D8AAD21F5FB400065FB50 /* CurvedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurvedButton.swift; sourceTree = "<group>"; };
 		DD97D2BB222E6E75004A72B5 /* ProfitCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfitCalculator.swift; sourceTree = "<group>"; };
 		DD97D2BE222E8830004A72B5 /* ProfitCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfitCalculatorTests.swift; sourceTree = "<group>"; };
-		DD97D2C0222E94CE004A72B5 /* HalfScreenPresentationTransitionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfScreenPresentationTransitionDelegate.swift; sourceTree = "<group>"; };
+		DD97D2C0222E94CE004A72B5 /* ModalViewControllerPresentationTransitionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalViewControllerPresentationTransitionDelegate.swift; sourceTree = "<group>"; };
 		DD97D2C2222E9CCE004A72B5 /* ResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
 		DD97D2C3222E9CCE004A72B5 /* ResultsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ResultsViewController.xib; sourceTree = "<group>"; };
 		DD97D2C6222EA657004A72B5 /* ViewDismissalNotifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDismissalNotifier.swift; sourceTree = "<group>"; };
@@ -159,7 +159,7 @@
 				DD2D8AAA21F5F4530065FB50 /* SelectDateViewController.xib */,
 				DD2D8AAD21F5FB400065FB50 /* CurvedButton.swift */,
 				DD97D2BD222E6E98004A72B5 /* Business Logic */,
-				DD97D2C0222E94CE004A72B5 /* HalfScreenPresentationTransitionDelegate.swift */,
+				DD97D2C0222E94CE004A72B5 /* ModalViewControllerPresentationTransitionDelegate.swift */,
 				DD97D2C2222E9CCE004A72B5 /* ResultsViewController.swift */,
 				DD97D2C3222E9CCE004A72B5 /* ResultsViewController.xib */,
 				DD97D2C6222EA657004A72B5 /* ViewDismissalNotifier.swift */,
@@ -392,7 +392,7 @@
 				DD97D2BC222E6E75004A72B5 /* ProfitCalculator.swift in Sources */,
 				01C259D7217C65DC0084617B /* NetworkOpeartion.swift in Sources */,
 				01C259D0217C60A10084617B /* EndpointConstructor.swift in Sources */,
-				DD97D2C1222E94CE004A72B5 /* HalfScreenPresentationTransitionDelegate.swift in Sources */,
+				DD97D2C1222E94CE004A72B5 /* ModalViewControllerPresentationTransitionDelegate.swift in Sources */,
 				DDE1488F21BB9C3700CF8182 /* SelectCoinsTableViewController.swift in Sources */,
 				DD2D8AAE21F5FB400065FB50 /* CurvedButton.swift in Sources */,
 				013A4705208F616700DBAEAE /* AppDelegate.swift in Sources */,

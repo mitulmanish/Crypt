@@ -14,6 +14,10 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var contentScrollView: UIScrollView!
     @IBOutlet weak var quantityTextField: UITextField!
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
+    @IBOutlet weak var resultsLabel: UILabel!
+    
     private var currentCoin: Coin?
     private var concernedDate: Date?
     
@@ -31,6 +35,9 @@ class HomeViewController: UIViewController {
         view.addGestureRecognizer(tapGesturerecognizer)
         amountTextField.attributedPlaceholder = NSAttributedString(string: "", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
         amountTextField.keyboardType = .decimalPad
+        activityIndicator.isHidden = true
+        activityIndicator.hidesWhenStopped = true
+        quantityTextField.delegate = self
     }
     
     var shouldFetchHistoricalData: Bool {
@@ -51,7 +58,16 @@ class HomeViewController: UIViewController {
         super.viewDidAppear(animated)
     }
 
+    private func showResults(portfolio: PortfolioType) {
+        let resultsViewController = ResultsViewController(portfolioType: portfolio)
+        resultsViewTransitionDelegate = ModalViewControllerPresentationTransitionDelegate(portraitHeight: 150, landscapeHeight: 170, verticalMargin: 0, horizontalMargin: 0)
+        resultsViewController.modalPresentationStyle = .custom
+        resultsViewController.transitioningDelegate = resultsViewTransitionDelegate
+        present(resultsViewController, animated: true, completion: .none)
+    }
+    
     func getPriceData(price: CoinPrice?, error: HistoricalPriceError?) {
+        activityIndicator.stopAnimating()
         guard let currentPrice = price?.latest, let oldPrice = price?.old, let quantityInFloat = quantityBought else {
             return
         }
@@ -60,22 +76,27 @@ class HomeViewController: UIViewController {
             currectPrice: currentPrice,
             oldPrice: oldPrice
             ).computePortfolio()
-        
-        let resultsViewController = ResultsViewController(portfolioType: portfolio)
-        resultsViewTransitionDelegate = HalfScreenPresentationTransitionDelegate(portraitHeight: 150, landscapeHeight: 170, verticalMargin: 0, horizontalMargin: 0)
-        resultsViewController.modalPresentationStyle = .custom
-        resultsViewController.transitioningDelegate = resultsViewTransitionDelegate
-        present(resultsViewController, animated: true, completion: .none)
+        switch portfolio {
+        case .profit(_, let currentValue):
+            resultsLabel.text = "$ \(currentValue)"
+        case .loss(_, let currentValue):
+            resultsLabel.text = "$ \(currentValue)"
+        case .neutral:
+            resultsLabel.text = "$ \(quantityInFloat)"
+        }
+        showResults(portfolio: portfolio)
     }
 
     func getHistoricalData() {
         guard let coin = self.currentCoin,
             let date = self.concernedDate,
-            quantityBought != nil,
-            isBeingPresented == false
+            quantityBought != nil
         else {
             return
         }
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
+        resultsLabel.text = nil
         let historicalDataNetworkOperationManager = HistoricalDataNetworkOperationManager()
         historicalDataNetworkOperationManager.requestCoinHistoricalData(
             forDates: (old: date,
@@ -96,6 +117,7 @@ class HomeViewController: UIViewController {
         selectCoinViewController.coinSelected = { [weak self] coin in
             self?.currentCoin = coin
             self?.coinButton.setTitle(coin.name, for: .normal)
+            self?.getHistoricalData()
         }
         selectCoinViewController.viewDismissed = { [weak self] in
             self?.getHistoricalData()
@@ -110,13 +132,14 @@ class HomeViewController: UIViewController {
     
     @IBAction func dateSelected(_ sender: UIButton) {
         let selectDateViewController = SelectDateViewController(selectedDate: concernedDate ?? Date())
-        selectDateTransitionDelegate = HalfScreenPresentationTransitionDelegate(portraitHeight: 250, landscapeHeight: 270, verticalMargin: 8, horizontalMargin: 0)
+        selectDateTransitionDelegate = ModalViewControllerPresentationTransitionDelegate(portraitHeight: 250, landscapeHeight: 270, verticalMargin: 8, horizontalMargin: 0)
         selectDateViewController.transitioningDelegate = selectDateTransitionDelegate
         selectDateViewController.modalPresentationStyle = .custom
         present(selectDateViewController, animated: true, completion: nil)
         selectDateViewController.dateChanged = { [weak self] date in
             self?.concernedDate = date
             self?.formatDate(date: date)
+            self?.getHistoricalData()
         }
         selectDateViewController.viewDismissed = { [weak self] in
             self?.getHistoricalData()
@@ -137,5 +160,11 @@ class HomeViewController: UIViewController {
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
+    }
+}
+
+extension HomeViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        resultsLabel.text = nil
     }
 }

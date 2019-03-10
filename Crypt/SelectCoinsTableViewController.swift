@@ -16,6 +16,7 @@ class SelectCoinsTableViewController: UIViewController, UITableViewDataSource, U
         didSet {
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
+                self.activityIndicator.stopAnimating()
                 self.tableView.reloadData()
                 if let coin = self.selectedCoin, let indexPath = self.indexPath(of: coin) {
                     self.tableView.reloadRows(at: [indexPath], with: .none)
@@ -56,6 +57,13 @@ class SelectCoinsTableViewController: UIViewController, UITableViewDataSource, U
         view.layer.cornerRadius = 4
         return view
     }()
+    
+    lazy var activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .whiteLarge)
+        indicator.hidesWhenStopped = true
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        return indicator
+    }()
 
     init(selectedCoin: Coin?) {
         self.selectedCoin = selectedCoin
@@ -70,16 +78,39 @@ class SelectCoinsTableViewController: UIViewController, UITableViewDataSource, U
         view.backgroundColor = .darkGray
         containerView.backgroundColor = .darkGray
 
+        setupSubViews()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        if let coinsData = UserDefaults.standard.data(forKey: "coins") {
+            self.originalCoinCollection = try? JSONDecoder().decode(CoinCollection.self, from: coinsData)
+            activityIndicator.removeFromSuperview()
+        } else {
+            AllCoinsNetworkOperationManager().getAllCoins(completionHandler: allCoins)
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        activityIndicator.startAnimating()
+    }
+
+    override func viewDidLayoutSubviews() {
+        view.round(corners: [.topLeft, .topRight], radius: 8)
+    }
+    
+    private func setupSubViews() {
         containerView.translatesAutoresizingMaskIntoConstraints = false
         
         view.addSubview(containerView)
-
+        
         [containerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
          containerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-         containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-         containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+         containerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+         containerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
             ].forEach { $0.isActive = true }
-
+        
         handlerView.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(handlerView)
         [handlerView.heightAnchor.constraint(equalToConstant: 4),
@@ -87,7 +118,7 @@ class SelectCoinsTableViewController: UIViewController, UITableViewDataSource, U
          handlerView.widthAnchor.constraint(equalToConstant: 90),
          handlerView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 8)
             ].forEach { $0.isActive = true }
-
+        
         searchBar.delegate = self
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(searchBar)
@@ -97,7 +128,7 @@ class SelectCoinsTableViewController: UIViewController, UITableViewDataSource, U
          searchBar.heightAnchor.constraint(equalToConstant: 44),
          searchBar.centerXAnchor.constraint(equalTo: containerView.centerXAnchor)
             ].forEach { $0.isActive = true }
-
+        
         tableView.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(tableView)
         [tableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor),
@@ -105,25 +136,19 @@ class SelectCoinsTableViewController: UIViewController, UITableViewDataSource, U
          tableView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
          tableView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor)
             ].forEach { $0.isActive = true }
-
+        
         tableView.register(CoinTableViewCell.self, forCellReuseIdentifier: CoinTableViewCell.identifier)
         tableView.backgroundColor = .darkGray
         tableView.separatorStyle = .none
         tableView.delegate = self
         tableView.dataSource = self
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        if let coinsData = UserDefaults.standard.data(forKey: "coins") {
-            self.originalCoinCollection = try? JSONDecoder().decode(CoinCollection.self, from: coinsData)
-        } else {
-            AllCoinsNetworkOperationManager().getAllCoins(completionHandler: allCoins)
-        }
-    }
-
-    override func viewDidLayoutSubviews() {
-        view.round(corners: [.topLeft, .topRight], radius: 8)
+        
+        tableView.addSubview(activityIndicator)
+        [activityIndicator.centerXAnchor.constraint(equalTo: tableView.centerXAnchor),
+         activityIndicator.topAnchor.constraint(equalTo: tableView.topAnchor, constant: 16),
+         activityIndicator.widthAnchor.constraint(equalToConstant: 36),
+         activityIndicator.heightAnchor.constraint(equalTo: activityIndicator.widthAnchor)]
+            .forEach { $0.isActive = true }
     }
 
     func allCoins(coinCollection: CoinCollection?) {
