@@ -6,7 +6,7 @@ struct AllCoinsNetworkOperationManager {
             completionHandler(nil)
             return
         }
-        let allCoinsOperation = NetworkOperation(session: URLSession(configuration: .default), urlRequest: request)
+        let allCoinsOperation = NetworkOperation(urlRequest: request)
         let dataDecodingOperation = DecodingOperation<CoinCollection, NetworkOperation>()
         dataDecodingOperation.addDependency(allCoinsOperation)
         let operationQueue = OperationQueue()

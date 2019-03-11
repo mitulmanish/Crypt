@@ -22,12 +22,12 @@ struct HistoricalDataNetworkOperationManager {
                 return
         }
         
-        let oldPriceOperation = NetworkOperation(session: URLSession(configuration: .default), urlRequest: oldPriceRequest)
+        let oldPriceOperation = NetworkOperation(urlRequest: oldPriceRequest)
 
         let oldPriceDecodingOperation = DecodingOperation<CryptoHistoricalData, NetworkOperation>()
         oldPriceDecodingOperation.addDependency(oldPriceOperation)
 
-        let latestPriceOperation = NetworkOperation(session: URLSession(configuration: .default), urlRequest: latestPriceRequest)
+        let latestPriceOperation = NetworkOperation(urlRequest: latestPriceRequest)
         latestPriceOperation.addDependency(oldPriceDecodingOperation)
 
         let latestPriceDecodingOperation = DecodingOperation<CryptoHistoricalData, NetworkOperation>()

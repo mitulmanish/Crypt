@@ -30,9 +30,16 @@ where Element: Decodable, DataProvider: DecodingDataProvider {
     }
 
     override func main() {
-        let dataToDecode = (dependencies.first { $0 is Provider } as? Provider)?.data
-        decodedObject = try? JSONDecoder().decode(DataType.self, from: dataToDecode ?? Data())
-        setFinished()
+        guard let dataToDecode = (dependencies.first { $0 is Provider } as? Provider)?.data else {
+            setFinished()
+            return
+        }
+        do {
+            decodedObject = try JSONDecoder().decode(DataType.self, from: dataToDecode)
+            setFinished()
+        } catch {
+            setFinished()
+        }
     }
 }
 
@@ -47,7 +54,7 @@ class NetworkOperation: BasicOperation, DecodingDataProvider {
         return true
     }
     
-    init(session: URLSession, urlRequest: URLRequest) {
+    init(urlRequest: URLRequest, session: URLSession = URLSession(configuration: .default)) {
         self.session = session
         self.urlRequest = urlRequest
     }
