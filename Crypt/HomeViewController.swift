@@ -63,7 +63,7 @@ class HomeViewController: UIViewController {
         resultsViewTransitionDelegate = ModalViewControllerPresentationTransitionDelegate(portraitHeight: 150, landscapeHeight: 170, verticalMargin: 0, horizontalMargin: 0)
         resultsViewController.modalPresentationStyle = .custom
         resultsViewController.transitioningDelegate = resultsViewTransitionDelegate
-        present(resultsViewController, animated: true, completion: .none)
+        dismissThenPresent(viewController: resultsViewController)
     }
     
     func getPriceData(price: CoinPrice?, error: HistoricalPriceError?) {
@@ -85,6 +85,16 @@ class HomeViewController: UIViewController {
             resultsLabel.text = "$ \(quantityInFloat)"
         }
         showResults(portfolio: portfolio)
+    }
+    
+    func dismissThenPresent(viewController: UIViewController) {
+        if presentedViewController == .none {
+            present(viewController, animated: true, completion: .none)
+        } else {
+            dismiss(animated: true) { [weak self] in
+                self?.present(viewController, animated: true, completion: .none)
+            }
+        }
     }
 
     func getHistoricalData() {
@@ -108,12 +118,11 @@ class HomeViewController: UIViewController {
 
     @IBAction func selectCoin(_ sender: UIButton) {
         dismissKeyboard()
-        guard isBeingPresented == false else { return }
         let selectCoinViewController = SelectCoinsTableViewController(selectedCoin: currentCoin)
         animator = DraggableTransitionDelegate()
         selectCoinViewController.modalPresentationStyle = .custom
         selectCoinViewController.transitioningDelegate = animator
-        present(selectCoinViewController, animated: true, completion: nil)
+        dismissThenPresent(viewController: selectCoinViewController)
         selectCoinViewController.coinSelected = { [weak self] coin in
             self?.currentCoin = coin
             self?.coinButton.setTitle(coin.name, for: .normal)
@@ -135,7 +144,7 @@ class HomeViewController: UIViewController {
         selectDateTransitionDelegate = ModalViewControllerPresentationTransitionDelegate(portraitHeight: 250, landscapeHeight: 270, verticalMargin: 8, horizontalMargin: 0)
         selectDateViewController.transitioningDelegate = selectDateTransitionDelegate
         selectDateViewController.modalPresentationStyle = .custom
-        present(selectDateViewController, animated: true, completion: nil)
+        dismissThenPresent(viewController: selectDateViewController)
         selectDateViewController.dateChanged = { [weak self] date in
             self?.concernedDate = date
             self?.formatDate(date: date)

@@ -26,7 +26,7 @@ class BasicOperation: Operation {
         }
 
         didSet {
-            willChangeValue(forKey: oldValue.keyPath)
+            didChangeValue(forKey: oldValue.keyPath)
             didChangeValue(forKey: state.keyPath)
         }
     }
