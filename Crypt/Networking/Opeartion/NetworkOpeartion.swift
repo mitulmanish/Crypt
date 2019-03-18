@@ -70,8 +70,8 @@ class NetworkOperation: BasicOperation, DecodingDataProvider {
                 self.error = cause
                 self.setFinished()
             case .unexpected:
-                self.data = nil
-                self.error = nil
+                self.data = .none
+                self.error = .none
                 self.setFinished()
             }
         }

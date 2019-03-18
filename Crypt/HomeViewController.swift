@@ -5,7 +5,6 @@ class HomeViewController: UIViewController {
     private var animator: UIViewControllerTransitioningDelegate?
     private var selectDateTransitionDelegate: UIViewControllerTransitioningDelegate?
     private var resultsViewTransitionDelegate: UIViewControllerTransitioningDelegate?
-    
     private var selectCoinsTableViewController: SelectCoinsTableViewController?
 
     @IBOutlet weak var amountTextField: UITextField!
@@ -15,7 +14,6 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var quantityTextField: UITextField!
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    
     @IBOutlet weak var resultsLabel: UILabel!
     
     private var currentCoin: Coin?
@@ -40,8 +38,10 @@ class HomeViewController: UIViewController {
         quantityTextField.delegate = self
     }
     
-    var shouldFetchHistoricalData: Bool {
-        return (quantityTextField.text?.isEmpty == false && currentCoin != nil && concernedDate != nil)
+    private var shouldFetchHistoricalData: Bool {
+        return quantityTextField.text?.isEmpty == false
+            && currentCoin != nil
+            && concernedDate != nil
     }
 
     @objc func screenTapped() {
@@ -60,7 +60,12 @@ class HomeViewController: UIViewController {
 
     private func showResults(portfolio: PortfolioType) {
         let resultsViewController = ResultsViewController(portfolioType: portfolio)
-        resultsViewTransitionDelegate = ModalViewControllerPresentationTransitionDelegate(portraitHeight: 150, landscapeHeight: 170, verticalMargin: 0, horizontalMargin: 0)
+        resultsViewTransitionDelegate = ModalViewControllerPresentationTransitionDelegate(
+            portraitHeight: 150,
+            landscapeHeight: 170,
+            verticalMargin: 0,
+            horizontalMargin: 0
+        )
         resultsViewController.modalPresentationStyle = .custom
         resultsViewController.transitioningDelegate = resultsViewTransitionDelegate
         dismissThenPresent(viewController: resultsViewController)
@@ -68,23 +73,42 @@ class HomeViewController: UIViewController {
     
     func getPriceData(price: CoinPrice?, error: HistoricalPriceError?) {
         activityIndicator.stopAnimating()
-        guard let currentPrice = price?.latest, let oldPrice = price?.old, let quantityInFloat = quantityBought else {
+        guard let error = error else {
+            guard let currentPrice = price?.latest, let oldPrice = price?.old, let quantityInFloat = quantityBought else {
+                return
+            }
+            let portfolio = ProfitCalculator(
+                moneySpent: quantityInFloat,
+                currectPrice: currentPrice,
+                oldPrice: oldPrice
+                ).computePortfolio()
+            switch portfolio {
+            case .profit(_, let currentValue):
+                resultsLabel.text = "$ \(currentValue)"
+            case .loss(_, let currentValue):
+                resultsLabel.text = "$ \(currentValue)"
+            case .neutral:
+                resultsLabel.text = "$ \(quantityInFloat)"
+            }
+            showResults(portfolio: portfolio)
             return
         }
-        let portfolio = ProfitCalculator(
-            moneySpent: quantityInFloat,
-            currectPrice: currentPrice,
-            oldPrice: oldPrice
-            ).computePortfolio()
-        switch portfolio {
-        case .profit(_, let currentValue):
-            resultsLabel.text = "$ \(currentValue)"
-        case .loss(_, let currentValue):
-            resultsLabel.text = "$ \(currentValue)"
-        case .neutral:
-            resultsLabel.text = "$ \(quantityInFloat)"
+        showPriceFetchError(error: error)
+    }
+    
+    func showPriceFetchError(error: HistoricalPriceError) {
+        let resultsViewController = ResultsViewController(error: error)
+        resultsViewTransitionDelegate = ModalViewControllerPresentationTransitionDelegate(
+            portraitHeight: 220,
+            landscapeHeight: 150,
+            verticalMargin: 0,
+            horizontalMargin: 0
+        )
+        resultsViewController.modalPresentationStyle = .custom
+        resultsViewController.transitioningDelegate = resultsViewTransitionDelegate
+        if presentedViewController == .none {
+            present(resultsViewController, animated: true, completion: .none)
         }
-        showResults(portfolio: portfolio)
     }
     
     func dismissThenPresent(viewController: UIViewController) {
@@ -96,22 +120,49 @@ class HomeViewController: UIViewController {
             }
         }
     }
-
-    func getHistoricalData() {
+    
+    private (set) var historicalDataNetworkOperationManager: HistoricalDataNetworkOperationManager?
+    
+    func computePriceRequestParams() -> PriceRequestParams? {
         guard let coin = self.currentCoin,
             let date = self.concernedDate,
-            quantityBought != nil
-        else {
+            let quantityBought = self.quantityBought
+            else {
+                return .none
+        }
+        return PriceRequestParams(
+            quantityBought: quantityBought,
+            currentDate: Date(),
+            historicalDate: date,
+            coin: coin
+        )
+    }
+    
+    private var priceRequestParams: PriceRequestParams?
+    
+    var shouldRequestNewPriceData: Bool {
+        guard let priceRequestParams = self.priceRequestParams else {
+            return true
+        }
+        return computePriceRequestParams() != priceRequestParams
+    }
+    
+    func getHistoricalData() {
+        guard shouldRequestNewPriceData else {
             return
         }
+        guard let priceRequestParams = computePriceRequestParams() else {
+            return
+        }
+        self.priceRequestParams = priceRequestParams
         activityIndicator.isHidden = false
         activityIndicator.startAnimating()
         resultsLabel.text = nil
-        let historicalDataNetworkOperationManager = HistoricalDataNetworkOperationManager()
-        historicalDataNetworkOperationManager.requestCoinHistoricalData(
-            forDates: (old: date,
-                       latest: Date()),
-            forCoin: coin,
+        historicalDataNetworkOperationManager = HistoricalDataNetworkOperationManager()
+        historicalDataNetworkOperationManager?.requestCoinHistoricalData(
+            forDates: (old: priceRequestParams.historicalDate,
+                       latest: priceRequestParams.currentDate),
+            forCoin: priceRequestParams.coin,
             forCurrency: "usd",
             completionHandler: getPriceData)
     }

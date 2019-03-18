@@ -3,6 +3,13 @@ import Foundation
 enum HistoricalPriceError: Error {
     case cantFetchOldPrice
     case cantFetchLatestPrice
+    
+    var description: String {
+        switch self {
+        case .cantFetchOldPrice, .cantFetchLatestPrice:
+            return "☹️ There seems be a problem with the network. Try again later."
+        }
+    }
 }
 
 struct HistoricalDataNetworkOperationManager {

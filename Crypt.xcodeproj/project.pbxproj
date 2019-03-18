@@ -37,6 +37,7 @@
 		DDB5159C21C65731009B9483 /* UIWindow+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB5159B21C65731009B9483 /* UIWindow+Extensions.swift */; };
 		DDE1488F21BB9C3700CF8182 /* SelectCoinsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE1488D21BB9C3700CF8182 /* SelectCoinsTableViewController.swift */; };
 		DDE1489321BB9E9000CF8182 /* CoinTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE1489121BB9E9000CF8182 /* CoinTableViewCell.swift */; };
+		DDFB14C7223F9050004C5B29 /* PriceRequestParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFB14C6223F9050004C5B29 /* PriceRequestParams.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +94,7 @@
 		DDB5159B21C65731009B9483 /* UIWindow+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+Extensions.swift"; sourceTree = "<group>"; };
 		DDE1488D21BB9C3700CF8182 /* SelectCoinsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCoinsTableViewController.swift; sourceTree = "<group>"; };
 		DDE1489121BB9E9000CF8182 /* CoinTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinTableViewCell.swift; sourceTree = "<group>"; };
+		DDFB14C6223F9050004C5B29 /* PriceRequestParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceRequestParams.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +165,7 @@
 				DD97D2C2222E9CCE004A72B5 /* ResultsViewController.swift */,
 				DD97D2C3222E9CCE004A72B5 /* ResultsViewController.xib */,
 				DD97D2C6222EA657004A72B5 /* ViewDismissalNotifier.swift */,
+				DDFB14C6223F9050004C5B29 /* PriceRequestParams.swift */,
 			);
 			path = Crypt;
 			sourceTree = "<group>";
@@ -392,6 +395,7 @@
 				DD97D2BC222E6E75004A72B5 /* ProfitCalculator.swift in Sources */,
 				01C259D7217C65DC0084617B /* NetworkOpeartion.swift in Sources */,
 				01C259D0217C60A10084617B /* EndpointConstructor.swift in Sources */,
+				DDFB14C7223F9050004C5B29 /* PriceRequestParams.swift in Sources */,
 				DD97D2C1222E94CE004A72B5 /* ModalViewControllerPresentationTransitionDelegate.swift in Sources */,
 				DDE1488F21BB9C3700CF8182 /* SelectCoinsTableViewController.swift in Sources */,
 				DD2D8AAE21F5FB400065FB50 /* CurvedButton.swift in Sources */,

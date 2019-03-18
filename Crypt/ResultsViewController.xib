@@ -22,7 +22,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9r1-uY-FG7">
-                    <rect key="frame" x="16" y="20" width="343" height="33.5"/>
+                    <rect key="frame" x="16" y="20" width="343" height="126"/>
                     <fontDescription key="fontDescription" type="system" pointSize="28"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
@@ -32,6 +32,7 @@
                     <color key="backgroundColor" red="0.43529412150000002" green="0.4431372583" blue="0.47450980539999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="80" id="Fe7-GD-fvQ"/>
+                        <constraint firstAttribute="height" constant="30" id="rxv-kP-NqF"/>
                     </constraints>
                     <state key="normal" title="OK">
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -47,6 +48,7 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="9r1-uY-FG7" secondAttribute="trailing" constant="16" id="Yev-Il-wHZ"/>
                 <constraint firstItem="9r1-uY-FG7" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="bgz-g6-8Sh"/>
                 <constraint firstItem="xSs-mB-O0a" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="dH3-7m-mqX"/>
+                <constraint firstItem="xSs-mB-O0a" firstAttribute="top" secondItem="9r1-uY-FG7" secondAttribute="bottom" constant="8" id="hK7-Wm-QxU"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="xSs-mB-O0a" secondAttribute="bottom" constant="16" id="kwZ-rO-Q5q"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

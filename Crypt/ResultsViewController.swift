@@ -12,10 +12,18 @@ class ResultsViewController: UIViewController, ViewDismissalNotifier {
     var viewDismissed: (() -> Void)?
     
     @IBOutlet weak var resultsLabel: UILabel!
-    private let portfolioType: PortfolioType
+    private let portfolioType: PortfolioType?
+    private let error: HistoricalPriceError?
     
     init(portfolioType: PortfolioType) {
+        self.error = .none
         self.portfolioType = portfolioType
+        super.init(nibName: nil, bundle: .main)
+    }
+    
+    init(error: HistoricalPriceError) {
+        self.portfolioType = .none
+        self.error = error
         super.init(nibName: nil, bundle: .main)
     }
     
@@ -29,12 +37,18 @@ class ResultsViewController: UIViewController, ViewDismissalNotifier {
         var text: String?
         
         switch portfolioType {
-        case .profit(let amount, _):
+        case .profit(let amount, _)?:
             text = "You made a \nprofit of $ \(amount)"
-        case .loss(let amount, _):
+        case .loss(let amount, _)?:
             text = "You made a \nloss of $ \(amount)"
-        case .neutral:
+        case .neutral?:
             text = "No profit \nno loss"
+        case .none:
+            break
+        }
+        
+        if let error = self.error {
+            text = error.description
         }
         resultsLabel.text = text
     }
