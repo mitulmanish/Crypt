@@ -114,6 +114,8 @@ class ModalViewControllerPresentationController: UIPresentationController {
              (.compact, .unspecified),
              (.regular, .unspecified):
             return CGRect(origin: CGPoint(x: 0, y: containerView.frame.height / 2), size: CGSize(width: containerView.frame.width, height: containerView.frame.height / 2))
+        default:
+            return .zero
         }
     }
 }
