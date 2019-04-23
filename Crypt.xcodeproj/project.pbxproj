@@ -35,6 +35,7 @@
 		DDB5159721C6008C009B9483 /* AllCoinsNetworkOperationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB5159621C6008C009B9483 /* AllCoinsNetworkOperationManager.swift */; };
 		DDB5159A21C651E2009B9483 /* DraggableTransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB5159921C651E2009B9483 /* DraggableTransitionDelegate.swift */; };
 		DDB5159C21C65731009B9483 /* UIWindow+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB5159B21C65731009B9483 /* UIWindow+Extensions.swift */; };
+		DDC7A5F92257B5D10069FCF3 /* DecodingOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC7A5F82257B5D10069FCF3 /* DecodingOperation.swift */; };
 		DDE1488F21BB9C3700CF8182 /* SelectCoinsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE1488D21BB9C3700CF8182 /* SelectCoinsTableViewController.swift */; };
 		DDE1489321BB9E9000CF8182 /* CoinTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE1489121BB9E9000CF8182 /* CoinTableViewCell.swift */; };
 		DDFB14C7223F9050004C5B29 /* PriceRequestParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFB14C6223F9050004C5B29 /* PriceRequestParams.swift */; };
@@ -92,6 +93,7 @@
 		DDB5159621C6008C009B9483 /* AllCoinsNetworkOperationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllCoinsNetworkOperationManager.swift; sourceTree = "<group>"; };
 		DDB5159921C651E2009B9483 /* DraggableTransitionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggableTransitionDelegate.swift; sourceTree = "<group>"; };
 		DDB5159B21C65731009B9483 /* UIWindow+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+Extensions.swift"; sourceTree = "<group>"; };
+		DDC7A5F82257B5D10069FCF3 /* DecodingOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodingOperation.swift; sourceTree = "<group>"; };
 		DDE1488D21BB9C3700CF8182 /* SelectCoinsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCoinsTableViewController.swift; sourceTree = "<group>"; };
 		DDE1489121BB9E9000CF8182 /* CoinTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinTableViewCell.swift; sourceTree = "<group>"; };
 		DDFB14C6223F9050004C5B29 /* PriceRequestParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceRequestParams.swift; sourceTree = "<group>"; };
@@ -224,6 +226,7 @@
 			children = (
 				01C259D4217C64CC0084617B /* BasicOpeartion.swift */,
 				01C259D6217C65DC0084617B /* NetworkOpeartion.swift */,
+				DDC7A5F82257B5D10069FCF3 /* DecodingOperation.swift */,
 			);
 			path = Opeartion;
 			sourceTree = "<group>";
@@ -397,6 +400,7 @@
 				01C259D0217C60A10084617B /* EndpointConstructor.swift in Sources */,
 				DDFB14C7223F9050004C5B29 /* PriceRequestParams.swift in Sources */,
 				DD97D2C1222E94CE004A72B5 /* ModalViewControllerPresentationTransitionDelegate.swift in Sources */,
+				DDC7A5F92257B5D10069FCF3 /* DecodingOperation.swift in Sources */,
 				DDE1488F21BB9C3700CF8182 /* SelectCoinsTableViewController.swift in Sources */,
 				DD2D8AAE21F5FB400065FB50 /* CurvedButton.swift in Sources */,
 				013A4705208F616700DBAEAE /* AppDelegate.swift in Sources */,

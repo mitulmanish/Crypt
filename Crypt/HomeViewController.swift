@@ -7,7 +7,6 @@ class HomeViewController: UIViewController {
     private var resultsViewTransitionDelegate: UIViewControllerTransitioningDelegate?
     private var selectCoinsTableViewController: SelectCoinsTableViewController?
 
-    @IBOutlet weak var amountTextField: UITextField!
     @IBOutlet weak var coinButton: UIButton!
     @IBOutlet weak var dateButton: UIButton!
     @IBOutlet weak var contentScrollView: UIScrollView!
@@ -31,11 +30,19 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         let tapGesturerecognizer = UITapGestureRecognizer(target: self, action: #selector(screenTapped))
         view.addGestureRecognizer(tapGesturerecognizer)
-        amountTextField.attributedPlaceholder = NSAttributedString(string: "", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
-        amountTextField.keyboardType = .decimalPad
+        quantityTextField.attributedPlaceholder = NSAttributedString(string: "", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+        quantityTextField.keyboardType = .decimalPad
         activityIndicator.isHidden = true
         activityIndicator.hidesWhenStopped = true
         quantityTextField.delegate = self
+        
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+    }
+    
+    @objc func keyboardWillShow(notification: Notification) {
+        let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect
+        print(">> \(keyboardFrame)")
     }
     
     private var shouldFetchHistoricalData: Bool {
