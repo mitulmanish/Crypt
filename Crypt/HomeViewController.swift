@@ -35,14 +35,6 @@ class HomeViewController: UIViewController {
         activityIndicator.isHidden = true
         activityIndicator.hidesWhenStopped = true
         quantityTextField.delegate = self
-        
-        let notificationCenter = NotificationCenter.default
-        notificationCenter.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-    }
-    
-    @objc func keyboardWillShow(notification: Notification) {
-        let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect
-        print(">> \(keyboardFrame)")
     }
     
     private var shouldFetchHistoricalData: Bool {
