@@ -81,6 +81,7 @@ class HomeViewController: UIViewController {
                 currectPrice: currentPrice,
                 oldPrice: oldPrice
                 ).computePortfolio()
+            
             switch portfolio {
             case .profit(_, let currentValue):
                 resultsLabel.text = "$ \(currentValue)"

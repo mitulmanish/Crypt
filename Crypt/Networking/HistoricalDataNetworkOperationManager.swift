@@ -7,7 +7,7 @@ enum HistoricalPriceError: Error {
     var description: String {
         switch self {
         case .cantFetchOldPrice, .cantFetchLatestPrice:
-            return "☹️ There seems be a problem with the network. Try again later."
+            return "☹️ There seems to be a problem with the network. Try again later."
         }
     }
 }

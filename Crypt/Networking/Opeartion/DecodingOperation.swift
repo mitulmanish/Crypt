@@ -20,8 +20,8 @@ protocol DecodableOperationType: class {
 class DecodingOperation<Element, DataProvider>: BasicOperation, DecodableOperationType
 where Element: Decodable, DataProvider: DecodingDataProvider {
     
-    typealias Provider = DataProvider
     typealias DataType = Element
+    typealias Provider = DataProvider
     
     private(set) var decodedObject: DataType?
     
