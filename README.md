@@ -1,4 +1,10 @@
 # Crypt
+## TODO
+- [ ] Add support for more currencies
+- [ ] Introduce Coordinators for navigation
+- [ ] Add ability to cancel network operations
+
+---
 
 |Home|Coin List|Date Selection|Result|
 |----|---|---|---|
