@@ -81,15 +81,16 @@ class HomeViewController: UIViewController {
                 currectPrice: currentPrice,
                 oldPrice: oldPrice
                 ).computePortfolio()
-            
+            var formattedString: String?
             switch portfolio {
             case .profit(_, let currentValue):
-                resultsLabel.text = "$ \(currentValue)"
+                formattedString = "$ \(currentValue)"
             case .loss(_, let currentValue):
-                resultsLabel.text = "$ \(currentValue)"
+                formattedString = "$ \(currentValue)"
             case .neutral:
-                resultsLabel.text = "$ \(quantityInFloat)"
+                formattedString = "$ \(quantityInFloat)"
             }
+            resultsLabel.text = formattedString ?? ""
             showResults(portfolio: portfolio)
             return
         }

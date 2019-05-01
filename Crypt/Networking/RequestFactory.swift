@@ -2,7 +2,7 @@ import Foundation
 
 struct RequestFactory {
     static func getRequest(endpointType: EndPointConstructor) -> URLRequest? {
-        guard let baseURL = URL(string: "https://www.cryptocurrencychart.com/api") else {
+        guard let baseURL = URL(string: "https://www.cryptocurrencychart.com/api/coin/") else {
             return nil
         }
         var request = URLRequest(url: baseURL)
