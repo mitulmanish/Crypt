@@ -64,3 +64,13 @@ struct CryptoHistoricalData: Codable {
         return dateFormatter.date(from: string)
     }
 }
+
+struct CoinPriceData: Decodable {
+    let price: Double
+    let date: String
+}
+
+struct CoinHistoricalPrice: Decodable {
+    let coin: Coin
+    let data: [CoinPriceData]
+}

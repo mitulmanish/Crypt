@@ -55,6 +55,23 @@ class HomeViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        fetchPriceBetweenDates()
+    }
+    
+    // For testing purposes
+    private func fetchPriceBetweenDates() {
+        let endPoint = EndPointConstructor.history(coin: Coin(id: 363, name: "Bitcoin", code: "BTC"), fromDate: Date().addingTimeInterval(-24 * 60 * 60 * 5), toDate: Date().addingTimeInterval(-24 * 60 * 60 * 1), currency: "USD")
+        guard let req = RequestFactory.getRequest(endpointType: endPoint) else {
+            return
+        }
+        Service().fetch(urlRequest: req) { (result: Result<CoinHistoricalPrice, Error>) in
+            switch result {
+            case .success(let coinPriceData):
+                print(coinPriceData.data.first?.price)
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 
     private func showResults(portfolio: PortfolioType) {
