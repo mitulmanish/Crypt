@@ -73,4 +73,51 @@ struct CoinPriceData: Decodable {
 struct CoinHistoricalPrice: Decodable {
     let coin: Coin
     let data: [CoinPriceData]
+    
+    func a() -> Currency? {
+        return Currency(rawValue: "ZAR")
+    }
+}
+
+struct CurrecyHolder: Decodable {
+    let baseCurrencies: [String]
+    
+    var toCurrencyList: [Currency] {
+        return baseCurrencies.compactMap({ Currency(rawValue: $0)})
+    }
+}
+
+enum Currency: String, Decodable {
+    case usd = "USD"
+    case eur = "EUR"
+    case aud = "AUD"
+    case bgn = "BGN"
+    case brl = "BRL"
+    case cad = "CAD"
+    case chf = "CHF"
+    case cny = "CNY"
+    case czk = "CZK"
+    case dkk = "DKK"
+    case gbp = "GBP"
+    case hkd = "HKD"
+    case hrk = "HRK"
+    case huf = "HUF"
+    case idr = "IDR"
+    case ils = "ILS"
+    case inr = "INR"
+    case jpy = "JPY"
+    case krw = "KRW"
+    case mxn = "MXN"
+    case myr = "MYR"
+    case nok = "NOK"
+    case nzd = "NZD"
+    case php = "PHP"
+    case pln = "PLN"
+    case ron = "RON"
+    case rub = "RUB"
+    case sek = "SEK"
+    case sgd = "SGD"
+    case thb = "THB"
+    case tryCurrency = "TRY"
+    case zar = "ZAR"
 }
