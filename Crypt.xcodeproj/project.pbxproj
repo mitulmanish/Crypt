@@ -26,6 +26,10 @@
 		DD2D8AAE21F5FB400065FB50 /* CurvedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2D8AAD21F5FB400065FB50 /* CurvedButton.swift */; };
 		DD745CC2227A3248006ADA45 /* URLSession+Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD745CC1227A3248006ADA45 /* URLSession+Result.swift */; };
 		DD745CC4227A34C6006ADA45 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD745CC3227A34C6006ADA45 /* Service.swift */; };
+		DD745CC6227D31E9006ADA45 /* SelectCurrrecyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD745CC5227D31E9006ADA45 /* SelectCurrrecyTableViewController.swift */; };
+		DD745CC8227D396E006ADA45 /* UIView+Anchor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD745CC7227D396E006ADA45 /* UIView+Anchor.swift */; };
+		DD745CCA227D4876006ADA45 /* Array+SafeAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD745CC9227D4876006ADA45 /* Array+SafeAccess.swift */; };
+		DD745CCC227D4888006ADA45 /* Result+Value.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD745CCB227D4888006ADA45 /* Result+Value.swift */; };
 		DD97D2BC222E6E75004A72B5 /* ProfitCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD97D2BB222E6E75004A72B5 /* ProfitCalculator.swift */; };
 		DD97D2BF222E8830004A72B5 /* ProfitCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD97D2BE222E8830004A72B5 /* ProfitCalculatorTests.swift */; };
 		DD97D2C1222E94CE004A72B5 /* ModalViewControllerPresentationTransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD97D2C0222E94CE004A72B5 /* ModalViewControllerPresentationTransitionDelegate.swift */; };
@@ -86,6 +90,10 @@
 		DD2D8AAD21F5FB400065FB50 /* CurvedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurvedButton.swift; sourceTree = "<group>"; };
 		DD745CC1227A3248006ADA45 /* URLSession+Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+Result.swift"; sourceTree = "<group>"; };
 		DD745CC3227A34C6006ADA45 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		DD745CC5227D31E9006ADA45 /* SelectCurrrecyTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCurrrecyTableViewController.swift; sourceTree = "<group>"; };
+		DD745CC7227D396E006ADA45 /* UIView+Anchor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Anchor.swift"; sourceTree = "<group>"; };
+		DD745CC9227D4876006ADA45 /* Array+SafeAccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+SafeAccess.swift"; sourceTree = "<group>"; };
+		DD745CCB227D4888006ADA45 /* Result+Value.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Result+Value.swift"; sourceTree = "<group>"; };
 		DD97D2BB222E6E75004A72B5 /* ProfitCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfitCalculator.swift; sourceTree = "<group>"; };
 		DD97D2BE222E8830004A72B5 /* ProfitCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfitCalculatorTests.swift; sourceTree = "<group>"; };
 		DD97D2C0222E94CE004A72B5 /* ModalViewControllerPresentationTransitionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalViewControllerPresentationTransitionDelegate.swift; sourceTree = "<group>"; };
@@ -172,6 +180,7 @@
 				DD97D2C3222E9CCE004A72B5 /* ResultsViewController.xib */,
 				DD97D2C6222EA657004A72B5 /* ViewDismissalNotifier.swift */,
 				DDFB14C6223F9050004C5B29 /* PriceRequestParams.swift */,
+				DD745CC5227D31E9006ADA45 /* SelectCurrrecyTableViewController.swift */,
 			);
 			path = Crypt;
 			sourceTree = "<group>";
@@ -209,6 +218,9 @@
 				01C259CC217C569D0084617B /* URLSession+SanitizedResponse.swift */,
 				DDB5159421C4FC3C009B9483 /* UIViiew+roundedCorners.swift */,
 				DDB5159B21C65731009B9483 /* UIWindow+Extensions.swift */,
+				DD745CC7227D396E006ADA45 /* UIView+Anchor.swift */,
+				DD745CC9227D4876006ADA45 /* Array+SafeAccess.swift */,
+				DD745CCB227D4888006ADA45 /* Result+Value.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -395,10 +407,13 @@
 				01C259CD217C569D0084617B /* URLSession+SanitizedResponse.swift in Sources */,
 				013A4707208F616700DBAEAE /* HomeViewController.swift in Sources */,
 				01C259D9217C83810084617B /* HistoricalDataNetworkOperationManager.swift in Sources */,
+				DD745CCA227D4876006ADA45 /* Array+SafeAccess.swift in Sources */,
+				DD745CCC227D4888006ADA45 /* Result+Value.swift in Sources */,
 				DD745CC2227A3248006ADA45 /* URLSession+Result.swift in Sources */,
 				01C259D5217C64CC0084617B /* BasicOpeartion.swift in Sources */,
 				DD2D8AAB21F5F4530065FB50 /* SelectDateViewController.swift in Sources */,
 				01C259CA217C4F5E0084617B /* DataModel.swift in Sources */,
+				DD745CC8227D396E006ADA45 /* UIView+Anchor.swift in Sources */,
 				DDB5159C21C65731009B9483 /* UIWindow+Extensions.swift in Sources */,
 				01C259D2217C61050084617B /* RequestFactory.swift in Sources */,
 				DDE1489321BB9E9000CF8182 /* CoinTableViewCell.swift in Sources */,
@@ -412,6 +427,7 @@
 				DDE1488F21BB9C3700CF8182 /* SelectCoinsTableViewController.swift in Sources */,
 				DD2D8AAE21F5FB400065FB50 /* CurvedButton.swift in Sources */,
 				013A4705208F616700DBAEAE /* AppDelegate.swift in Sources */,
+				DD745CC6227D31E9006ADA45 /* SelectCurrrecyTableViewController.swift in Sources */,
 				DD97D2C4222E9CCE004A72B5 /* ResultsViewController.swift in Sources */,
 				DDB0EA2421F2E096002EF027 /* ModalViewControllerPresentationController.swift in Sources */,
 				DDB5159721C6008C009B9483 /* AllCoinsNetworkOperationManager.swift in Sources */,

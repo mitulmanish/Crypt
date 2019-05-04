@@ -36,12 +36,16 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ugA-nw-QeS">
                                                 <rect key="frame" x="0.0" y="52" width="240" height="36"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W5K-Ik-qgz">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z9S-tM-VT3">
                                                         <rect key="frame" x="0.0" y="0.0" width="14" height="36"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
+                                                        <state key="normal" title="$">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="didSelectCurrencySelection:" destination="BYZ-38-t0r" eventType="touchUpInside" id="C08-Xd-gM6"/>
+                                                        </connections>
+                                                    </button>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="100" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Foe-CG-0nZ">
                                                         <rect key="frame" x="22" y="0.0" width="160" height="36"/>
                                                         <color key="backgroundColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57254901960000004" alpha="0.24646832191780821" colorSpace="custom" customColorSpace="sRGB"/>
@@ -183,6 +187,7 @@
                         <outlet property="activityIndicator" destination="mnq-j6-qRY" id="6aJ-ao-V5F"/>
                         <outlet property="coinButton" destination="VGg-Ka-EKx" id="HaO-rV-Boa"/>
                         <outlet property="contentScrollView" destination="Msm-LN-Y2N" id="0TU-rd-6UC"/>
+                        <outlet property="currencySelectionButton" destination="Z9S-tM-VT3" id="x7x-X7-QqH"/>
                         <outlet property="dateButton" destination="IXv-ZK-s5F" id="aeb-Z4-b1r"/>
                         <outlet property="quantityTextField" destination="Foe-CG-0nZ" id="QzK-mi-ZQX"/>
                         <outlet property="resultsLabel" destination="vnL-fT-JHh" id="9G4-Ni-aPI"/>

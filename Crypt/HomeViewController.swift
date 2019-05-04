@@ -15,6 +15,8 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var resultsLabel: UILabel!
     
+    @IBOutlet weak var currencySelectionButton: UIButton!
+    
     private var currentCoin: Coin?
     private var concernedDate: Date?
     
@@ -201,6 +203,12 @@ class HomeViewController: UIViewController {
             self?.getHistoricalData()
         }
     }
+    
+    @IBAction func didSelectCurrencySelection(_ sender: UIButton) {
+        let vc = SelectCurrrecyTableViewController(some: 7)
+        present(vc, animated: true, completion: .none)
+    }
+    
 
     @IBAction func didBeginEditing(_ sender: UITextField) {
         selectCoinsTableViewController?.dismiss(animated: true, completion: { [weak self] in

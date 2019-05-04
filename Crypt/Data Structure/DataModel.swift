@@ -82,12 +82,12 @@ struct CoinHistoricalPrice: Decodable {
 struct CurrecyHolder: Decodable {
     let baseCurrencies: [String]
     
-    var toCurrencyList: [Currency] {
+    var currencyList: [Currency] {
         return baseCurrencies.compactMap({ Currency(rawValue: $0)})
     }
 }
 
-enum Currency: String, Decodable {
+enum Currency: String {
     case usd = "USD"
     case eur = "EUR"
     case aud = "AUD"
@@ -120,4 +120,16 @@ enum Currency: String, Decodable {
     case thb = "THB"
     case tryCurrency = "TRY"
     case zar = "ZAR"
+    
+    var flag: String {
+        return ""
+    }
+    
+    var countryName: String {
+        return ""
+    }
+    
+    var currencyName: String {
+        return rawValue
+    }
 }
