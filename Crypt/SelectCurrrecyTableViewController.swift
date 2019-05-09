@@ -11,25 +11,17 @@ import UIKit
 class SelectCurrrecyTableViewController: UITableViewController {
     private let cellID = "cellID"
     
-    private var currencyList: [Currency] {
+    private var currencyList: [Currency] = [Currency]() {
         didSet {
-            tableView.reloadData()
+            OperationQueue.main.addOperation { [weak self] in
+                self?.tableView.reloadData()
+            }
         }
-    }
-    
-    init(some: Int) {
-        currencyList = []
-        super.init(nibName: .none, bundle: .none)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(SelectCurrencyTableViewCell.self, forCellReuseIdentifier: cellID)
-        currencyList = [.aud, .bgn, .brl, .cad, .chf, .cny, .czk, .dkk, .eur, .hrk, .myr, .tryCurrency, .rub, .pln, .sek, .jpy]
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -77,14 +69,6 @@ class SelectCurrrecyTableViewController: UITableViewController {
         }
         return cell
     }
-    
-//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
-//    }
-//
-//    override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-//        tableView.cellForRow(at: indexPath)?.accessoryType = .none
-//    }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80

@@ -66,8 +66,8 @@ enum DraggablePosition {
 
 class DraggablePresentationController: UIPresentationController {
 
-    private var draggableView: DraggableViewType? {
-        return presentedViewController as? DraggableViewType
+    private var draggableView: KeyboardDismissableDraggableView? {
+        return presentedViewController as? KeyboardDismissableDraggableView
     }
 
     private var presentedViewOriginY: CGFloat {

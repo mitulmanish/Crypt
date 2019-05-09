@@ -1,10 +1,15 @@
 import UIKit
 
 protocol DraggableViewType: class {
-    func dismissKeyboard()
     func handleInteraction(enabled: Bool)
     var scrollView: UIScrollView { get }
 }
+
+protocol KeyBoardDismissable: class {
+    func dismissKeyboard()
+}
+
+typealias KeyboardDismissableDraggableView = KeyBoardDismissable & DraggableViewType
 
 class SelectCoinsTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, ViewDismissalNotifier {
     var viewDismissed: (() -> Void)?
@@ -240,10 +245,13 @@ extension SelectCoinsTableViewController: DraggableViewType {
     }
 
     func handleInteraction(enabled: Bool) {
-        tableView.isUserInteractionEnabled = enabled
-        searchBar.isUserInteractionEnabled = enabled
+        [tableView, searchBar].forEach {
+            $0.isUserInteractionEnabled = true
+        }
     }
-    
+}
+
+extension SelectCoinsTableViewController: KeyBoardDismissable {
     func dismissKeyboard() {
         guard searchBar.isFirstResponder else { return }
         searchBar.resignFirstResponder()
