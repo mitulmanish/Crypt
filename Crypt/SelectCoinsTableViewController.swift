@@ -1,17 +1,7 @@
 import UIKit
 
-protocol DraggableViewType: class {
-    func handleInteraction(enabled: Bool)
-    var scrollView: UIScrollView { get }
-}
-
-protocol KeyBoardDismissable: class {
-    func dismissKeyboard()
-}
-
-typealias KeyboardDismissableDraggableView = KeyBoardDismissable & DraggableViewType
-
 class SelectCoinsTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, ViewDismissalNotifier {
+    
     var viewDismissed: (() -> Void)?
     private var selectedCoin: Coin?
     let selection = UISelectionFeedbackGenerator()
@@ -80,6 +70,7 @@ class SelectCoinsTableViewController: UIViewController, UITableViewDataSource, U
     }
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         view.backgroundColor = .darkGray
         containerView.backgroundColor = .darkGray
 
@@ -102,6 +93,7 @@ class SelectCoinsTableViewController: UIViewController, UITableViewDataSource, U
     }
 
     override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         view.round(corners: [.topLeft, .topRight], radius: 8)
     }
     
@@ -208,11 +200,7 @@ class SelectCoinsTableViewController: UIViewController, UITableViewDataSource, U
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         selectedCoin = nil
         let searchString = searchText.lowercased()
-        if searchText.isEmpty {
-            self.filteredCoinCollection = originalCoinCollection
-        } else {
-            self.filteredCoinCollection = filteredCoins(searchString: searchString)
-        }
+        self.filteredCoinCollection = searchText.isEmpty ? originalCoinCollection : filteredCoins(searchString: searchString)
     }
 
     func filteredCoins(searchString: String) -> CoinCollection {
@@ -251,7 +239,7 @@ extension SelectCoinsTableViewController: DraggableViewType {
     }
 }
 
-extension SelectCoinsTableViewController: KeyBoardDismissable {
+extension SelectCoinsTableViewController: KeyboardDismissable {
     func dismissKeyboard() {
         guard searchBar.isFirstResponder else { return }
         searchBar.resignFirstResponder()

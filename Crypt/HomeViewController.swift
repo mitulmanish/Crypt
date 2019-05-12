@@ -207,7 +207,7 @@ class HomeViewController: UIViewController {
     private var currencySelectionTransitionDelegate: DraggableTransitionDelegate?
     @IBAction func didSelectCurrencySelection(_ sender: UIButton) {
         currencySelectionTransitionDelegate = DraggableTransitionDelegate()
-        let vc = SelectCurrrecyTableViewController()
+        let vc = SelectCurrrecyViewController()
         vc.transitioningDelegate = currencySelectionTransitionDelegate
         vc.modalPresentationStyle = .custom
         present(vc, animated: true, completion: .none)

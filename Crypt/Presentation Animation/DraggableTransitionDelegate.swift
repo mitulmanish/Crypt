@@ -122,7 +122,7 @@ class DraggablePresentationController: UIPresentationController {
     }
 
     @objc func receivedTouch(tapRecognizer: UITapGestureRecognizer) {
-        presentedViewController.dismiss(animated: true, completion: nil)
+        presentedViewController.dismiss(animated: true, completion: .none)
     }
 
     @objc private func userDidPan(panRecognizer: UIPanGestureRecognizer) {

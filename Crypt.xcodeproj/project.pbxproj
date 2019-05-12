@@ -45,6 +45,7 @@
 		DDE1488F21BB9C3700CF8182 /* SelectCoinsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE1488D21BB9C3700CF8182 /* SelectCoinsTableViewController.swift */; };
 		DDE1489321BB9E9000CF8182 /* CoinTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE1489121BB9E9000CF8182 /* CoinTableViewCell.swift */; };
 		DDFB14C7223F9050004C5B29 /* PriceRequestParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFB14C6223F9050004C5B29 /* PriceRequestParams.swift */; };
+		DDFC00BD2284084700F75153 /* Draggable+Dismissable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFC00BC2284084700F75153 /* Draggable+Dismissable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,6 +110,7 @@
 		DDE1488D21BB9C3700CF8182 /* SelectCoinsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCoinsTableViewController.swift; sourceTree = "<group>"; };
 		DDE1489121BB9E9000CF8182 /* CoinTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinTableViewCell.swift; sourceTree = "<group>"; };
 		DDFB14C6223F9050004C5B29 /* PriceRequestParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceRequestParams.swift; sourceTree = "<group>"; };
+		DDFC00BC2284084700F75153 /* Draggable+Dismissable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Draggable+Dismissable.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +161,7 @@
 		013A4703208F616700DBAEAE /* Crypt */ = {
 			isa = PBXGroup;
 			children = (
+				DDFC00BB2284081800F75153 /* Protocol */,
 				DDB5159821C651A9009B9483 /* Presentation Animation */,
 				01C259CE217C60800084617B /* Networking */,
 				01C259CB217C56620084617B /* Extensions */,
@@ -264,6 +267,14 @@
 				DDB0EA2321F2E096002EF027 /* ModalViewControllerPresentationController.swift */,
 			);
 			path = "Presentation Animation";
+			sourceTree = "<group>";
+		};
+		DDFC00BB2284081800F75153 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				DDFC00BC2284084700F75153 /* Draggable+Dismissable.swift */,
+			);
+			path = Protocol;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -427,6 +438,7 @@
 				DDE1488F21BB9C3700CF8182 /* SelectCoinsTableViewController.swift in Sources */,
 				DD2D8AAE21F5FB400065FB50 /* CurvedButton.swift in Sources */,
 				013A4705208F616700DBAEAE /* AppDelegate.swift in Sources */,
+				DDFC00BD2284084700F75153 /* Draggable+Dismissable.swift in Sources */,
 				DD745CC6227D31E9006ADA45 /* SelectCurrrecyTableViewController.swift in Sources */,
 				DD97D2C4222E9CCE004A72B5 /* ResultsViewController.swift in Sources */,
 				DDB0EA2421F2E096002EF027 /* ModalViewControllerPresentationController.swift in Sources */,
