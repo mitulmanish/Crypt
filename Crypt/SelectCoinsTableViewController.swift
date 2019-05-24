@@ -234,7 +234,7 @@ extension SelectCoinsTableViewController: DraggableViewType {
 
     func handleInteraction(enabled: Bool) {
         [tableView, searchBar].forEach {
-            $0.isUserInteractionEnabled = true
+            $0.isUserInteractionEnabled = enabled
         }
     }
 }

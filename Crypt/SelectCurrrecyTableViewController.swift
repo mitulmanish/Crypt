@@ -12,9 +12,10 @@ class CurrenciesTableViewController: UITableViewController {
     
     private let cellID = "cellID"
     
+    var viewScrolled: (() -> ())?
+    
     init() {
         super.init(nibName: .none, bundle: .none)
-        view.backgroundColor = .red
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -32,6 +33,7 @@ class CurrenciesTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(SelectCurrencyTableViewCell.self, forCellReuseIdentifier: cellID)
+        tableView.separatorStyle = .none
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -70,8 +72,12 @@ class CurrenciesTableViewController: UITableViewController {
         guard let cell = cell as? SelectCurrencyTableViewCell else {
             return
         }
-        cell.currencyLabel.text = currencyList.getElementAt(index: indexPath.row).value?.currencyName
-        cell.flagLabel.text = "🇺🇸"
+        guard let currency = currencyList
+            .getElementAt(index: indexPath.row).value else {
+            return
+        }
+        cell.currencyLabel.text = currency.currencyName
+        cell.flagLabel.text = currency.flag
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -82,7 +88,11 @@ class CurrenciesTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 64.0
+        return 44.0
+    }
+    
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        viewScrolled?()
     }
 }
 
@@ -118,7 +128,6 @@ class SelectCurrencyTableViewCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         accessoryType = selected ? .checkmark : .none
-        // how to change the accessory view tint color
     }
 }
 
@@ -191,6 +200,11 @@ class SelectCurrrecyViewController: UIViewController, UISearchBarDelegate, ViewD
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        currenciesTableViewController.viewScrolled = { [weak self] in
+            if self?.searchBar.isFirstResponder ?? false {
+                self?.searchBar.resignFirstResponder()
+            }
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -203,7 +217,7 @@ class SelectCurrrecyViewController: UIViewController, UISearchBarDelegate, ViewD
         
         view.addSubview(containerView)
         
-        [containerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
+        [containerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
          containerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
          containerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
          containerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
@@ -213,7 +227,7 @@ class SelectCurrrecyViewController: UIViewController, UISearchBarDelegate, ViewD
         containerView.addSubview(handlerView)
         [handlerView.heightAnchor.constraint(equalToConstant: 4),
          handlerView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-         handlerView.widthAnchor.constraint(equalToConstant: 90),
+         handlerView.widthAnchor.constraint(equalToConstant: 88),
          handlerView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 8)
             ].forEach { $0.isActive = true }
         
@@ -223,13 +237,15 @@ class SelectCurrrecyViewController: UIViewController, UISearchBarDelegate, ViewD
         [searchBar.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
          searchBar.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
          searchBar.topAnchor.constraint(equalTo: handlerView.bottomAnchor, constant: 8),
-         searchBar.heightAnchor.constraint(equalToConstant: 44),
+         searchBar.heightAnchor.constraint(equalToConstant: 48),
          searchBar.centerXAnchor.constraint(equalTo: containerView.centerXAnchor)
             ].forEach { $0.isActive = true }
         
         guard let currenciesTableView = currenciesTableViewController.view else {
             return
         }
+        
+        addChild(currenciesTableViewController)
         currenciesTableView.translatesAutoresizingMaskIntoConstraints = false
         
         containerView.addSubview(currenciesTableView)
@@ -238,6 +254,7 @@ class SelectCurrrecyViewController: UIViewController, UISearchBarDelegate, ViewD
          currenciesTableView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
          currenciesTableView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor)
             ].forEach { $0.isActive = true }
+        currenciesTableViewController.didMove(toParent: self)
         
         currenciesTableView.addSubview(activityIndicator)
         [activityIndicator.centerXAnchor.constraint(equalTo: currenciesTableView.centerXAnchor),
@@ -245,18 +262,6 @@ class SelectCurrrecyViewController: UIViewController, UISearchBarDelegate, ViewD
          activityIndicator.widthAnchor.constraint(equalToConstant: 36),
          activityIndicator.heightAnchor.constraint(equalTo: activityIndicator.widthAnchor)]
             .forEach { $0.isActive = true }
-    }
-    
-    // MARK: - Table view data source
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if searchBar.isFirstResponder {
-            searchBar.resignFirstResponder()
-        }
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -277,7 +282,7 @@ extension SelectCurrrecyViewController: DraggableViewType {
     
     func handleInteraction(enabled: Bool) {
         [tableView, searchBar].forEach {
-            $0.isUserInteractionEnabled = true
+            $0.isUserInteractionEnabled = enabled
         }
     }
 }

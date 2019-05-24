@@ -122,11 +122,72 @@ enum Currency: String {
     case zar = "ZAR"
     
     var flag: String {
-        return ""
-    }
-    
-    var countryName: String {
-        return ""
+        switch self {
+        case .usd:
+            return "🇺🇸"
+        case .eur:
+            return "🇪🇺"
+        case .aud:
+            return "🇦🇺"
+        case .bgn:
+            return "🇧🇬"
+        case .brl:
+            return "🇧🇷"
+        case .cad:
+            return "🇨🇦"
+        case .chf:
+            return "🇨🇭"
+        case .cny:
+            return "🇨🇳"
+        case .czk:
+            return "🇨🇿"
+        case .dkk:
+            return "🇩🇰"
+        case .gbp:
+            return "🇬🇧"
+        case .hkd:
+            return "🇭🇰"
+        case .hrk:
+            return "🇭🇷"
+        case .huf:
+            return "🇭🇺"
+        case .idr:
+            return "🇮🇩"
+        case .ils:
+            return "🇮🇱"
+        case .inr:
+            return "🇮🇳"
+        case .jpy:
+            return "🇯🇵"
+        case .krw:
+            return "🇰🇷"
+        case .mxn:
+            return "🇲🇽"
+        case .myr:
+            return "🇲🇾"
+        case .nok:
+            return "🇳🇴"
+        case .nzd:
+            return "🇳🇿"
+        case .php:
+            return "🇵🇭"
+        case .pln:
+            return "🇵🇱"
+        case .ron:
+            return "🇷🇴"
+        case .rub:
+            return "🇷🇺"
+        case .sek:
+            return "🇸🇪"
+        case .sgd:
+            return "🇸🇬"
+        case .thb:
+            return "🇹🇭"
+        case .tryCurrency:
+            return "🇹🇷"
+        case .zar:
+            return "🇿🇦"
+        }
     }
     
     var currencyName: String {
