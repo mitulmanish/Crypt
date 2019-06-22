@@ -32,6 +32,7 @@ class CurrenciesTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        extendedLayoutIncludesOpaqueBars = true
         tableView.register(SelectCurrencyTableViewCell.self, forCellReuseIdentifier: cellID)
         tableView.separatorStyle = .none
     }
@@ -162,7 +163,6 @@ class SelectCurrrecyViewController: UIViewController, UISearchBarDelegate, ViewD
         let searchBar = UISearchBar()
         searchBar.backgroundImage = UIImage()
         searchBar.barTintColor = .darkGray
-        (searchBar.value(forKey: "_searchField") as? UITextField)?.backgroundColor = .groupTableViewBackground
         searchBar.isTranslucent = false
         searchBar.searchBarStyle = .default
         return searchBar
@@ -213,12 +213,12 @@ class SelectCurrrecyViewController: UIViewController, UISearchBarDelegate, ViewD
     }
     
     private func setupSubViews() {
+        
         containerView.translatesAutoresizingMaskIntoConstraints = false
         
         view.addSubview(containerView)
         
-        [containerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-         containerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+        [containerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor), containerView.heightAnchor.constraint(equalToConstant: 66),
          containerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
          containerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
             ].forEach { $0.isActive = true }
@@ -241,24 +241,20 @@ class SelectCurrrecyViewController: UIViewController, UISearchBarDelegate, ViewD
          searchBar.centerXAnchor.constraint(equalTo: containerView.centerXAnchor)
             ].forEach { $0.isActive = true }
         
-        guard let currenciesTableView = currenciesTableViewController.view else {
-            return
-        }
+        tableView.layoutMargins = .zero
+        tableView.tableFooterView?.frame = .zero
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(tableView)
         
-        addChild(currenciesTableViewController)
-        currenciesTableView.translatesAutoresizingMaskIntoConstraints = false
-        
-        containerView.addSubview(currenciesTableView)
-        [currenciesTableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor),
-         currenciesTableView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: 0),
-         currenciesTableView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-         currenciesTableView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor)
+        [tableView.topAnchor.constraint(equalTo: containerView.bottomAnchor),
+         tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -(view.frame.height / 4.0)),
+         tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+         tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
             ].forEach { $0.isActive = true }
-        currenciesTableViewController.didMove(toParent: self)
         
-        currenciesTableView.addSubview(activityIndicator)
-        [activityIndicator.centerXAnchor.constraint(equalTo: currenciesTableView.centerXAnchor),
-         activityIndicator.topAnchor.constraint(equalTo: currenciesTableView.topAnchor, constant: 16),
+        tableView.addSubview(activityIndicator)
+        [activityIndicator.centerXAnchor.constraint(equalTo: tableView.centerXAnchor),
+         activityIndicator.topAnchor.constraint(equalTo: tableView.topAnchor, constant: 16),
          activityIndicator.widthAnchor.constraint(equalToConstant: 36),
          activityIndicator.heightAnchor.constraint(equalTo: activityIndicator.widthAnchor)]
             .forEach { $0.isActive = true }

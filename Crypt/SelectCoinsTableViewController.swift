@@ -32,15 +32,12 @@ class SelectCoinsTableViewController: UIViewController, UITableViewDataSource, U
         return UIView()
     }()
 
-    lazy var tableView: UITableView = {
-        return UITableView()
-    }()
+    lazy var tableView: UITableView = { UITableView() }()
 
     lazy var searchBar: UISearchBar = {
         let searchBar = UISearchBar()
         searchBar.backgroundImage = UIImage()
         searchBar.barTintColor = .darkGray
-        (searchBar.value(forKey: "_searchField") as? UITextField)?.backgroundColor = .groupTableViewBackground
         searchBar.isTranslucent = false
         searchBar.searchBarStyle = .default
         return searchBar
@@ -75,6 +72,7 @@ class SelectCoinsTableViewController: UIViewController, UITableViewDataSource, U
         containerView.backgroundColor = .darkGray
 
         setupSubViews()
+        extendedLayoutIncludesOpaqueBars = true
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -129,7 +127,7 @@ class SelectCoinsTableViewController: UIViewController, UITableViewDataSource, U
         tableView.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(tableView)
         [tableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor),
-         tableView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
+         tableView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -(view.bounds.height / 4.0)),
          tableView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
          tableView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor)
             ].forEach { $0.isActive = true }
@@ -163,19 +161,18 @@ class SelectCoinsTableViewController: UIViewController, UITableViewDataSource, U
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return filteredCoinCollection?.coins.count ?? 0
     }
-    
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        guard let coin = filteredCoinCollection?.coins[indexPath.row],
-            let cell = cell as? CoinTableViewCell else {
-            return
-        }
-        cell.primaryLabel.text = coin.name
-    }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CoinTableViewCell.identifier, for: indexPath) as? CoinTableViewCell
-        cell?.selectionStyle = .none
-        return cell ?? UITableViewCell()
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CoinTableViewCell.identifier, for: indexPath) as? CoinTableViewCell else {
+            return UITableViewCell()
+        }
+        
+        guard let coin = filteredCoinCollection?.coins[indexPath.row] else {
+            return UITableViewCell()
+        }
+        cell.selectionStyle = .none
+        cell.primaryLabel.text = coin.name
+        return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

@@ -8,7 +8,7 @@ enum EndPointConstructor {
     var formattedEndpoint: String {
         switch self {
         case .allCoins:
-            return "list"
+            return "coin/list"
         case .historicalData(let coin, let date, let currency):
             let formattedDate = getFormattedDate(date: date)
             return "coin/view/\(coin.id)/\(formattedDate)/\(currency)"
