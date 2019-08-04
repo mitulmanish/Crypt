@@ -51,7 +51,7 @@ class SelectCoinsTableViewController: UIViewController, UITableViewDataSource, U
     }()
     
     lazy var activityIndicator: UIActivityIndicatorView = {
-        let indicator = UIActivityIndicatorView(style: .whiteLarge)
+        let indicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.large)
         indicator.hidesWhenStopped = true
         indicator.translatesAutoresizingMaskIntoConstraints = false
         return indicator
@@ -72,22 +72,18 @@ class SelectCoinsTableViewController: UIViewController, UITableViewDataSource, U
         containerView.backgroundColor = .darkGray
 
         setupSubViews()
-        extendedLayoutIncludesOpaqueBars = true
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        activityIndicator.startAnimating()
+
         if let coinsData = UserDefaults.standard.data(forKey: "coins") {
             self.originalCoinCollection = try? JSONDecoder().decode(CoinCollection.self, from: coinsData)
             activityIndicator.removeFromSuperview()
         } else {
             AllCoinsNetworkOperationManager().getAllCoins(completionHandler: allCoins)
         }
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        activityIndicator.startAnimating()
     }
 
     override func viewDidLayoutSubviews() {
@@ -127,7 +123,7 @@ class SelectCoinsTableViewController: UIViewController, UITableViewDataSource, U
         tableView.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(tableView)
         [tableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor),
-         tableView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -(view.bounds.height / 4.0)),
+         tableView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
          tableView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
          tableView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor)
             ].forEach { $0.isActive = true }
@@ -150,6 +146,9 @@ class SelectCoinsTableViewController: UIViewController, UITableViewDataSource, U
         self.originalCoinCollection = coinCollection
         guard let data = try? JSONEncoder().encode(coinCollection) else { return }
         UserDefaults.standard.set(data, forKey: "coins")
+        DispatchQueue.main.async {
+            self.activityIndicator.removeFromSuperview()
+        }
     }
 
     // MARK: - Table view data source

@@ -31,7 +31,7 @@ enum DraggablePosition {
         case .collapsed:
             return 0.2
         case .open:
-            return 0.80
+            return 0.9
         case .midway:
             return 0.5
         }
@@ -96,9 +96,10 @@ class DraggablePresentationController: UIPresentationController {
     private var containerViewGestureRecognizer = UITapGestureRecognizer()
 
     override var frameOfPresentedViewInContainerView: CGRect {
-        let presentedViewOrigin = CGPoint(x: 0, y: draggablePosition.yOrigin(for: maxFrame.height))
+        let yOrigin = draggablePosition.yOrigin(for: maxFrame.height)
+        let presentedViewOrigin = CGPoint(x: 0, y: yOrigin)
         let presentedViewSize = CGSize(width: containerView?.bounds.width ?? 0,
-                                       height: containerView?.bounds.height ?? 0)
+                                       height: (containerView?.bounds.height ?? 0) - yOrigin)
         return CGRect(origin: presentedViewOrigin, size: presentedViewSize)
     }
 

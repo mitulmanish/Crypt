@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14810.11" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14766.13"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -17,7 +16,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Msm-LN-Y2N">
-                                <rect key="frame" x="40" y="76" width="295" height="702"/>
+                                <rect key="frame" x="20" y="76" width="335" height="702"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="vgm-sX-DZ1">
                                         <rect key="frame" x="0.0" y="0.0" width="328.33333333333331" height="396.66666666666669"/>
@@ -31,7 +30,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="cjA-Aj-XSd">
                                                 <rect key="frame" x="0.0" y="65.333333333333343" width="328.33333333333331" height="70"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2eV-6E-0YC">
+                                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2eV-6E-0YC">
                                                         <rect key="frame" x="0.0" y="0.0" width="30" height="70"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="48"/>
                                                         <state key="normal" title="$">
@@ -41,12 +40,9 @@
                                                             <action selector="didSelectCurrencySelection:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dEo-zA-VrL"/>
                                                         </connections>
                                                     </button>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="1000" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="d8I-jq-O7D">
-                                                        <rect key="frame" x="38" y="0.0" width="150" height="70"/>
+                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="1000" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="d8I-jq-O7D">
+                                                        <rect key="frame" x="38" y="0.0" width="290.33333333333331" height="70"/>
                                                         <color key="backgroundColor" white="0.2031785102739726" alpha="0.80377782534246578" colorSpace="calibratedWhite"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="6PQ-cV-uHr"/>
-                                                        </constraints>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="48"/>
                                                         <textInputTraits key="textInputTraits"/>
@@ -54,10 +50,6 @@
                                                             <action selector="didBeginEditing:" destination="BYZ-38-t0r" eventType="editingDidBegin" id="nm1-ov-zb2"/>
                                                         </connections>
                                                     </textField>
-                                                    <view contentMode="scaleToFill" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Y34-2F-I9i">
-                                                        <rect key="frame" x="196" y="0.0" width="132.33333333333337" height="70"/>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    </view>
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="flW-64-kdR">
@@ -127,19 +119,19 @@
                                     </stackView>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="vgm-sX-DZ1" secondAttribute="trailing" id="4Le-3q-gCi"/>
                                     <constraint firstItem="vgm-sX-DZ1" firstAttribute="top" secondItem="Msm-LN-Y2N" secondAttribute="top" id="DtG-mc-UyX"/>
-                                    <constraint firstAttribute="bottom" secondItem="vgm-sX-DZ1" secondAttribute="bottom" constant="8" id="RFf-TJ-rW0"/>
                                     <constraint firstItem="vgm-sX-DZ1" firstAttribute="leading" secondItem="Msm-LN-Y2N" secondAttribute="leading" id="TJO-Ay-mG4"/>
-                                    <constraint firstAttribute="trailing" secondItem="vgm-sX-DZ1" secondAttribute="trailing" id="hzn-m1-OTi"/>
+                                    <constraint firstAttribute="bottom" secondItem="vgm-sX-DZ1" secondAttribute="bottom" id="h9c-qX-GLf"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                         <constraints>
                             <constraint firstItem="eQn-OJ-86V" firstAttribute="bottom" secondItem="Msm-LN-Y2N" secondAttribute="bottom" id="4UZ-57-QkJ"/>
-                            <constraint firstItem="Msm-LN-Y2N" firstAttribute="leading" secondItem="eQn-OJ-86V" secondAttribute="leading" constant="40" id="RRe-6Q-1cM"/>
+                            <constraint firstItem="Msm-LN-Y2N" firstAttribute="leading" secondItem="eQn-OJ-86V" secondAttribute="leading" constant="20" id="RRe-6Q-1cM"/>
                             <constraint firstItem="Msm-LN-Y2N" firstAttribute="top" secondItem="eQn-OJ-86V" secondAttribute="top" constant="32" id="cGO-4n-bS3"/>
-                            <constraint firstItem="eQn-OJ-86V" firstAttribute="trailing" secondItem="Msm-LN-Y2N" secondAttribute="trailing" constant="40" id="lTj-1t-Cht"/>
+                            <constraint firstItem="eQn-OJ-86V" firstAttribute="trailing" secondItem="Msm-LN-Y2N" secondAttribute="trailing" constant="20" id="lTj-1t-Cht"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="eQn-OJ-86V"/>
                     </view>

@@ -44,7 +44,6 @@
 		DDC7A5F92257B5D10069FCF3 /* DecodingOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC7A5F82257B5D10069FCF3 /* DecodingOperation.swift */; };
 		DDE1488F21BB9C3700CF8182 /* SelectCoinsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE1488D21BB9C3700CF8182 /* SelectCoinsTableViewController.swift */; };
 		DDE1489321BB9E9000CF8182 /* CoinTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE1489121BB9E9000CF8182 /* CoinTableViewCell.swift */; };
-		DDF7BFF622BE752500D2D011 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF7BFF522BE752500D2D011 /* BaseViewController.swift */; };
 		DDFB14C7223F9050004C5B29 /* PriceRequestParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFB14C6223F9050004C5B29 /* PriceRequestParams.swift */; };
 		DDFC00BD2284084700F75153 /* Draggable+Dismissable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFC00BC2284084700F75153 /* Draggable+Dismissable.swift */; };
 /* End PBXBuildFile section */
@@ -110,7 +109,6 @@
 		DDC7A5F82257B5D10069FCF3 /* DecodingOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodingOperation.swift; sourceTree = "<group>"; };
 		DDE1488D21BB9C3700CF8182 /* SelectCoinsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCoinsTableViewController.swift; sourceTree = "<group>"; };
 		DDE1489121BB9E9000CF8182 /* CoinTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinTableViewCell.swift; sourceTree = "<group>"; };
-		DDF7BFF522BE752500D2D011 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		DDFB14C6223F9050004C5B29 /* PriceRequestParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceRequestParams.swift; sourceTree = "<group>"; };
 		DDFC00BC2284084700F75153 /* Draggable+Dismissable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Draggable+Dismissable.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -186,7 +184,6 @@
 				DD97D2C6222EA657004A72B5 /* ViewDismissalNotifier.swift */,
 				DDFB14C6223F9050004C5B29 /* PriceRequestParams.swift */,
 				DD745CC5227D31E9006ADA45 /* SelectCurrrecyTableViewController.swift */,
-				DDF7BFF522BE752500D2D011 /* BaseViewController.swift */,
 			);
 			path = Crypt;
 			sourceTree = "<group>";
@@ -429,7 +426,6 @@
 				01C259CA217C4F5E0084617B /* DataModel.swift in Sources */,
 				DD745CC8227D396E006ADA45 /* UIView+Anchor.swift in Sources */,
 				DDB5159C21C65731009B9483 /* UIWindow+Extensions.swift in Sources */,
-				DDF7BFF622BE752500D2D011 /* BaseViewController.swift in Sources */,
 				01C259D2217C61050084617B /* RequestFactory.swift in Sources */,
 				DDE1489321BB9E9000CF8182 /* CoinTableViewCell.swift in Sources */,
 				DDB5159521C4FC3C009B9483 /* UIViiew+roundedCorners.swift in Sources */,
@@ -624,7 +620,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = RNF8E69GKB;
 				INFOPLIST_FILE = Crypt/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -643,7 +639,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = RNF8E69GKB;
 				INFOPLIST_FILE = Crypt/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

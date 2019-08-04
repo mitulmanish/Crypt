@@ -1,5 +1,6 @@
 import UIKit
 import SwiftUI
+import Combine
 
 class HomeViewController: UIViewController {
 
@@ -12,7 +13,6 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var dateButton: UIButton!
     @IBOutlet weak var contentScrollView: UIScrollView!
     @IBOutlet weak var quantityTextField: UITextField!
-    
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var resultsLabel: UILabel!
     
@@ -20,6 +20,7 @@ class HomeViewController: UIViewController {
     
     private var currentCoin: Coin?
     private var concernedDate: Date?
+    private var currentCurrency: Currency
     
     private var quantityBought: Float? {
         guard let quantityBought = quantityTextField.text,
@@ -28,7 +29,17 @@ class HomeViewController: UIViewController {
         }
         return quantityInFloat
     }
-
+    
+    init() {
+        currentCurrency = .usd
+        super.init(nibName: .none, bundle: .none)
+    }
+    
+    required init?(coder: NSCoder) {
+        currentCurrency = .usd
+        super.init(coder: coder)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let tapGesturerecognizer = UITapGestureRecognizer(target: self, action: #selector(screenTapped))
@@ -38,6 +49,8 @@ class HomeViewController: UIViewController {
         activityIndicator.isHidden = true
         activityIndicator.hidesWhenStopped = true
         quantityTextField.delegate = self
+    currencySelectionButton.setTitle("\(currentCurrency.currencyName)", for: .normal)
+        currencySelectionButton.contentVerticalAlignment = .bottom
     }
     
     private var shouldFetchHistoricalData: Bool {
@@ -57,7 +70,7 @@ class HomeViewController: UIViewController {
     }
 
     private func showResults(portfolio: PortfolioType) {
-        let resultsViewController = ResultsViewController(portfolioType: portfolio)
+        let resultsViewController = ResultsViewController(portfolioType: portfolio, currency: currentCurrency)
         resultsViewTransitionDelegate = ModalViewControllerPresentationTransitionDelegate(
             portraitHeight: 150,
             landscapeHeight: 170,
@@ -83,11 +96,11 @@ class HomeViewController: UIViewController {
             var formattedString: String?
             switch portfolio {
             case .profit(_, let currentValue):
-                formattedString = "$ \(currentValue)"
+                formattedString = "\(currentCurrency.currencyName) \(currentValue)"
             case .loss(_, let currentValue):
-                formattedString = "$ \(currentValue)"
+                formattedString = "\(currentCurrency.currencyName) \(currentValue)"
             case .neutral:
-                formattedString = "$ \(quantityInFloat)"
+                formattedString = "\(currentCurrency.currencyName) \(quantityInFloat)"
             }
             resultsLabel.text = formattedString ?? ""
             showResults(portfolio: portfolio)
@@ -163,7 +176,7 @@ class HomeViewController: UIViewController {
             forDates: (old: priceRequestParams.historicalDate,
                        latest: priceRequestParams.currentDate),
             forCoin: priceRequestParams.coin,
-            forCurrency: "usd",
+            forCurrency: currentCurrency.currencyName,
             completionHandler: getPriceData)
     }
 
@@ -188,9 +201,10 @@ class HomeViewController: UIViewController {
     @IBAction func didSelectCurrencySelection(_ sender: UIButton) {
         currencySelectionTransitionDelegate = DraggableTransitionDelegate()
         let vc = SelectCurrrecyViewController()
-        vc.transitioningDelegate = currencySelectionTransitionDelegate
-        vc.modalPresentationStyle = .custom
-        present(vc, animated: true, completion: .none)
+//        vc.transitioningDelegate = currencySelectionTransitionDelegate
+//        vc.modalPresentationStyle = .custom
+        vc.selectionDelegate = self
+        present(vc, animated: true)
     }
     
 
@@ -236,6 +250,13 @@ class HomeViewController: UIViewController {
 extension HomeViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         resultsLabel.text = nil
+    }
+}
+
+extension HomeViewController: CurrencySelectionDelegate {
+    func didSelectCurrency(currency: Currency) {
+        currencySelectionButton.setTitle("\(currency.currencyName)", for: .normal)
+        currentCurrency = currency
     }
 }
 

@@ -11,8 +11,8 @@ import UIKit
 class CurrenciesTableViewController: UITableViewController {
     
     private let cellID = "cellID"
-    
     var viewScrolled: (() -> ())?
+    var currencySelected: ((Currency) -> Void)?
     
     init() {
         super.init(nibName: .none, bundle: .none)
@@ -32,7 +32,6 @@ class CurrenciesTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        extendedLayoutIncludesOpaqueBars = true
         tableView.register(SelectCurrencyTableViewCell.self, forCellReuseIdentifier: cellID)
         tableView.separatorStyle = .none
     }
@@ -69,23 +68,22 @@ class CurrenciesTableViewController: UITableViewController {
         return currencyList.count
     }
     
-    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        guard let cell = cell as? SelectCurrencyTableViewCell else {
-            return
-        }
-        guard let currency = currencyList
-            .getElementAt(index: indexPath.row).value else {
-            return
-        }
-        cell.currencyLabel.text = currency.currencyName
-        cell.flagLabel.text = currency.flag
-    }
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as? SelectCurrencyTableViewCell else {
             return UITableViewCell()
         }
+        guard let currency = currencyList
+            .getElementAt(index: indexPath.row).value else {
+                return cell
+        }
+        cell.currencyLabel.text = currency.currencyName
+        cell.flagLabel.text = currency.flag
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let currency = currencyList.getElementAt(index: indexPath.row).value else { return }
+        currencySelected?(currency)
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -132,6 +130,10 @@ class SelectCurrencyTableViewCell: UITableViewCell {
     }
 }
 
+protocol CurrencySelectionDelegate: AnyObject {
+    func didSelectCurrency(currency: Currency)
+}
+
 class SelectCurrrecyViewController: UIViewController, UISearchBarDelegate, ViewDismissalNotifier {
     
     private var currencyList: [Currency] = [Currency]() {
@@ -142,6 +144,8 @@ class SelectCurrrecyViewController: UIViewController, UISearchBarDelegate, ViewD
         }
     }
     
+    var selectionDelegate: CurrencySelectionDelegate?
+    
     var tableView: UITableView {
         return currenciesTableViewController.view as! UITableView
     }
@@ -151,9 +155,7 @@ class SelectCurrrecyViewController: UIViewController, UISearchBarDelegate, ViewD
     }()
     
     var viewDismissed: (() -> Void)?
-    private var selectedCoin: Coin?
     let selection = UISelectionFeedbackGenerator()
-    var coinSelected: ((Coin) -> ())?
     
     lazy var containerView: UIView = {
         return UIView()
@@ -194,8 +196,14 @@ class SelectCurrrecyViewController: UIViewController, UISearchBarDelegate, ViewD
         super.viewDidLoad()
         view.backgroundColor = .darkGray
         containerView.backgroundColor = .darkGray
+        tableView.backgroundColor = .darkGray
         
         setupSubViews()
+        
+        currenciesTableViewController.currencySelected = { [weak self] currency in
+            self?.selectionDelegate?.didSelectCurrency(currency: currency)
+                self?.dismiss(animated: true)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -213,14 +221,14 @@ class SelectCurrrecyViewController: UIViewController, UISearchBarDelegate, ViewD
     }
     
     private func setupSubViews() {
-        
         containerView.translatesAutoresizingMaskIntoConstraints = false
         
         view.addSubview(containerView)
         
         [containerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor), containerView.heightAnchor.constraint(equalToConstant: 66),
          containerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-         containerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+         containerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+         containerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
             ].forEach { $0.isActive = true }
         
         handlerView.translatesAutoresizingMaskIntoConstraints = false
@@ -241,15 +249,13 @@ class SelectCurrrecyViewController: UIViewController, UISearchBarDelegate, ViewD
          searchBar.centerXAnchor.constraint(equalTo: containerView.centerXAnchor)
             ].forEach { $0.isActive = true }
         
-        tableView.layoutMargins = .zero
-        tableView.tableFooterView?.frame = .zero
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(tableView)
+        containerView.addSubview(tableView)
         
-        [tableView.topAnchor.constraint(equalTo: containerView.bottomAnchor),
-         tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -(view.frame.height / 4.0)),
-         tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-         tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+        [tableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor),
+         tableView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
+         tableView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+         tableView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor)
             ].forEach { $0.isActive = true }
         
         tableView.addSubview(activityIndicator)
