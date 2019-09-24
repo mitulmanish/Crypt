@@ -118,7 +118,7 @@ enum Currency: String {
     case sek = "SEK"
     case sgd = "SGD"
     case thb = "THB"
-    case tryCurrency = "TRY"
+    case `try` = "TRY"
     case zar = "ZAR"
     
     var flag: String {
@@ -183,7 +183,7 @@ enum Currency: String {
             return "🇸🇬"
         case .thb:
             return "🇹🇭"
-        case .tryCurrency:
+        case .try:
             return "🇹🇷"
         case .zar:
             return "🇿🇦"

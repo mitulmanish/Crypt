@@ -13,9 +13,7 @@ struct Service {
             switch result {
             case .success(let data):
                 do {
-                    completion(
-                        .success(try JSONDecoder().decode(DataType.self, from: data))
-                    )
+                    completion(.success(try JSONDecoder().decode(DataType.self, from: data)))
                 } catch {
                     completion(.failure(error))
                 }

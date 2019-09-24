@@ -51,17 +51,13 @@ extension URLSession {
     
     func get(request: URLRequest, result: @escaping (URLSessionNetworkResult) -> Void) {
         dataTask(with: request) { [unowned self] data, response, error in
-            result(
-                self.getResult(data: data, response: response, error: error)
-            )
-            }.resume()
+            result(self.getResult(data: data, response: response, error: error))
+        }.resume()
     }
     
     func get(url: URL, result: @escaping (URLSessionNetworkResult) -> Void) {
         dataTask(with: url) { [unowned self] data, response, error in
-            result(
-                self.getResult(data: data, response: response, error: error)
-            )
-            }.resume()
+            result(self.getResult(data: data, response: response, error: error))
+        }.resume()
     }
 }
