@@ -23,26 +23,19 @@ class CoinTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         backgroundColor = .darkGray
+        contentView.addSubview(primaryLabel)
+        primaryLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16).isActive = true
+        primaryLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16).isActive = true
+        primaryLabel.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+        primaryLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
 
-    override func layoutSubviews() {
-        setupPrimaryLabel()
-    }
-
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         primaryLabel.textColor = selected ? .green : .white
-    }
-
-    private func setupPrimaryLabel() {
-        contentView.addSubview(primaryLabel)
-        primaryLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16).isActive = true
-        primaryLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16).isActive = true
-        primaryLabel.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
-        primaryLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
     }
 }

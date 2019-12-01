@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -41,8 +41,11 @@
                                                         </connections>
                                                     </button>
                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="1000" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="d8I-jq-O7D">
-                                                        <rect key="frame" x="38" y="0.0" width="297" height="70"/>
+                                                        <rect key="frame" x="38" y="0.0" width="138.33333333333334" height="70"/>
                                                         <color key="backgroundColor" white="0.2031785102739726" alpha="0.80377782534246578" colorSpace="calibratedWhite"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="138.33000000000001" id="PRO-MV-4Tm"/>
+                                                        </constraints>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="48"/>
                                                         <textInputTraits key="textInputTraits"/>
@@ -50,6 +53,14 @@
                                                             <action selector="didBeginEditing:" destination="BYZ-38-t0r" eventType="editingDidBegin" id="nm1-ov-zb2"/>
                                                         </connections>
                                                     </textField>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eoZ-su-fcJ">
+                                                        <rect key="frame" x="184.33333333333337" y="0.0" width="150.66666666666663" height="70"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" relation="lessThanOrEqual" priority="250" constant="150.66999999999999" id="8Sm-Df-b6m"/>
+                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" priority="250" constant="60" id="z4K-bh-r8y"/>
+                                                        </constraints>
+                                                    </view>
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="flW-64-kdR">

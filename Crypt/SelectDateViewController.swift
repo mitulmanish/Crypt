@@ -35,6 +35,7 @@ class SelectDateViewController: UIViewController, ViewDismissalNotifier {
     }
 
     override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         view.round(corners: [.topLeft, .topRight, .bottomLeft, .bottomRight], radius: 8)
     }
 
