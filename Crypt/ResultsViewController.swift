@@ -9,11 +9,13 @@
 import UIKit
 
 class ResultsViewController: UIViewController, ViewDismissalNotifier {
+    
     var viewDismissed: (() -> Void)?
     
     @IBOutlet weak var resultsLabel: UILabel!
+    
     private let portfolioType: PortfolioType?
-    private let error: HistoricalPriceError?
+    private let error: Error?
     private let currency: Currency?
     
     init(portfolioType: PortfolioType, currency: Currency) {
@@ -23,7 +25,7 @@ class ResultsViewController: UIViewController, ViewDismissalNotifier {
         super.init(nibName: nil, bundle: .main)
     }
     
-    init(error: HistoricalPriceError) {
+    init(error: Error) {
         self.portfolioType = .none
         self.error = error
         self.currency = .none
@@ -52,7 +54,7 @@ class ResultsViewController: UIViewController, ViewDismissalNotifier {
         }
         
         if let error = self.error {
-            text = error.description
+            text = error.localizedDescription
         }
         resultsLabel.text = text
     }

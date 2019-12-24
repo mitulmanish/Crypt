@@ -8,44 +8,20 @@
 
 import Foundation
 
-enum NetworkError: Error {
-    case invalidURL
-    case noResponse
-    case invalidCredentials
-    case clientError
-    case serverError
-    case unknown
-    
-    static func from(httpCode: Int) -> NetworkError? {
-        switch httpCode {
-        case 200...299, 300...399:
-            return .none
-        case 400, 401:
-            return .invalidCredentials
-        case 402...499:
-            return .clientError
-        case 500...599:
-            return .serverError
-        default:
-            return .unknown
-        }
-    }
-}
-
 public typealias URLSessionNetworkResult = Result<Data, Error>
 
-extension URLSession {
+public extension URLSession {
     private func getResult(data: Data?, response: URLResponse?, error: Error?) -> URLSessionNetworkResult {
         switch (data, response, error) {
         case let (_, _, error?):
             return .failure(error)
         case let (data?, response as HTTPURLResponse, _)
-            where NetworkError.from(httpCode: response.statusCode) == .none:
+            where NetworkingError.from(httpCode: response.statusCode) == .none:
             return .success(data)
         case let (_, response as HTTPURLResponse, .none):
-            return .failure(NetworkError.from(httpCode: response.statusCode) ?? NetworkError.unknown)
+            return .failure(NetworkingError.from(httpCode: response.statusCode) ?? NetworkingError.unknown)
         case (_, _, .none):
-            return .failure(NetworkError.noResponse)
+            return .failure(NetworkingError.noResponse)
         }
     }
     

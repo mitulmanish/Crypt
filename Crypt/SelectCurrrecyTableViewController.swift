@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import NetworkingKit
 
 class CurrenciesTableViewController: UITableViewController {
     
@@ -49,7 +50,7 @@ class CurrenciesTableViewController: UITableViewController {
         guard let req = RequestFactory.getRequest(endpointType: .currencies) else {
             return
         }
-        Service().fetch(urlRequest: req) { [weak self]
+        Service.fetch(urlRequest: req) { [weak self]
             (result: Result<CurrecyHolder, Error>) in
             switch result {
             case .success(let holder):

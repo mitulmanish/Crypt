@@ -7,8 +7,12 @@
 //
 
 import Foundation
-struct Service {
-    func fetch<DataType: Decodable>(urlRequest: URLRequest, completion: @escaping (Result<DataType, Error>) -> ()) {
+public struct Service {
+    
+    public static func fetch<DataType: Decodable>(
+        urlRequest: URLRequest,
+        completion: @escaping (Result<DataType, Error>) -> ()
+    ) {
         URLSession.shared.get(request: urlRequest) { result in
             switch result {
             case .success(let data):

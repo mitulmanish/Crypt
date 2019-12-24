@@ -82,7 +82,7 @@ class HomeViewController: UIViewController {
         dismissThenPresent(viewController: resultsViewController)
     }
     
-    func getPriceData(price: CoinPrice?, error: HistoricalPriceError?) {
+    func getPriceData(price: CoinPrice?, error: Error?) {
         activityIndicator.stopAnimating()
         guard let error = error else {
             guard let currentPrice = price?.latest, let oldPrice = price?.old, let quantityInFloat = quantityBought else {
@@ -109,7 +109,7 @@ class HomeViewController: UIViewController {
         showPriceFetchError(error: error)
     }
     
-    func showPriceFetchError(error: HistoricalPriceError) {
+    func showPriceFetchError(error: Error) {
         let resultsViewController = ResultsViewController(error: error)
         resultsViewTransitionDelegate = ModalViewControllerPresentationTransitionDelegate(
             portraitHeight: 220,
@@ -161,10 +161,7 @@ class HomeViewController: UIViewController {
     }
     
     func getHistoricalData() {
-        guard shouldRequestNewPriceData else {
-            return
-        }
-        guard let priceRequestParams = computePriceRequestParams() else {
+        guard let priceRequestParams = computePriceRequestParams(), shouldRequestNewPriceData else {
             return
         }
         self.priceRequestParams = priceRequestParams
@@ -177,7 +174,8 @@ class HomeViewController: UIViewController {
                        latest: priceRequestParams.currentDate),
             forCoin: priceRequestParams.coin,
             forCurrency: currentCurrency.currencyName,
-            completionHandler: getPriceData)
+            completionHandler: getPriceData
+        )
     }
 
     @IBAction func selectCoin(_ sender: UIButton) {
@@ -201,8 +199,8 @@ class HomeViewController: UIViewController {
     @IBAction func didSelectCurrencySelection(_ sender: UIButton) {
         currencySelectionTransitionDelegate = DraggableTransitionDelegate()
         let vc = SelectCurrrecyViewController()
-//        vc.transitioningDelegate = currencySelectionTransitionDelegate
-//        vc.modalPresentationStyle = .custom
+        vc.transitioningDelegate = currencySelectionTransitionDelegate
+        vc.modalPresentationStyle = .custom
         vc.selectionDelegate = self
         present(vc, animated: true)
     }
