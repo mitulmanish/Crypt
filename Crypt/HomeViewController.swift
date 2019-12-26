@@ -3,12 +3,12 @@ import SwiftUI
 import Combine
 
 class HomeViewController: UIViewController {
-
+    
     private var animator: UIViewControllerTransitioningDelegate?
     private var selectDateTransitionDelegate: UIViewControllerTransitioningDelegate?
     private var resultsViewTransitionDelegate: UIViewControllerTransitioningDelegate?
     private var selectCoinsTableViewController: SelectCoinsTableViewController?
-
+    
     @IBOutlet weak var coinButton: UIButton!
     @IBOutlet weak var dateButton: UIButton!
     @IBOutlet weak var contentScrollView: UIScrollView!
@@ -30,13 +30,33 @@ class HomeViewController: UIViewController {
         return quantityInFloat
     }
     
+    private var priceRequestParams: PriceRequestParams?
+    
+    var shouldRequestNewPriceData: Bool {
+        guard let priceRequestParams = self.priceRequestParams else {
+            return true
+        }
+        return computePriceRequestParams() != priceRequestParams
+    }
+    
+    private var shouldFetchHistoricalData: Bool {
+        quantityTextField.text?.isEmpty == false
+               && currentCoin != nil
+               && concernedDate != nil
+    }
+    
+    private var historicalPriceComparisonProvider: HistoricalPriceComparisonProvider
+    private var networkActivitySubscriber: AnyCancellable?
+    
     init() {
         currentCurrency = .usd
+        historicalPriceComparisonProvider = HistoricalPriceComparisonProvider()
         super.init(nibName: .none, bundle: .none)
     }
     
     required init?(coder: NSCoder) {
         currentCurrency = .usd
+        historicalPriceComparisonProvider = HistoricalPriceComparisonProvider()
         super.init(coder: coder)
     }
     
@@ -49,26 +69,29 @@ class HomeViewController: UIViewController {
         activityIndicator.isHidden = true
         activityIndicator.hidesWhenStopped = true
         quantityTextField.delegate = self
-    currencySelectionButton.setTitle("\(currentCurrency.currencyName)", for: .normal)
+        currencySelectionButton.setTitle(
+            "\(currentCurrency.currencyName)",
+            for: .normal
+        )
         currencySelectionButton.contentVerticalAlignment = .bottom
+        
+        networkActivitySubscriber = historicalPriceComparisonProvider.networkActivityPublisher.sink { [activityIndicator] in
+            if $0 {
+                activityIndicator?.startAnimating()
+            } else {
+                activityIndicator?.stopAnimating()
+            }
+        }
     }
     
-    private var shouldFetchHistoricalData: Bool {
-        return quantityTextField.text?.isEmpty == false
-            && currentCoin != nil
-            && concernedDate != nil
-    }
-
     @objc func screenTapped() {
         if quantityTextField.isFirstResponder {
             quantityTextField.resignFirstResponder()
         }
-        guard shouldFetchHistoricalData else {
-            return
-        }
+        guard shouldFetchHistoricalData else { return }
         getHistoricalData()
     }
-
+    
     private func showResults(portfolio: PortfolioType) {
         let resultsViewController = ResultsViewController(portfolioType: portfolio, currency: currentCurrency)
         resultsViewTransitionDelegate = ModalViewControllerPresentationTransitionDelegate(
@@ -83,7 +106,6 @@ class HomeViewController: UIViewController {
     }
     
     func getPriceData(price: CoinPrice?, error: Error?) {
-        activityIndicator.stopAnimating()
         guard let error = error else {
             guard let currentPrice = price?.latest, let oldPrice = price?.old, let quantityInFloat = quantityBought else {
                 return
@@ -92,7 +114,7 @@ class HomeViewController: UIViewController {
                 moneySpent: quantityInFloat,
                 currectPrice: currentPrice,
                 oldPrice: oldPrice
-                ).computePortfolio()
+            ).computePortfolio()
             var formattedString: String?
             switch portfolio {
             case .profit(_, let currentValue):
@@ -134,8 +156,6 @@ class HomeViewController: UIViewController {
         }
     }
     
-    private (set) var historicalDataNetworkOperationManager: HistoricalDataNetworkOperationManager?
-    
     func computePriceRequestParams() -> PriceRequestParams? {
         guard let coin = self.currentCoin,
             let date = self.concernedDate,
@@ -151,25 +171,13 @@ class HomeViewController: UIViewController {
         )
     }
     
-    private var priceRequestParams: PriceRequestParams?
-    
-    var shouldRequestNewPriceData: Bool {
-        guard let priceRequestParams = self.priceRequestParams else {
-            return true
-        }
-        return computePriceRequestParams() != priceRequestParams
-    }
-    
     func getHistoricalData() {
         guard let priceRequestParams = computePriceRequestParams(), shouldRequestNewPriceData else {
             return
         }
         self.priceRequestParams = priceRequestParams
-        activityIndicator.isHidden = false
-        activityIndicator.startAnimating()
         resultsLabel.text = nil
-        historicalDataNetworkOperationManager = HistoricalDataNetworkOperationManager()
-        historicalDataNetworkOperationManager?.requestCoinHistoricalData(
+        historicalPriceComparisonProvider.price(
             forDates: (old: priceRequestParams.historicalDate,
                        latest: priceRequestParams.currentDate),
             forCoin: priceRequestParams.coin,
@@ -177,7 +185,7 @@ class HomeViewController: UIViewController {
             completionHandler: getPriceData
         )
     }
-
+    
     @IBAction func selectCoin(_ sender: UIButton) {
         dismissKeyboard()
         let selectCoinViewController = SelectCoinsTableViewController(selectedCoin: currentCoin)
@@ -205,7 +213,7 @@ class HomeViewController: UIViewController {
         present(vc, animated: true)
     }
     
-
+    
     @IBAction func didBeginEditing(_ sender: UITextField) {
         selectCoinsTableViewController?.dismiss(animated: true, completion: { [weak self] in
             self?.selectCoinsTableViewController = nil
@@ -234,12 +242,12 @@ class HomeViewController: UIViewController {
         let formattedText = formatter.string(from: date)
         dateButton.setTitle(formattedText, for: .normal)
     }
-
+    
     func dismissKeyboard() {
         guard quantityTextField.isFirstResponder else { return }
         quantityTextField.resignFirstResponder()
     }
-
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }

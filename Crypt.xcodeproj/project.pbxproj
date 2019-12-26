@@ -33,6 +33,7 @@
 		DD40917023B282130027D39B /* URLSession+Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD745CC1227A3248006ADA45 /* URLSession+Result.swift */; };
 		DD40917123B2832D0027D39B /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD745CC3227A34C6006ADA45 /* Service.swift */; };
 		DD40917223B284080027D39B /* URLSession+SanitizedResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C259CC217C569D0084617B /* URLSession+SanitizedResponse.swift */; };
+		DD40917D23B4C8EF0027D39B /* HistoricalPriceComparisonProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD40917C23B4C8EF0027D39B /* HistoricalPriceComparisonProvider.swift */; };
 		DD745CC6227D31E9006ADA45 /* SelectCurrrecyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD745CC5227D31E9006ADA45 /* SelectCurrrecyTableViewController.swift */; };
 		DD745CC8227D396E006ADA45 /* UIView+Anchor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD745CC7227D396E006ADA45 /* UIView+Anchor.swift */; };
 		DD745CCA227D4876006ADA45 /* Array+SafeAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD745CC9227D4876006ADA45 /* Array+SafeAccess.swift */; };
@@ -139,6 +140,7 @@
 		DD40916023B25EAA0027D39B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DD40916C23B25F150027D39B /* Networking+Publisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Networking+Publisher.swift"; sourceTree = "<group>"; };
 		DD40916E23B280E20027D39B /* NetworkingError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingError.swift; sourceTree = "<group>"; };
+		DD40917C23B4C8EF0027D39B /* HistoricalPriceComparisonProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalPriceComparisonProvider.swift; sourceTree = "<group>"; };
 		DD745CC1227A3248006ADA45 /* URLSession+Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+Result.swift"; sourceTree = "<group>"; };
 		DD745CC3227A34C6006ADA45 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		DD745CC5227D31E9006ADA45 /* SelectCurrrecyTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCurrrecyTableViewController.swift; sourceTree = "<group>"; };
@@ -304,6 +306,7 @@
 				01C259D1217C61050084617B /* RequestFactory.swift */,
 				01C259D8217C83810084617B /* HistoricalDataNetworkOperationManager.swift */,
 				DDB5159621C6008C009B9483 /* AllCoinsNetworkOperationManager.swift */,
+				DD40917C23B4C8EF0027D39B /* HistoricalPriceComparisonProvider.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -590,6 +593,7 @@
 				01C259D2217C61050084617B /* RequestFactory.swift in Sources */,
 				DDE1489321BB9E9000CF8182 /* CoinTableViewCell.swift in Sources */,
 				DDB5159521C4FC3C009B9483 /* UIViiew+roundedCorners.swift in Sources */,
+				DD40917D23B4C8EF0027D39B /* HistoricalPriceComparisonProvider.swift in Sources */,
 				DD97D2BC222E6E75004A72B5 /* ProfitCalculator.swift in Sources */,
 				01C259D7217C65DC0084617B /* NetworkOpeartion.swift in Sources */,
 				01C259D0217C60A10084617B /* EndpointConstructor.swift in Sources */,

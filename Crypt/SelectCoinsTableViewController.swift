@@ -82,7 +82,7 @@ class SelectCoinsTableViewController: UIViewController, UITableViewDataSource, U
             self.originalCoinCollection = try? JSONDecoder().decode(CoinCollection.self, from: coinsData)
             activityIndicator.removeFromSuperview()
         } else {
-            AllCoinsNetworkOperationManager().getAllCoins(completionHandler: allCoins)
+            AllCoinsNetworkOperationManager().allCoins(completionHandler: allCoins)
         }
     }
 

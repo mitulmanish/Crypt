@@ -16,8 +16,6 @@ enum HistoricalPriceError: Error {
 
 struct HistoricalDataNetworkOperationManager {
     
-    private var cancellableTask: AnyCancellable?
-    
     func requestCoinHistoricalData(
         forDates dates: (old: Date, latest: Date),
         forCoin coin: Coin,
@@ -58,49 +56,5 @@ struct HistoricalDataNetworkOperationManager {
                 }
             }
         }
-    }
-    
-    mutating func price(
-    forDates dates: (old: Date, latest: Date),
-    forCoin coin: Coin,
-    forCurrency currency: String,
-    completionHandler: @escaping ((CoinPrice?, Error?) -> ())
-    ) {
-        if cancellableTask != nil {
-            cancellableTask?.cancel()
-        }
-        let oldPriceEndpoint = EndPointConstructor.historicalData(coin: coin, date: dates.old, currency: currency)
-        let latestPriceEndpoint = EndPointConstructor.historicalData(coin: coin, date: dates.latest, currency: currency)
-        
-        guard let oldPriceRequest = RequestFactory.getRequest(endpointType: oldPriceEndpoint),
-            let latestPriceRequest = RequestFactory.getRequest(endpointType: latestPriceEndpoint) else {
-                return
-        }
-        
-        let oldPricePublisher: AnyPublisher<CryptoHistoricalData, Error> = NetworkingPublisher.dataPublisher(urlRequest: oldPriceRequest)
-        let latestPricePublisher: AnyPublisher<CryptoHistoricalData, Error> = NetworkingPublisher.dataPublisher(urlRequest: latestPriceRequest)
-        
-        cancellableTask = Publishers.Zip(
-            oldPricePublisher,
-            latestPricePublisher
-        )
-        .receive(on: DispatchQueue.main)
-        .sink(receiveCompletion: { result in
-            switch result {
-            case let .failure(error):
-                completionHandler(nil, error)
-            case .finished:
-                break
-            }
-        }, receiveValue: { oldPriceHistoricalData, latestPriceHistoricalData in
-            guard let oldPrice = oldPriceHistoricalData.price, let latestPrice = latestPriceHistoricalData.price else {
-                completionHandler(nil, HistoricalPriceError.cantFetchLatestPrice)
-                return
-            }
-            completionHandler(
-                CoinPrice(old: oldPrice, latest: latestPrice),
-                nil
-            )
-        })
     }
 }
