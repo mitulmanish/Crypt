@@ -8,6 +8,7 @@
 
 import UIKit
 import NetworkingKit
+import CustomPresentation
 
 class CurrenciesTableViewController: UITableViewController {
     
@@ -88,7 +89,7 @@ class CurrenciesTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 44.0
+        44.0
     }
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -173,8 +174,8 @@ class SelectCurrrecyViewController: UIViewController, UISearchBarDelegate, ViewD
     
     lazy var handlerView: UIView = {
         let view = UIView()
-        view.backgroundColor = .groupTableViewBackground
-        view.layer.cornerRadius = 4
+        view.backgroundColor = .white
+        view.layer.cornerRadius = 2
         return view
     }()
     
@@ -226,7 +227,7 @@ class SelectCurrrecyViewController: UIViewController, UISearchBarDelegate, ViewD
         
         view.addSubview(containerView)
         
-        [containerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor), containerView.heightAnchor.constraint(equalToConstant: 66),
+        [containerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
          containerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
          containerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
          containerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
@@ -246,7 +247,6 @@ class SelectCurrrecyViewController: UIViewController, UISearchBarDelegate, ViewD
         [searchBar.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
          searchBar.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
          searchBar.topAnchor.constraint(equalTo: handlerView.bottomAnchor, constant: 8),
-         searchBar.heightAnchor.constraint(equalToConstant: 48),
          searchBar.centerXAnchor.constraint(equalTo: containerView.centerXAnchor)
             ].forEach { $0.isActive = true }
         
@@ -277,22 +277,19 @@ class SelectCurrrecyViewController: UIViewController, UISearchBarDelegate, ViewD
     }
 }
 
-extension SelectCurrrecyViewController: DraggableViewType {
-    
-    var scrollView: UIScrollView {
-        return tableView
-    }
-    
-    func handleInteraction(enabled: Bool) {
-        [tableView, searchBar].forEach {
-            $0.isUserInteractionEnabled = enabled
-        }
-    }
-}
-
 extension SelectCurrrecyViewController: KeyboardDismissable {
     func dismissKeyboard() {
         guard searchBar.isFirstResponder else { return }
         searchBar.resignFirstResponder()
+    }
+}
+
+extension SelectCurrrecyViewController: DraggableViewType {
+    var scrollView: UIScrollView {
+        tableView
+    }
+          
+    func handleInteraction(enabled: Bool) {
+        tableView.isUserInteractionEnabled = enabled
     }
 }

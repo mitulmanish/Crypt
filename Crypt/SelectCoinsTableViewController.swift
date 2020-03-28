@@ -1,4 +1,5 @@
 import UIKit
+import CustomPresentation
 
 class SelectCoinsTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, ViewDismissalNotifier {
     
@@ -46,7 +47,7 @@ class SelectCoinsTableViewController: UIViewController, UITableViewDataSource, U
     lazy var handlerView: UIView = {
         let view = UIView()
         view.backgroundColor = .groupTableViewBackground
-        view.layer.cornerRadius = 4
+        view.layer.cornerRadius = 2
         return view
     }()
     
@@ -187,12 +188,6 @@ class SelectCoinsTableViewController: UIViewController, UITableViewDataSource, U
         return 44
     }
 
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if searchBar.isFirstResponder {
-            searchBar.resignFirstResponder()
-        }
-    }
-
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         selectedCoin = nil
         let searchString = searchText.lowercased()
@@ -220,17 +215,10 @@ class SelectCoinsTableViewController: UIViewController, UITableViewDataSource, U
         super.viewDidDisappear(animated)
         viewDismissed?()
     }
-}
-
-extension SelectCoinsTableViewController: DraggableViewType {
     
-    var scrollView: UIScrollView {
-        return tableView
-    }
-
-    func handleInteraction(enabled: Bool) {
-        [tableView, searchBar].forEach {
-            $0.isUserInteractionEnabled = enabled
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+       if searchBar.isFirstResponder {
+            searchBar.resignFirstResponder()
         }
     }
 }
@@ -239,5 +227,17 @@ extension SelectCoinsTableViewController: KeyboardDismissable {
     func dismissKeyboard() {
         guard searchBar.isFirstResponder else { return }
         searchBar.resignFirstResponder()
+    }
+}
+
+extension SelectCoinsTableViewController: DraggableViewType {
+    var scrollView: UIScrollView {
+        tableView
+    }
+          
+    func handleInteraction(enabled: Bool) {
+         [tableView, searchBar].forEach {
+            $0.isUserInteractionEnabled = enabled
+        }
     }
 }

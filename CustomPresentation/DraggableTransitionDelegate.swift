@@ -1,29 +1,26 @@
 import Foundation
 import UIKit
 
-class DraggableTransitionDelegate: NSObject, UIViewControllerTransitioningDelegate {
-    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
-        return DraggablePresentationController(presentedViewController: presented, presenting: source)
+public class DraggableTransitionDelegate: NSObject, UIViewControllerTransitioningDelegate {
+    public func presentationController(
+        forPresented presented: UIViewController,
+        presenting: UIViewController?, source: UIViewController
+    ) -> UIPresentationController? {
+        DraggablePresentationController(
+            presentedViewController: presented,
+            presenting: source
+        )
     }
 }
 
-private extension CGFloat {
-    static let springDampingRatio: CGFloat = 0.7
-    static let springInitialVelocityY: CGFloat =  10
-}
-
-private extension Double {
-    static let animationDuration: Double = 0.3
-}
-
-enum DragDirection {
+private enum DragDirection {
     case up
     case down
 }
 
-enum DraggablePosition {
+private enum DraggablePosition {
     case open
-    case midway
+    case mid
     case collapsed
 
     var heightMulitiplier: CGFloat {
@@ -32,7 +29,7 @@ enum DraggablePosition {
             return 0.2
         case .open:
             return 0.9
-        case .midway:
+        case .mid:
             return 0.5
         }
     }
@@ -43,7 +40,7 @@ enum DraggablePosition {
             return 0.0
         case .open:
             return 0.8
-        case .midway:
+        case .mid:
             return 0.35
         }
     }
@@ -54,7 +51,7 @@ enum DraggablePosition {
             return 0.0
         case .open:
             return 0.65
-        case .midway:
+        case .mid:
             return 0.27
         }
     }
@@ -64,22 +61,26 @@ enum DraggablePosition {
     }
 }
 
-class DraggablePresentationController: UIPresentationController {
+private final class DraggablePresentationController: UIPresentationController {
 
-    private var draggableView: KeyboardDismissableDraggableView? {
-        return presentedViewController as? KeyboardDismissableDraggableView
+    private var draggableViewController: KeyboardDismissableDraggableView {
+        guard let presentedViewController = presentedViewController as?  KeyboardDismissableDraggableView else {
+            fatalError("presentedViewController must conform to KeyboardDismissableDraggableView")
+        }
+        return presentedViewController
     }
 
     private var presentedViewOriginY: CGFloat {
-        return presentedView?.frame.origin.y ?? 0
+        presentedView?.frame.origin.y ?? 0
     }
 
     private var draggablePosition: DraggablePosition = .open {
         didSet {
             if draggablePosition == .open {
-                draggableView?.handleInteraction(enabled: true)
+                draggableViewController.scrollView.isScrollEnabled = true
+                draggableViewController.handleInteraction(enabled: true)
             } else {
-                draggableView?.handleInteraction(enabled: false)
+                draggableViewController.handleInteraction(enabled: false)
             }
         }
     }
@@ -91,15 +92,17 @@ class DraggablePresentationController: UIPresentationController {
         return CGRect(x: 0, y: 0, width: containerView?.bounds.width ?? 0, height: containerView?.bounds.height ?? 0)
     }
 
-    private var panOnPresented = UIPanGestureRecognizer()
-
+    private var presentedViewGestureRecognizer = UIPanGestureRecognizer()
     private var containerViewGestureRecognizer = UITapGestureRecognizer()
-
+    private var presentedViewGestureDelegate: PresentedViewGestureDelegate?
+    
     override var frameOfPresentedViewInContainerView: CGRect {
         let yOrigin = draggablePosition.yOrigin(for: maxFrame.height)
         let presentedViewOrigin = CGPoint(x: 0, y: yOrigin)
-        let presentedViewSize = CGSize(width: containerView?.bounds.width ?? 0,
-                                       height: (containerView?.bounds.height ?? 0) - yOrigin)
+        let presentedViewSize = CGSize(
+            width: containerView?.bounds.width ?? 0,
+            height: (containerView?.bounds.height ?? 0) - yOrigin
+        )
         return CGRect(origin: presentedViewOrigin, size: presentedViewSize)
     }
 
@@ -108,15 +111,28 @@ class DraggablePresentationController: UIPresentationController {
     }
 
     override func presentationTransitionWillBegin() {
-        draggableView?.handleInteraction(enabled: true)
+        draggableViewController.handleInteraction(enabled: true)
     }
 
     override func presentationTransitionDidEnd(_ completed: Bool) {
-        animator = UIViewPropertyAnimator(duration: .animationDuration, curve: .easeInOut)
-        animator?.isInterruptible = true
-        panOnPresented = UIPanGestureRecognizer(target: self, action: #selector(userDidPan(panRecognizer:)))
-        presentedView?.addGestureRecognizer(panOnPresented)
-        containerViewGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(receivedTouch))
+        animator = UIViewPropertyAnimator(
+            duration: .animationDuration,
+            curve: .easeInOut
+        )
+        animator?.isInterruptible = false
+        presentedViewGestureRecognizer = UIPanGestureRecognizer(
+            target: self,
+            action: #selector(userDidPan(panRecognizer:))
+        )
+        presentedView?.addGestureRecognizer(presentedViewGestureRecognizer)
+        presentedViewGestureDelegate = PresentedViewGestureDelegate(
+            scrollView: draggableViewController.scrollView
+        )
+        presentedViewGestureRecognizer.delegate = presentedViewGestureDelegate
+        containerViewGestureRecognizer = UITapGestureRecognizer(
+            target: self,
+            action: #selector(receivedTouch)
+        )
         containerViewGestureRecognizer.delegate = self
         containerView?.addGestureRecognizer(containerViewGestureRecognizer)
         animate(to: .open)
@@ -127,7 +143,7 @@ class DraggablePresentationController: UIPresentationController {
     }
 
     @objc private func userDidPan(panRecognizer: UIPanGestureRecognizer) {
-        draggableView?.dismissKeyboard()
+        draggableViewController.dismissKeyboard()
         let translationPoint = panRecognizer.translation(in: presentedView)
         let currentOriginY = draggablePosition.yOrigin(for: maxFrame.height)
         let newOffset = translationPoint.y + currentOriginY
@@ -157,39 +173,39 @@ class DraggablePresentationController: UIPresentationController {
         case .up:
             if distanceFromBottom > (maxFrame.height * DraggablePosition.open.upBoundary) {
                 animate(to: .open)
-            } else if distanceFromBottom > (maxFrame.height * DraggablePosition.midway.upBoundary) {
-                animate(to: .midway)
+            } else if distanceFromBottom > (maxFrame.height * DraggablePosition.mid.upBoundary) {
+                animate(to: .mid)
             } else {
                 animate(to: .collapsed)
             }
         case .down:
             if distanceFromBottom > (maxFrame.height * DraggablePosition.open.downBoundary) {
                 animate(to: .open)
-            } else if distanceFromBottom > (maxFrame.height * DraggablePosition.midway.downBoundary) {
-                animate(to: .midway)
+            } else if distanceFromBottom > (maxFrame.height * DraggablePosition.mid.downBoundary) {
+                animate(to: .mid)
             } else {
                 animate(to: .collapsed)
             }
         }
     }
 
-    func getDraggablePosition() -> DraggablePosition {
+    private func getDraggablePosition() -> DraggablePosition {
         let distanceFromBottom = maxFrame.height - presentedViewOriginY
 
         switch dragDirection {
         case .up:
             if distanceFromBottom > (maxFrame.height * DraggablePosition.open.upBoundary) {
                 return .open
-            } else if distanceFromBottom > (maxFrame.height * DraggablePosition.midway.upBoundary) {
-                return .midway
+            } else if distanceFromBottom > (maxFrame.height * DraggablePosition.mid.upBoundary) {
+                return .mid
             } else {
                 return .collapsed
             }
         case .down:
             if distanceFromBottom > (maxFrame.height * DraggablePosition.open.downBoundary) {
                 return .open
-            } else if distanceFromBottom > (maxFrame.height * DraggablePosition.midway.downBoundary) {
-                return .midway
+            } else if distanceFromBottom > (maxFrame.height * DraggablePosition.mid.downBoundary) {
+                return .mid
             } else {
                 return .collapsed
             }
@@ -218,3 +234,40 @@ extension DraggablePresentationController: UIGestureRecognizerDelegate {
 }
 
 
+private final class PresentedViewGestureDelegate: NSObject, UIGestureRecognizerDelegate {
+    
+    private let scrollView: UIScrollView
+    
+    init(scrollView: UIScrollView) {
+        self.scrollView = scrollView
+    }
+    
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        true
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        guard let gestureRecognizer = gestureRecognizer as? UIPanGestureRecognizer else {
+            return false
+        }
+        let velocity = gestureRecognizer.velocity(in: scrollView)
+        if scrollView.contentOffset.y <= 0,
+            scrollView.isDecelerating == false,
+            velocity.y > 0 {
+            scrollView.isScrollEnabled = false
+        } else {
+            scrollView.isScrollEnabled = true
+        }
+        return false
+    }
+}
+
+
+private extension CGFloat {
+    static let springDampingRatio: CGFloat = 0.7
+    static let springInitialVelocityY: CGFloat =  10
+}
+
+private extension Double {
+    static let animationDuration: Double = 0.22
+}

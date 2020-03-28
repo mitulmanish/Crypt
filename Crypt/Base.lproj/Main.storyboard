@@ -44,7 +44,7 @@
                                                         <rect key="frame" x="38" y="0.0" width="138.33333333333334" height="70"/>
                                                         <color key="backgroundColor" white="0.2031785102739726" alpha="0.80377782534246578" colorSpace="calibratedWhite"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="138.33000000000001" id="PRO-MV-4Tm"/>
+                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" priority="750" constant="135" id="9Kb-lA-31o"/>
                                                         </constraints>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="48"/>
@@ -140,7 +140,7 @@
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                         <constraints>
-                            <constraint firstItem="eQn-OJ-86V" firstAttribute="bottom" secondItem="Msm-LN-Y2N" secondAttribute="bottom" id="4UZ-57-QkJ"/>
+                            <constraint firstItem="eQn-OJ-86V" firstAttribute="bottom" secondItem="Msm-LN-Y2N" secondAttribute="bottom" priority="999" id="4UZ-57-QkJ"/>
                             <constraint firstItem="Msm-LN-Y2N" firstAttribute="leading" secondItem="eQn-OJ-86V" secondAttribute="leading" constant="20" id="RRe-6Q-1cM"/>
                             <constraint firstItem="Msm-LN-Y2N" firstAttribute="top" secondItem="eQn-OJ-86V" secondAttribute="top" constant="32" id="cGO-4n-bS3"/>
                             <constraint firstItem="eQn-OJ-86V" firstAttribute="trailing" secondItem="Msm-LN-Y2N" secondAttribute="trailing" constant="20" id="lTj-1t-Cht"/>
