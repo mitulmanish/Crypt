@@ -266,20 +266,3 @@ extension HomeViewController: CurrencySelectionDelegate {
         currentCurrency = currency
     }
 }
-
-
-// For testing purposes
-//    private func fetchPriceBetweenDates() {
-//        let endPoint = EndPointConstructor.history(coin: Coin(id: 363, name: "Bitcoin", code: "BTC"), fromDate: Date().addingTimeInterval(-24 * 60 * 60 * 5), toDate: Date().addingTimeInterval(-24 * 60 * 60 * 1), currency: "USD")
-//        guard let req = RequestFactory.getRequest(endpointType: .currencies) else {
-//            return
-//        }
-//        Service().fetch(urlRequest: req) { (result: Result<CurrecyHolder, Error>) in
-//            switch result {
-//            case .success(let holder):
-//                print(holder.baseCurrencies.count)
-//            case .failure(let error):
-//                print(error)
-//            }
-//        }
-//    }

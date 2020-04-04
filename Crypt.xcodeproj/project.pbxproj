@@ -286,7 +286,6 @@
 		013A4703208F616700DBAEAE /* Crypt */ = {
 			isa = PBXGroup;
 			children = (
-				DDFC00BB2284081800F75153 /* Protocol */,
 				DDB5159821C651A9009B9483 /* Presentation Animation */,
 				01C259CE217C60800084617B /* Networking */,
 				01C259CB217C56620084617B /* Extensions */,
@@ -432,13 +431,6 @@
 				DDF1BDA9242FC0B700415F84 /* Info.plist */,
 			);
 			path = CustomPresentationTests;
-			sourceTree = "<group>";
-		};
-		DDFC00BB2284081800F75153 /* Protocol */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Protocol;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
