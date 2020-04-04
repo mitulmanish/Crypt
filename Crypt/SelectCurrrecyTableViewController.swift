@@ -67,7 +67,7 @@ class CurrenciesTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return currencyList.count
+        currencyList.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -136,7 +136,7 @@ protocol CurrencySelectionDelegate: AnyObject {
     func didSelectCurrency(currency: Currency)
 }
 
-class SelectCurrrecyViewController: UIViewController, UISearchBarDelegate, ViewDismissalNotifier {
+class SelectCurrencyViewController: UIViewController, ViewDismissalNotifier {
     
     private var currencyList: [Currency] = [Currency]() {
         didSet {
@@ -146,45 +146,30 @@ class SelectCurrrecyViewController: UIViewController, UISearchBarDelegate, ViewD
         }
     }
     
-    var selectionDelegate: CurrencySelectionDelegate?
-    
-    var tableView: UITableView {
-        return currenciesTableViewController.view as! UITableView
+    private var tableView: UITableView {
+        currenciesTableViewController.view as! UITableView
     }
     
-    var currenciesTableViewController: CurrenciesTableViewController = {
-        return CurrenciesTableViewController()
-    }()
-    
-    var viewDismissed: (() -> Void)?
-    let selection = UISelectionFeedbackGenerator()
-    
-    lazy var containerView: UIView = {
-        return UIView()
-    }()
-    
-    lazy var searchBar: UISearchBar = {
-        let searchBar = UISearchBar()
-        searchBar.backgroundImage = UIImage()
-        searchBar.barTintColor = .darkGray
-        searchBar.isTranslucent = false
-        searchBar.searchBarStyle = .default
-        return searchBar
-    }()
-    
-    lazy var handlerView: UIView = {
+    private lazy var handlerView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
         view.layer.cornerRadius = 2
         return view
     }()
     
-    lazy var activityIndicator: UIActivityIndicatorView = {
-        let indicator = UIActivityIndicatorView(style: .whiteLarge)
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .medium)
         indicator.hidesWhenStopped = true
         indicator.translatesAutoresizingMaskIntoConstraints = false
         return indicator
     }()
+    
+    var selectionDelegate: CurrencySelectionDelegate?
+    var viewDismissed: (() -> Void)?
+    
+    private let selection = UISelectionFeedbackGenerator()
+    private let containerView = UIView()
+    private let currenciesTableViewController = CurrenciesTableViewController()
     
     init() {
         super.init(nibName: .none, bundle: .none)
@@ -205,15 +190,6 @@ class SelectCurrrecyViewController: UIViewController, UISearchBarDelegate, ViewD
         currenciesTableViewController.currencySelected = { [weak self] currency in
             self?.selectionDelegate?.didSelectCurrency(currency: currency)
                 self?.dismiss(animated: true)
-        }
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        currenciesTableViewController.viewScrolled = { [weak self] in
-            if self?.searchBar.isFirstResponder ?? false {
-                self?.searchBar.resignFirstResponder()
-            }
         }
     }
     
@@ -241,23 +217,14 @@ class SelectCurrrecyViewController: UIViewController, UISearchBarDelegate, ViewD
          handlerView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 8)
             ].forEach { $0.isActive = true }
         
-        searchBar.delegate = self
-        searchBar.translatesAutoresizingMaskIntoConstraints = false
-        containerView.addSubview(searchBar)
-        [searchBar.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-         searchBar.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-         searchBar.topAnchor.constraint(equalTo: handlerView.bottomAnchor, constant: 8),
-         searchBar.centerXAnchor.constraint(equalTo: containerView.centerXAnchor)
-            ].forEach { $0.isActive = true }
-        
         tableView.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(tableView)
         
-        [tableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor),
+        [tableView.topAnchor.constraint(equalTo: handlerView.bottomAnchor),
          tableView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
          tableView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
          tableView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor)
-            ].forEach { $0.isActive = true }
+        ].forEach { $0.isActive = true }
         
         tableView.addSubview(activityIndicator)
         [activityIndicator.centerXAnchor.constraint(equalTo: tableView.centerXAnchor),
@@ -267,24 +234,16 @@ class SelectCurrrecyViewController: UIViewController, UISearchBarDelegate, ViewD
             .forEach { $0.isActive = true }
     }
     
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
-    }
-    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         viewDismissed?()
     }
 }
 
-extension SelectCurrrecyViewController: KeyboardDismissable {
-    func dismissKeyboard() {
-        guard searchBar.isFirstResponder else { return }
-        searchBar.resignFirstResponder()
-    }
-}
-
-extension SelectCurrrecyViewController: DraggableViewType {
+extension SelectCurrencyViewController: KeyboardDismissableDraggableView {
+    
+    func dismissKeyboard() {}
+    
     var scrollView: UIScrollView {
         tableView
     }
