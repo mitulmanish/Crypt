@@ -16,6 +16,13 @@ class CurrenciesTableViewController: UITableViewController {
     var viewScrolled: (() -> ())?
     var currencySelected: ((Currency) -> Void)?
     
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+          let indicator = UIActivityIndicatorView(style: .medium)
+          indicator.hidesWhenStopped = true
+          indicator.translatesAutoresizingMaskIntoConstraints = false
+          return indicator
+    }()
+    
     init() {
         super.init(nibName: .none, bundle: .none)
     }
@@ -27,6 +34,7 @@ class CurrenciesTableViewController: UITableViewController {
     private var currencyList: [Currency] = [Currency]() {
         didSet {
             OperationQueue.main.addOperation { [weak self] in
+                self?.activityIndicator.stopAnimating()
                 self?.tableView.reloadData()
             }
         }
@@ -36,6 +44,11 @@ class CurrenciesTableViewController: UITableViewController {
         super.viewDidLoad()
         tableView.register(SelectCurrencyTableViewCell.self, forCellReuseIdentifier: cellID)
         tableView.separatorStyle = .none
+        view.addSubview(activityIndicator)
+        activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        activityIndicator.bringSubviewToFront(view)
+        activityIndicator.startAnimating()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -43,14 +56,12 @@ class CurrenciesTableViewController: UITableViewController {
         fetchCurrencies()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-    
     private func fetchCurrencies() {
         guard let req = RequestFactory.getRequest(endpointType: .currencies) else {
             return
         }
+        // TODO: Activity indicator is not centered
+        activityIndicator.startAnimating()
         Service.fetch(urlRequest: req) { [weak self]
             (result: Result<CurrecyHolder, Error>) in
             switch result {
@@ -128,6 +139,7 @@ class SelectCurrencyTableViewCell: UITableViewCell {
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
         accessoryType = selected ? .checkmark : .none
     }
 }
@@ -155,13 +167,6 @@ class SelectCurrencyViewController: UIViewController, ViewDismissalNotifier {
         view.backgroundColor = .white
         view.layer.cornerRadius = 2
         return view
-    }()
-    
-    private lazy var activityIndicator: UIActivityIndicatorView = {
-        let indicator = UIActivityIndicatorView(style: .medium)
-        indicator.hidesWhenStopped = true
-        indicator.translatesAutoresizingMaskIntoConstraints = false
-        return indicator
     }()
     
     var selectionDelegate: CurrencySelectionDelegate?
@@ -225,13 +230,6 @@ class SelectCurrencyViewController: UIViewController, ViewDismissalNotifier {
          tableView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
          tableView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor)
         ].forEach { $0.isActive = true }
-        
-        tableView.addSubview(activityIndicator)
-        [activityIndicator.centerXAnchor.constraint(equalTo: tableView.centerXAnchor),
-         activityIndicator.topAnchor.constraint(equalTo: tableView.topAnchor, constant: 16),
-         activityIndicator.widthAnchor.constraint(equalToConstant: 36),
-         activityIndicator.heightAnchor.constraint(equalTo: activityIndicator.widthAnchor)]
-            .forEach { $0.isActive = true }
     }
     
     override func viewDidDisappear(_ animated: Bool) {

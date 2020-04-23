@@ -46,7 +46,7 @@ class SelectCoinsTableViewController: UIViewController, UITableViewDataSource, U
 
     lazy var handlerView: UIView = {
         let view = UIView()
-        view.backgroundColor = .groupTableViewBackground
+        view.backgroundColor = .lightGray
         view.layer.cornerRadius = 2
         return view
     }()

@@ -159,6 +159,7 @@
 		DD2D8AA921F5F4530065FB50 /* SelectDateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDateViewController.swift; sourceTree = "<group>"; };
 		DD2D8AAA21F5F4530065FB50 /* SelectDateViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectDateViewController.xib; sourceTree = "<group>"; };
 		DD2D8AAD21F5FB400065FB50 /* CurvedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurvedButton.swift; sourceTree = "<group>"; };
+		DD3CF1952451CBB000E3E7DB /* Crypt.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Crypt.entitlements; sourceTree = "<group>"; };
 		DD40914F23B25EAA0027D39B /* NetworkingKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NetworkingKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD40915123B25EAA0027D39B /* NetworkingKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkingKit.h; sourceTree = "<group>"; };
 		DD40915223B25EAA0027D39B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -286,6 +287,7 @@
 		013A4703208F616700DBAEAE /* Crypt */ = {
 			isa = PBXGroup;
 			children = (
+				DD3CF1952451CBB000E3E7DB /* Crypt.entitlements */,
 				DDB5159821C651A9009B9483 /* Presentation Animation */,
 				01C259CE217C60800084617B /* Networking */,
 				01C259CB217C56620084617B /* Extensions */,
@@ -463,6 +465,7 @@
 				013A46FE208F616700DBAEAE /* Frameworks */,
 				013A46FF208F616700DBAEAE /* Resources */,
 				DD40912323B258CE0027D39B /* Embed Frameworks */,
+				DD3CF0AD2451926F00E3E7DB /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -706,6 +709,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		DD3CF0AD2451926F00E3E7DB /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "
+
+";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		013A46FD208F616700DBAEAE /* Sources */ = {
@@ -980,7 +1005,9 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Crypt/Crypt.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = RNF8E69GKB;
 				INFOPLIST_FILE = Crypt/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -990,6 +1017,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "mitul-manish.Crypt";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1000,7 +1028,9 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Crypt/Crypt.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = RNF8E69GKB;
 				INFOPLIST_FILE = Crypt/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1010,6 +1040,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "mitul-manish.Crypt";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
