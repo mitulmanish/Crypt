@@ -45,7 +45,7 @@ struct HistoricalPriceComparisonProvider {
                     break
                 }
             }, receiveValue: { [networkActivityPublisher] oldPriceHistoricalData, latestPriceHistoricalData in
-                guard let oldPrice = oldPriceHistoricalData.price, let latestPrice = latestPriceHistoricalData.price else {
+                guard let oldPrice = oldPriceHistoricalData.finalPrice, let latestPrice = latestPriceHistoricalData.finalPrice else {
                     networkActivityPublisher.send(false)
                     completionHandler(nil, HistoricalPriceError.cantFetchLatestPrice)
                     return

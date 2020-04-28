@@ -45,7 +45,7 @@ struct HistoricalDataNetworkOperationManager {
         opeartionQueue.addOperations([oldPriceOperation, oldPriceDecodingOperation, latestPriceOperation, latestPriceDecodingOperation], waitUntilFinished: false)
 
         latestPriceDecodingOperation.completionBlock = {
-            if let oldPrice = oldPriceDecodingOperation.decodedObject?.price, let latestPrice = latestPriceDecodingOperation.decodedObject?.price {
+            if let oldPrice = oldPriceDecodingOperation.decodedObject?.finalPrice, let latestPrice = latestPriceDecodingOperation.decodedObject?.finalPrice {
                 let price = CoinPrice(old: oldPrice, latest: latestPrice)
                 OperationQueue.main.addOperation {
                     completionHandler(price, nil)
