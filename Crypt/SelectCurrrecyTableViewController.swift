@@ -8,9 +8,9 @@
 
 import UIKit
 import NetworkingKit
-import CustomPresentation
+import Drawer
 
-class CurrenciesTableViewController: UITableViewController {
+private final class CurrenciesTableViewController: UITableViewController {
     
     private let cellID = "cellID"
     var viewScrolled: (() -> ())?

@@ -1,5 +1,5 @@
 import UIKit
-import CustomPresentation
+import Drawer
 
 class SelectCoinsTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, ViewDismissalNotifier {
     
@@ -223,14 +223,7 @@ class SelectCoinsTableViewController: UIViewController, UITableViewDataSource, U
     }
 }
 
-extension SelectCoinsTableViewController: KeyboardDismissable {
-    func dismissKeyboard() {
-        guard searchBar.isFirstResponder else { return }
-        searchBar.resignFirstResponder()
-    }
-}
-
-extension SelectCoinsTableViewController: DraggableViewType {
+extension SelectCoinsTableViewController: KeyboardDismissableDraggableView {
     var scrollView: UIScrollView {
         tableView
     }
@@ -239,5 +232,10 @@ extension SelectCoinsTableViewController: DraggableViewType {
          [tableView, searchBar].forEach {
             $0.isUserInteractionEnabled = enabled
         }
+    }
+    
+    func dismissKeyboard() {
+        guard searchBar.isFirstResponder else { return }
+        searchBar.resignFirstResponder()
     }
 }

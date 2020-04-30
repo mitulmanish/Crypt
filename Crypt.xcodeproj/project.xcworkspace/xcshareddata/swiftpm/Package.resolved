@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Drawer",
+        "repositoryURL": "https://github.com/mitulmanish/Drawer",
+        "state": {
+          "branch": null,
+          "revision": "4f541ccefd22d18f750f11e3fc85246cc3b79934",
+          "version": "1.0.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
