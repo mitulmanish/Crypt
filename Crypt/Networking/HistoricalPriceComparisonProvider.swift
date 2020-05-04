@@ -12,7 +12,7 @@ struct HistoricalPriceComparisonProvider {
         forDates dates: (old: Date, latest: Date),
         forCoin coin: Coin,
         forCurrency currency: String,
-        completionHandler: @escaping ((CoinPrice?, Error?) -> ())
+        completionHandler: @escaping ((CoinPrice?, Error?) -> Void)
     ) {
         if cancellableTask != nil {
             cancellableTask?.cancel()
@@ -29,8 +29,14 @@ struct HistoricalPriceComparisonProvider {
                 return
         }
         
-        let oldPricePublisher: AnyPublisher<CryptoHistoricalData, Error> = NetworkingPublisher.dataPublisher(urlRequest: oldPriceRequest)
-        let latestPricePublisher: AnyPublisher<CryptoHistoricalData, Error> = NetworkingPublisher.dataPublisher(urlRequest: latestPriceRequest)
+        let oldPricePublisher: AnyPublisher<CryptoHistoricalData, Error> =
+            NetworkingPublisher.dataPublisher(
+            urlRequest: oldPriceRequest
+        )
+        let latestPricePublisher: AnyPublisher<CryptoHistoricalData, Error> =
+            NetworkingPublisher.dataPublisher(
+            urlRequest: latestPriceRequest
+        )
         
         cancellableTask = Publishers.Zip(
             oldPricePublisher,
@@ -45,7 +51,8 @@ struct HistoricalPriceComparisonProvider {
                     break
                 }
             }, receiveValue: { [networkActivityPublisher] oldPriceHistoricalData, latestPriceHistoricalData in
-                guard let oldPrice = oldPriceHistoricalData.finalPrice, let latestPrice = latestPriceHistoricalData.finalPrice else {
+                guard let oldPrice = oldPriceHistoricalData.finalPrice,
+                    let latestPrice = latestPriceHistoricalData.finalPrice else {
                     networkActivityPublisher.send(false)
                     completionHandler(nil, HistoricalPriceError.cantFetchLatestPrice)
                     return
@@ -58,4 +65,3 @@ struct HistoricalPriceComparisonProvider {
             })
     }
 }
-

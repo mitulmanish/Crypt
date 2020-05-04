@@ -11,7 +11,7 @@ public struct Service {
     
     public static func fetch<DataType: Decodable>(
         urlRequest: URLRequest,
-        completion: @escaping (Result<DataType, Error>) -> ()
+        completion: @escaping (Result<DataType, Error>) -> Void
     ) {
         URLSession.shared.get(request: urlRequest) { result in
             switch result {

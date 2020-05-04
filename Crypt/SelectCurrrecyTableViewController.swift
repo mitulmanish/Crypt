@@ -13,7 +13,7 @@ import Drawer
 private final class CurrenciesTableViewController: UITableViewController {
     
     private let cellID = "cellID"
-    var viewScrolled: (() -> ())?
+    var viewScrolled: (() -> Void)?
     var currencySelected: ((Currency) -> Void)?
     
     private lazy var activityIndicator: UIActivityIndicatorView = {
@@ -60,10 +60,8 @@ private final class CurrenciesTableViewController: UITableViewController {
         guard let req = RequestFactory.getRequest(endpointType: .currencies) else {
             return
         }
-        // TODO: Activity indicator is not centered
         activityIndicator.startAnimating()
-        Service.fetch(urlRequest: req) { [weak self]
-            (result: Result<CurrecyHolder, Error>) in
+        Service.fetch(urlRequest: req) { [weak self] (result: Result<CurrecyHolder, Error>) in
             switch result {
             case .success(let holder):
                 self?.currencyList = holder.currencyList
@@ -82,7 +80,10 @@ private final class CurrenciesTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as? SelectCurrencyTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: cellID,
+            for: indexPath
+        ) as? SelectCurrencyTableViewCell else {
             return UITableViewCell()
         }
         guard let currency = currencyList
@@ -148,7 +149,7 @@ protocol CurrencySelectionDelegate: AnyObject {
     func didSelectCurrency(currency: Currency)
 }
 
-class SelectCurrencyViewController: UIViewController, ViewDismissalNotifier {
+final class SelectCurrencyViewController: UIViewController, ViewDismissalNotifier {
     
     private var currencyList: [Currency] = [Currency]() {
         didSet {
@@ -159,6 +160,7 @@ class SelectCurrencyViewController: UIViewController, ViewDismissalNotifier {
     }
     
     private var tableView: UITableView {
+        // swiftlint:disable:next force_cast
         currenciesTableViewController.view as! UITableView
     }
     
@@ -169,7 +171,7 @@ class SelectCurrencyViewController: UIViewController, ViewDismissalNotifier {
         return view
     }()
     
-    var selectionDelegate: CurrencySelectionDelegate?
+    weak var selectionDelegate: CurrencySelectionDelegate?
     var viewDismissed: (() -> Void)?
     
     private let selection = UISelectionFeedbackGenerator()
@@ -178,6 +180,8 @@ class SelectCurrencyViewController: UIViewController, ViewDismissalNotifier {
     
     init() {
         super.init(nibName: .none, bundle: .none)
+        transitioningDelegate = self
+        modalPresentationStyle = .custom
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -248,5 +252,17 @@ extension SelectCurrencyViewController: KeyboardDismissableDraggableView {
           
     func handleInteraction(enabled: Bool) {
         tableView.isUserInteractionEnabled = enabled
+    }
+}
+
+extension SelectCurrencyViewController: UIViewControllerTransitioningDelegate {
+    func presentationController(
+        forPresented presented: UIViewController,
+        presenting: UIViewController?, source: UIViewController
+    ) -> UIPresentationController? {
+        DraggablePresentationController(
+            presentedViewController: presented,
+            presenting: source
+        )
     }
 }

@@ -5,9 +5,6 @@ import Drawer
 
 class HomeViewController: UIViewController {
     
-    private var animator: UIViewControllerTransitioningDelegate?
-    private var selectDateTransitionDelegate: UIViewControllerTransitioningDelegate?
-    private var resultsViewTransitionDelegate: UIViewControllerTransitioningDelegate?
     private var selectCoinsTableViewController: SelectCoinsTableViewController?
     
     @IBOutlet weak var coinButton: UIButton!
@@ -65,7 +62,10 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         let tapGesturerecognizer = UITapGestureRecognizer(target: self, action: #selector(screenTapped))
         view.addGestureRecognizer(tapGesturerecognizer)
-        quantityTextField.attributedPlaceholder = NSAttributedString(string: "", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+        quantityTextField.attributedPlaceholder = NSAttributedString(
+            string: "",
+            attributes: [NSAttributedString.Key.foregroundColor: UIColor.white]
+        )
         quantityTextField.keyboardType = .decimalPad
         activityIndicator.isHidden = true
         activityIndicator.hidesWhenStopped = true
@@ -76,7 +76,9 @@ class HomeViewController: UIViewController {
         )
         currencySelectionButton.contentVerticalAlignment = .bottom
         
-        networkActivitySubscriber = historicalPriceComparisonProvider.networkActivityPublisher.sink { [activityIndicator] in
+        networkActivitySubscriber = historicalPriceComparisonProvider
+            .networkActivityPublisher
+            .sink { [activityIndicator] in
             if $0 {
                 activityIndicator?.startAnimating()
             } else {
@@ -95,20 +97,14 @@ class HomeViewController: UIViewController {
     
     private func showResults(portfolio: PortfolioType) {
         let resultsViewController = ResultsViewController(portfolioType: portfolio, currency: currentCurrency)
-        resultsViewTransitionDelegate = ModalViewControllerPresentationTransitionDelegate(
-            portraitHeight: 150,
-            landscapeHeight: 170,
-            verticalMargin: 0,
-            horizontalMargin: 0
-        )
-        resultsViewController.modalPresentationStyle = .custom
-        resultsViewController.transitioningDelegate = resultsViewTransitionDelegate
         dismissThenPresent(viewController: resultsViewController)
     }
     
     func getPriceData(price: CoinPrice?, error: Error?) {
         guard let error = error else {
-            guard let currentPrice = price?.latest, let oldPrice = price?.old, let quantityInFloat = quantityBought else {
+            guard let currentPrice = price?.latest,
+                let oldPrice = price?.old,
+                let quantityInFloat = quantityBought else {
                 return
             }
             let portfolio = ProfitCalculator(
@@ -134,14 +130,6 @@ class HomeViewController: UIViewController {
     
     func showPriceFetchError(error: Error) {
         let resultsViewController = ResultsViewController(error: error)
-        resultsViewTransitionDelegate = ModalViewControllerPresentationTransitionDelegate(
-            portraitHeight: 220,
-            landscapeHeight: 150,
-            verticalMargin: 0,
-            horizontalMargin: 0
-        )
-        resultsViewController.modalPresentationStyle = .custom
-        resultsViewController.transitioningDelegate = resultsViewTransitionDelegate
         if presentedViewController == .none {
             present(resultsViewController, animated: true, completion: .none)
         }
@@ -190,9 +178,6 @@ class HomeViewController: UIViewController {
     @IBAction func selectCoin(_ sender: UIButton) {
         dismissKeyboard()
         let selectCoinViewController = SelectCoinsTableViewController(selectedCoin: currentCoin)
-        animator = DraggableTransitionDelegate()
-        selectCoinViewController.modalPresentationStyle = .custom
-        selectCoinViewController.transitioningDelegate = animator
         dismissThenPresent(viewController: selectCoinViewController)
         selectCoinViewController.coinSelected = { [weak self] coin in
             self?.currentCoin = coin
@@ -204,16 +189,11 @@ class HomeViewController: UIViewController {
         }
     }
     
-    private var currencySelectionTransitionDelegate: DraggableTransitionDelegate?
     @IBAction func didSelectCurrencySelection(_ sender: UIButton) {
-        currencySelectionTransitionDelegate = DraggableTransitionDelegate()
-        let vc = SelectCurrencyViewController()
-        vc.transitioningDelegate = currencySelectionTransitionDelegate
-        vc.modalPresentationStyle = .custom
-        vc.selectionDelegate = self
-        present(vc, animated: true)
+        let viewController = SelectCurrencyViewController()
+        viewController.selectionDelegate = self
+        present(viewController, animated: true)
     }
-    
     
     @IBAction func didBeginEditing(_ sender: UITextField) {
         selectCoinsTableViewController?.dismiss(animated: true, completion: { [weak self] in
@@ -223,9 +203,6 @@ class HomeViewController: UIViewController {
     
     @IBAction func dateSelected(_ sender: UIButton) {
         let selectDateViewController = SelectDateViewController(selectedDate: concernedDate ?? Date())
-        selectDateTransitionDelegate = ModalViewControllerPresentationTransitionDelegate(portraitHeight: 250, landscapeHeight: 270, verticalMargin: 8, horizontalMargin: 0)
-        selectDateViewController.transitioningDelegate = selectDateTransitionDelegate
-        selectDateViewController.modalPresentationStyle = .custom
         dismissThenPresent(viewController: selectDateViewController)
         selectDateViewController.dateChanged = { [weak self] date in
             self?.concernedDate = date

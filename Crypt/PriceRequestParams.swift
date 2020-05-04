@@ -15,7 +15,7 @@ struct PriceRequestParams {
 }
 
 extension PriceRequestParams: Equatable {
-    static func ==(lhs: PriceRequestParams, rhs: PriceRequestParams) -> Bool {
+    static func == (lhs: PriceRequestParams, rhs: PriceRequestParams) -> Bool {
         return lhs.historicalDate.compare(rhs.historicalDate) == .orderedSame
             && lhs.quantityBought == rhs.quantityBought
             && lhs.coin == rhs.coin

@@ -15,7 +15,7 @@ public enum NetworkResult {
 }
 
 public extension URLSession {
-    func getData(request: URLRequest, dataResponse: @escaping (NetworkResult) -> ()) {
+    func getData(request: URLRequest, dataResponse: @escaping (NetworkResult) -> Void) {
         dataTask(with: request) { (serverData, serverResponse, networkError) in
             let validStatusCodeRange: ClosedRange<Int> = 200...299
             switch (serverData, serverResponse, networkError) {

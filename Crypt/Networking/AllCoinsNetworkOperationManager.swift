@@ -1,7 +1,7 @@
 import Foundation
 struct AllCoinsNetworkOperationManager {
 
-    func allCoins(completionHandler: @escaping (CoinCollection?) -> ()) {
+    func allCoins(completionHandler: @escaping (CoinCollection?) -> Void) {
         guard let request = RequestFactory.getRequest(endpointType: EndPointConstructor.allCoins) else {
             completionHandler(nil)
             return

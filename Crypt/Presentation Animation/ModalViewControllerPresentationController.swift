@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ModalViewControllerPresentationController: UIPresentationController {
+class ModalPresentationController: UIPresentationController {
     private var tapGestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer()
     
     private let portraitHeight: CGFloat
@@ -67,23 +67,29 @@ class ModalViewControllerPresentationController: UIPresentationController {
     
     private func computeSideMargin() -> CGFloat {
         if #available(iOS 11, *) {
-            return presentingViewController.view.directionalLayoutMargins.leading +  presentingViewController.view.directionalLayoutMargins.trailing + sideMargin
+            return presentingViewController.view.directionalLayoutMargins.leading
+                +  presentingViewController.view.directionalLayoutMargins.trailing
+                + sideMargin
         } else { 
-            return presentingViewController.view.layoutMargins.right +  presentingViewController.view.layoutMargins.left + sideMargin
+            return presentingViewController.view.layoutMargins.right
+                +  presentingViewController.view.layoutMargins.left
+                + sideMargin
         }
     }
     
     private func computeTotalVerticalMargin() -> CGFloat {
         if #available(iOS 11, *) {
             return presentingViewController.view.directionalLayoutMargins.bottom
-                + presentingViewController.view.directionalLayoutMargins.top + marginFromBottom
+                + presentingViewController.view.directionalLayoutMargins.top
+                + marginFromBottom
         } else {
             return presentingViewController.view.layoutMargins.top
-                + presentingViewController.view.layoutMargins.bottom + marginFromBottom
+                + presentingViewController.view.layoutMargins.bottom
+                + marginFromBottom
         }
     }
     
-    @objc func dismiss(){
+    @objc func dismiss() {
         presentedViewController.dismiss(animated: true, completion: nil)
     }
     
@@ -113,7 +119,14 @@ class ModalViewControllerPresentationController: UIPresentationController {
              (.unspecified, .regular),
              (.compact, .unspecified),
              (.regular, .unspecified):
-            return CGRect(origin: CGPoint(x: 0, y: containerView.frame.height / 2), size: CGSize(width: containerView.frame.width, height: containerView.frame.height / 2))
+            return CGRect(origin: CGPoint(
+                x: 0,
+                y: containerView.frame.height / 2),
+                size: CGSize(
+                    width: containerView.frame.width,
+                    height: containerView.frame.height / 2
+                )
+            )
         default:
             return .zero
         }

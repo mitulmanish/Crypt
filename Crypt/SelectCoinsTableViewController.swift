@@ -1,12 +1,13 @@
 import UIKit
 import Drawer
 
-class SelectCoinsTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, ViewDismissalNotifier {
+class SelectCoinsTableViewController:
+UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, ViewDismissalNotifier {
     
     var viewDismissed: (() -> Void)?
     private var selectedCoin: Coin?
     let selection = UISelectionFeedbackGenerator()
-    var coinSelected: ((Coin) -> ())?
+    var coinSelected: ((Coin) -> Void)?
 
     var filteredCoinCollection: CoinCollection? {
         didSet {
@@ -61,6 +62,8 @@ class SelectCoinsTableViewController: UIViewController, UITableViewDataSource, U
     init(selectedCoin: Coin?) {
         self.selectedCoin = selectedCoin
         super.init(nibName: nil, bundle: nil)
+        transitioningDelegate = self
+        modalPresentationStyle = .custom
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -90,6 +93,14 @@ class SelectCoinsTableViewController: UIViewController, UITableViewDataSource, U
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         view.round(corners: [.topLeft, .topRight], radius: 8)
+    }
+    
+    private func configureTableView() {
+        tableView.register(CoinTableViewCell.self, forCellReuseIdentifier: CoinTableViewCell.identifier)
+        tableView.backgroundColor = .darkGray
+        tableView.separatorStyle = .none
+        tableView.delegate = self
+        tableView.dataSource = self
     }
     
     private func setupSubViews() {
@@ -129,11 +140,7 @@ class SelectCoinsTableViewController: UIViewController, UITableViewDataSource, U
          tableView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor)
             ].forEach { $0.isActive = true }
         
-        tableView.register(CoinTableViewCell.self, forCellReuseIdentifier: CoinTableViewCell.identifier)
-        tableView.backgroundColor = .darkGray
-        tableView.separatorStyle = .none
-        tableView.delegate = self
-        tableView.dataSource = self
+        configureTableView()
         
         tableView.addSubview(activityIndicator)
         [activityIndicator.centerXAnchor.constraint(equalTo: tableView.centerXAnchor),
@@ -163,7 +170,10 @@ class SelectCoinsTableViewController: UIViewController, UITableViewDataSource, U
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: CoinTableViewCell.identifier, for: indexPath) as? CoinTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: CoinTableViewCell.identifier,
+            for: indexPath
+        ) as? CoinTableViewCell else {
             return UITableViewCell()
         }
         
@@ -191,7 +201,8 @@ class SelectCoinsTableViewController: UIViewController, UITableViewDataSource, U
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         selectedCoin = nil
         let searchString = searchText.lowercased()
-        self.filteredCoinCollection = searchText.isEmpty ? originalCoinCollection : filteredCoins(searchString: searchString)
+        self.filteredCoinCollection = searchText.isEmpty
+            ? originalCoinCollection : filteredCoins(searchString: searchString)
     }
 
     func filteredCoins(searchString: String) -> CoinCollection {
@@ -237,5 +248,15 @@ extension SelectCoinsTableViewController: KeyboardDismissableDraggableView {
     func dismissKeyboard() {
         guard searchBar.isFirstResponder else { return }
         searchBar.resignFirstResponder()
+    }
+}
+
+extension SelectCoinsTableViewController: UIViewControllerTransitioningDelegate {
+    func presentationController(
+        forPresented presented: UIViewController,
+        presenting: UIViewController?,
+        source: UIViewController
+    ) -> UIPresentationController? {
+        DraggablePresentationController(presentedViewController: presented, presenting: presenting)
     }
 }

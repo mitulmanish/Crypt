@@ -23,6 +23,8 @@ class ResultsViewController: UIViewController, ViewDismissalNotifier {
         self.portfolioType = portfolioType
         self.currency = currency
         super.init(nibName: nil, bundle: .main)
+        transitioningDelegate = self
+        modalPresentationStyle = .custom
     }
     
     init(error: Error) {
@@ -70,5 +72,22 @@ class ResultsViewController: UIViewController, ViewDismissalNotifier {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         viewDismissed?()
+    }
+}
+
+extension ResultsViewController: UIViewControllerTransitioningDelegate {
+    func presentationController(
+        forPresented presented: UIViewController,
+        presenting: UIViewController?,
+        source: UIViewController
+    ) -> UIPresentationController? {
+        return ModalPresentationController(
+            portraitHeight: 150,
+            landscapeHeight: 170,
+            marginFromBottom: 0,
+            sideMargin: 0,
+            presentedViewController: presented,
+            presentingViewController: source
+        )
     }
 }

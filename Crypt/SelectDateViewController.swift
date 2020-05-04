@@ -10,7 +10,7 @@ import UIKit
 
 class SelectDateViewController: UIViewController, ViewDismissalNotifier {
     var viewDismissed: (() -> Void)?
-    var dateChanged: ((Date) -> ())?
+    var dateChanged: ((Date) -> Void)?
 
     @IBOutlet weak var doneButton: CurvedButton!
     @IBOutlet weak var datePicker: UIDatePicker!
@@ -21,6 +21,8 @@ class SelectDateViewController: UIViewController, ViewDismissalNotifier {
     init(selectedDate: Date) {
         self.selectedDate = selectedDate
         super.init(nibName: nil, bundle: .main)
+        transitioningDelegate = self
+        modalPresentationStyle = .custom
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -51,5 +53,22 @@ class SelectDateViewController: UIViewController, ViewDismissalNotifier {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         viewDismissed?()
+    }
+}
+
+extension SelectDateViewController: UIViewControllerTransitioningDelegate {
+    func presentationController(
+        forPresented presented: UIViewController,
+        presenting: UIViewController?,
+        source: UIViewController
+    ) -> UIPresentationController? {
+        return ModalPresentationController(
+            portraitHeight: 250,
+            landscapeHeight: 270,
+            marginFromBottom: 16,
+            sideMargin: 0,
+            presentedViewController: presented,
+            presentingViewController: source
+        )
     }
 }
