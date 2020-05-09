@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CompactModal
 
 class SelectDateViewController: UIViewController, ViewDismissalNotifier {
     var viewDismissed: (() -> Void)?
@@ -62,11 +63,11 @@ extension SelectDateViewController: UIViewControllerTransitioningDelegate {
         presenting: UIViewController?,
         source: UIViewController
     ) -> UIPresentationController? {
-        return ModalPresentationController(
+        return CompactModalPresentationController(
             portraitHeight: 250,
-            landscapeHeight: 270,
-            marginFromBottom: 16,
-            sideMargin: 0,
+            landscapeHeight: 250,
+            marginFromBottom: 32,
+            sideMargin: 20,
             presentedViewController: presented,
             presentingViewController: source
         )

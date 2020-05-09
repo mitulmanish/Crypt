@@ -35,16 +35,21 @@
 		DD40917123B2832D0027D39B /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD745CC3227A34C6006ADA45 /* Service.swift */; };
 		DD40917223B284080027D39B /* URLSession+SanitizedResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C259CC217C569D0084617B /* URLSession+SanitizedResponse.swift */; };
 		DD40917D23B4C8EF0027D39B /* HistoricalPriceComparisonProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD40917C23B4C8EF0027D39B /* HistoricalPriceComparisonProvider.swift */; };
-		DD4091E123C096C00027D39B /* ModalViewControllerPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD4091E023C096C00027D39B /* ModalViewControllerPresentationController.swift */; };
 		DD745CC6227D31E9006ADA45 /* SelectCurrrecyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD745CC5227D31E9006ADA45 /* SelectCurrrecyTableViewController.swift */; };
 		DD745CC8227D396E006ADA45 /* UIView+Anchor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD745CC7227D396E006ADA45 /* UIView+Anchor.swift */; };
 		DD745CCA227D4876006ADA45 /* Array+SafeAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD745CC9227D4876006ADA45 /* Array+SafeAccess.swift */; };
 		DD745CCC227D4888006ADA45 /* Result+Value.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD745CCB227D4888006ADA45 /* Result+Value.swift */; };
+		DD8C8DE6246352E000EBF5D1 /* CompactModal in Frameworks */ = {isa = PBXBuildFile; productRef = DD8C8DE5246352E000EBF5D1 /* CompactModal */; };
 		DD97D2BC222E6E75004A72B5 /* ProfitCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD97D2BB222E6E75004A72B5 /* ProfitCalculator.swift */; };
 		DD97D2BF222E8830004A72B5 /* ProfitCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD97D2BE222E8830004A72B5 /* ProfitCalculatorTests.swift */; };
 		DD97D2C4222E9CCE004A72B5 /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD97D2C2222E9CCE004A72B5 /* ResultsViewController.swift */; };
 		DD97D2C5222E9CCE004A72B5 /* ResultsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD97D2C3222E9CCE004A72B5 /* ResultsViewController.xib */; };
 		DD97D2C7222EA657004A72B5 /* ViewDismissalNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD97D2C6222EA657004A72B5 /* ViewDismissalNotifier.swift */; };
+		DDB3DAE22462FB520057E71C /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = DDB3DAE12462FB520057E71C /* RxSwift */; };
+		DDB3DAE42462FB520057E71C /* RxTest in Frameworks */ = {isa = PBXBuildFile; productRef = DDB3DAE32462FB520057E71C /* RxTest */; };
+		DDB3DAE62462FB520057E71C /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = DDB3DAE52462FB520057E71C /* RxRelay */; };
+		DDB3DAE82462FB520057E71C /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = DDB3DAE72462FB520057E71C /* RxCocoa */; };
+		DDB3DAEA2462FB520057E71C /* RxBlocking in Frameworks */ = {isa = PBXBuildFile; productRef = DDB3DAE92462FB520057E71C /* RxBlocking */; };
 		DDB5159521C4FC3C009B9483 /* UIViiew+roundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB5159421C4FC3C009B9483 /* UIViiew+roundedCorners.swift */; };
 		DDB5159721C6008C009B9483 /* AllCoinsNetworkOperationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB5159621C6008C009B9483 /* AllCoinsNetworkOperationManager.swift */; };
 		DDC7A5F92257B5D10069FCF3 /* DecodingOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC7A5F82257B5D10069FCF3 /* DecodingOperation.swift */; };
@@ -139,7 +144,6 @@
 		DD40916C23B25F150027D39B /* Networking+Publisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Networking+Publisher.swift"; sourceTree = "<group>"; };
 		DD40916E23B280E20027D39B /* NetworkingError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingError.swift; sourceTree = "<group>"; };
 		DD40917C23B4C8EF0027D39B /* HistoricalPriceComparisonProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalPriceComparisonProvider.swift; sourceTree = "<group>"; };
-		DD4091E023C096C00027D39B /* ModalViewControllerPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalViewControllerPresentationController.swift; sourceTree = "<group>"; };
 		DD745CC1227A3248006ADA45 /* URLSession+Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+Result.swift"; sourceTree = "<group>"; };
 		DD745CC3227A34C6006ADA45 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		DD745CC5227D31E9006ADA45 /* SelectCurrrecyTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCurrrecyTableViewController.swift; sourceTree = "<group>"; };
@@ -164,8 +168,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD8C8DE6246352E000EBF5D1 /* CompactModal in Frameworks */,
+				DDB3DAE82462FB520057E71C /* RxCocoa in Frameworks */,
+				DDB3DAE62462FB520057E71C /* RxRelay in Frameworks */,
+				DDB3DAE42462FB520057E71C /* RxTest in Frameworks */,
+				DDB3DAE22462FB520057E71C /* RxSwift in Frameworks */,
 				DD3B2FA9245B124700676BEE /* Drawer in Frameworks */,
 				DD40916423B25EAA0027D39B /* NetworkingKit.framework in Frameworks */,
+				DDB3DAEA2462FB520057E71C /* RxBlocking in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -229,7 +239,6 @@
 			isa = PBXGroup;
 			children = (
 				DD3CF1952451CBB000E3E7DB /* Crypt.entitlements */,
-				DDB5159821C651A9009B9483 /* Presentation Animation */,
 				01C259CE217C60800084617B /* Networking */,
 				01C259CB217C56620084617B /* Extensions */,
 				01C259C8217C4F370084617B /* Data Structure */,
@@ -346,14 +355,6 @@
 			path = "Business Logic";
 			sourceTree = "<group>";
 		};
-		DDB5159821C651A9009B9483 /* Presentation Animation */ = {
-			isa = PBXGroup;
-			children = (
-				DD4091E023C096C00027D39B /* ModalViewControllerPresentationController.swift */,
-			);
-			path = "Presentation Animation";
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -386,6 +387,12 @@
 			name = Crypt;
 			packageProductDependencies = (
 				DD3B2FA8245B124700676BEE /* Drawer */,
+				DDB3DAE12462FB520057E71C /* RxSwift */,
+				DDB3DAE32462FB520057E71C /* RxTest */,
+				DDB3DAE52462FB520057E71C /* RxRelay */,
+				DDB3DAE72462FB520057E71C /* RxCocoa */,
+				DDB3DAE92462FB520057E71C /* RxBlocking */,
+				DD8C8DE5246352E000EBF5D1 /* CompactModal */,
 			);
 			productName = Crypt;
 			productReference = 013A4701208F616700DBAEAE /* Crypt.app */;
@@ -509,6 +516,8 @@
 			mainGroup = 013A46F8208F616700DBAEAE;
 			packageReferences = (
 				DD3B2FA7245B124600676BEE /* XCRemoteSwiftPackageReference "Drawer" */,
+				DDB3DAE02462FB520057E71C /* XCRemoteSwiftPackageReference "RxSwift" */,
+				DD8C8DE4246352E000EBF5D1 /* XCRemoteSwiftPackageReference "CompactModal" */,
 			);
 			productRefGroup = 013A4702208F616700DBAEAE /* Products */;
 			projectDirPath = "";
@@ -599,7 +608,6 @@
 				DD745CCC227D4888006ADA45 /* Result+Value.swift in Sources */,
 				01C259D5217C64CC0084617B /* BasicOpeartion.swift in Sources */,
 				DD2D8AAB21F5F4530065FB50 /* SelectDateViewController.swift in Sources */,
-				DD4091E123C096C00027D39B /* ModalViewControllerPresentationController.swift in Sources */,
 				01C259CA217C4F5E0084617B /* DataModel.swift in Sources */,
 				DD745CC8227D396E006ADA45 /* UIView+Anchor.swift in Sources */,
 				01C259D2217C61050084617B /* RequestFactory.swift in Sources */,
@@ -1124,6 +1132,22 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		DD8C8DE4246352E000EBF5D1 /* XCRemoteSwiftPackageReference "CompactModal" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mitulmanish/CompactModal";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+		DDB3DAE02462FB520057E71C /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.1.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1131,6 +1155,36 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DD3B2FA7245B124600676BEE /* XCRemoteSwiftPackageReference "Drawer" */;
 			productName = Drawer;
+		};
+		DD8C8DE5246352E000EBF5D1 /* CompactModal */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DD8C8DE4246352E000EBF5D1 /* XCRemoteSwiftPackageReference "CompactModal" */;
+			productName = CompactModal;
+		};
+		DDB3DAE12462FB520057E71C /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DDB3DAE02462FB520057E71C /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+		DDB3DAE32462FB520057E71C /* RxTest */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DDB3DAE02462FB520057E71C /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxTest;
+		};
+		DDB3DAE52462FB520057E71C /* RxRelay */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DDB3DAE02462FB520057E71C /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxRelay;
+		};
+		DDB3DAE72462FB520057E71C /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DDB3DAE02462FB520057E71C /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		DDB3DAE92462FB520057E71C /* RxBlocking */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DDB3DAE02462FB520057E71C /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxBlocking;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

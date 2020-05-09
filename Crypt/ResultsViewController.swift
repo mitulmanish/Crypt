@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CompactModal
 
 class ResultsViewController: UIViewController, ViewDismissalNotifier {
     
@@ -81,7 +82,7 @@ extension ResultsViewController: UIViewControllerTransitioningDelegate {
         presenting: UIViewController?,
         source: UIViewController
     ) -> UIPresentationController? {
-        return ModalPresentationController(
+        return CompactModalPresentationController(
             portraitHeight: 150,
             landscapeHeight: 170,
             marginFromBottom: 0,

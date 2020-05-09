@@ -17,7 +17,6 @@ struct HistoricalPriceComparisonProvider {
         if cancellableTask != nil {
             cancellableTask?.cancel()
         }
-        
         networkActivityPublisher.send(true)
         
         let oldPriceEndpoint = EndPointConstructor.historicalData(coin: coin, date: dates.old, currency: currency)
