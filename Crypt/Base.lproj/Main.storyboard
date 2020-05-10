@@ -19,7 +19,7 @@
                                 <rect key="frame" x="20" y="76" width="335" height="702"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="vgm-sX-DZ1">
-                                        <rect key="frame" x="0.0" y="0.0" width="335" height="396.66666666666669"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="335" height="641.33333333333337"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="If I Invested" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c5O-G2-W0B">
                                                 <rect key="frame" x="0.0" y="0.0" width="335" height="57.333333333333336"/>
@@ -112,20 +112,40 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="UQr-eC-X1v">
-                                                <rect key="frame" x="0.0" y="339.33333333333331" width="335" height="57.333333333333314"/>
+                                                <rect key="frame" x="0.0" y="339.33333333333331" width="335" height="128"/>
                                                 <subviews>
                                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="24p-Y0-cJa">
-                                                        <rect key="frame" x="0.0" y="0.0" width="37" height="57.333333333333336"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="37" height="128"/>
                                                         <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </activityIndicatorView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bhl-BY-c4a">
-                                                        <rect key="frame" x="45" y="0.0" width="290" height="57.333333333333336"/>
+                                                        <rect key="frame" x="45" y="0.0" width="290" height="128"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="48"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
                                             </stackView>
+                                            <view contentMode="scaleToFill" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="jIb-hE-FwC">
+                                                <rect key="frame" x="0.0" y="475.33333333333337" width="335" height="128"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" priority="750" constant="128" id="hah-sB-GwF"/>
+                                                </constraints>
+                                            </view>
+                                            <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gtt-ZC-p3D">
+                                                <rect key="frame" x="0.0" y="611.33333333333337" width="335" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="1we-7E-rzc"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" image="key">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="apiKeyButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="IXp-e4-oSi"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                     </stackView>
                                 </subviews>
@@ -149,6 +169,7 @@
                     </view>
                     <connections>
                         <outlet property="activityIndicator" destination="24p-Y0-cJa" id="bA4-55-W7r"/>
+                        <outlet property="apiKeyButton" destination="Gtt-ZC-p3D" id="LRY-O4-4z4"/>
                         <outlet property="coinButton" destination="0qZ-Gb-tvB" id="EGm-rm-P3K"/>
                         <outlet property="contentScrollView" destination="Msm-LN-Y2N" id="F9a-fS-KE8"/>
                         <outlet property="currencySelectionButton" destination="2eV-6E-0YC" id="Xp7-ky-Kae"/>
@@ -162,4 +183,7 @@
             <point key="canvasLocation" x="989.60000000000002" y="22.906403940886701"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="key" width="32" height="32"/>
+    </resources>
 </document>

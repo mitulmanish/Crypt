@@ -40,6 +40,9 @@
 		DD745CCA227D4876006ADA45 /* Array+SafeAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD745CC9227D4876006ADA45 /* Array+SafeAccess.swift */; };
 		DD745CCC227D4888006ADA45 /* Result+Value.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD745CCB227D4888006ADA45 /* Result+Value.swift */; };
 		DD8C8DE6246352E000EBF5D1 /* CompactModal in Frameworks */ = {isa = PBXBuildFile; productRef = DD8C8DE5246352E000EBF5D1 /* CompactModal */; };
+		DD8C8DEC24674CC500EBF5D1 /* ScrollingContainer in Frameworks */ = {isa = PBXBuildFile; productRef = DD8C8DEB24674CC500EBF5D1 /* ScrollingContainer */; };
+		DD8C8DEE24674D1600EBF5D1 /* APIKeyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8C8DED24674D1600EBF5D1 /* APIKeyViewController.swift */; };
+		DD8C8DF024681B8700EBF5D1 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8C8DEF24681B8700EBF5D1 /* InfoViewController.swift */; };
 		DD97D2BC222E6E75004A72B5 /* ProfitCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD97D2BB222E6E75004A72B5 /* ProfitCalculator.swift */; };
 		DD97D2BF222E8830004A72B5 /* ProfitCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD97D2BE222E8830004A72B5 /* ProfitCalculatorTests.swift */; };
 		DD97D2C4222E9CCE004A72B5 /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD97D2C2222E9CCE004A72B5 /* ResultsViewController.swift */; };
@@ -150,6 +153,8 @@
 		DD745CC7227D396E006ADA45 /* UIView+Anchor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Anchor.swift"; sourceTree = "<group>"; };
 		DD745CC9227D4876006ADA45 /* Array+SafeAccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+SafeAccess.swift"; sourceTree = "<group>"; };
 		DD745CCB227D4888006ADA45 /* Result+Value.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Result+Value.swift"; sourceTree = "<group>"; };
+		DD8C8DED24674D1600EBF5D1 /* APIKeyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeyViewController.swift; sourceTree = "<group>"; };
+		DD8C8DEF24681B8700EBF5D1 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		DD97D2BB222E6E75004A72B5 /* ProfitCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfitCalculator.swift; sourceTree = "<group>"; };
 		DD97D2BE222E8830004A72B5 /* ProfitCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfitCalculatorTests.swift; sourceTree = "<group>"; };
 		DD97D2C2222E9CCE004A72B5 /* ResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
@@ -171,6 +176,7 @@
 				DD8C8DE6246352E000EBF5D1 /* CompactModal in Frameworks */,
 				DDB3DAE82462FB520057E71C /* RxCocoa in Frameworks */,
 				DDB3DAE62462FB520057E71C /* RxRelay in Frameworks */,
+				DD8C8DEC24674CC500EBF5D1 /* ScrollingContainer in Frameworks */,
 				DDB3DAE42462FB520057E71C /* RxTest in Frameworks */,
 				DDB3DAE22462FB520057E71C /* RxSwift in Frameworks */,
 				DD3B2FA9245B124700676BEE /* Drawer in Frameworks */,
@@ -259,6 +265,8 @@
 				DD97D2C6222EA657004A72B5 /* ViewDismissalNotifier.swift */,
 				DDFB14C6223F9050004C5B29 /* PriceRequestParams.swift */,
 				DD745CC5227D31E9006ADA45 /* SelectCurrrecyTableViewController.swift */,
+				DD8C8DED24674D1600EBF5D1 /* APIKeyViewController.swift */,
+				DD8C8DEF24681B8700EBF5D1 /* InfoViewController.swift */,
 			);
 			path = Crypt;
 			sourceTree = "<group>";
@@ -393,6 +401,7 @@
 				DDB3DAE72462FB520057E71C /* RxCocoa */,
 				DDB3DAE92462FB520057E71C /* RxBlocking */,
 				DD8C8DE5246352E000EBF5D1 /* CompactModal */,
+				DD8C8DEB24674CC500EBF5D1 /* ScrollingContainer */,
 			);
 			productName = Crypt;
 			productReference = 013A4701208F616700DBAEAE /* Crypt.app */;
@@ -518,6 +527,7 @@
 				DD3B2FA7245B124600676BEE /* XCRemoteSwiftPackageReference "Drawer" */,
 				DDB3DAE02462FB520057E71C /* XCRemoteSwiftPackageReference "RxSwift" */,
 				DD8C8DE4246352E000EBF5D1 /* XCRemoteSwiftPackageReference "CompactModal" */,
+				DD8C8DEA24674CC500EBF5D1 /* XCRemoteSwiftPackageReference "ScrollingContainer" */,
 			);
 			productRefGroup = 013A4702208F616700DBAEAE /* Products */;
 			projectDirPath = "";
@@ -608,6 +618,7 @@
 				DD745CCC227D4888006ADA45 /* Result+Value.swift in Sources */,
 				01C259D5217C64CC0084617B /* BasicOpeartion.swift in Sources */,
 				DD2D8AAB21F5F4530065FB50 /* SelectDateViewController.swift in Sources */,
+				DD8C8DEE24674D1600EBF5D1 /* APIKeyViewController.swift in Sources */,
 				01C259CA217C4F5E0084617B /* DataModel.swift in Sources */,
 				DD745CC8227D396E006ADA45 /* UIView+Anchor.swift in Sources */,
 				01C259D2217C61050084617B /* RequestFactory.swift in Sources */,
@@ -622,6 +633,7 @@
 				DDE1488F21BB9C3700CF8182 /* SelectCoinsTableViewController.swift in Sources */,
 				DD2D8AAE21F5FB400065FB50 /* CurvedButton.swift in Sources */,
 				013A4705208F616700DBAEAE /* AppDelegate.swift in Sources */,
+				DD8C8DF024681B8700EBF5D1 /* InfoViewController.swift in Sources */,
 				DD745CC6227D31E9006ADA45 /* SelectCurrrecyTableViewController.swift in Sources */,
 				DD97D2C4222E9CCE004A72B5 /* ResultsViewController.swift in Sources */,
 				DDB5159721C6008C009B9483 /* AllCoinsNetworkOperationManager.swift in Sources */,
@@ -1140,6 +1152,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		DD8C8DEA24674CC500EBF5D1 /* XCRemoteSwiftPackageReference "ScrollingContainer" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mitulmanish/ScrollingContainer.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.4;
+			};
+		};
 		DDB3DAE02462FB520057E71C /* XCRemoteSwiftPackageReference "RxSwift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
@@ -1160,6 +1180,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DD8C8DE4246352E000EBF5D1 /* XCRemoteSwiftPackageReference "CompactModal" */;
 			productName = CompactModal;
+		};
+		DD8C8DEB24674CC500EBF5D1 /* ScrollingContainer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DD8C8DEA24674CC500EBF5D1 /* XCRemoteSwiftPackageReference "ScrollingContainer" */;
+			productName = ScrollingContainer;
 		};
 		DDB3DAE12462FB520057E71C /* RxSwift */ = {
 			isa = XCSwiftPackageProductDependency;

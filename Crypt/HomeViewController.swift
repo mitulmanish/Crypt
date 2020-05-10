@@ -2,6 +2,8 @@ import UIKit
 import SwiftUI
 import Combine
 import Drawer
+import RxSwift
+import RxRelay
 
 class HomeViewController: UIViewController {
     
@@ -15,6 +17,11 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var resultsLabel: UILabel!
     
     @IBOutlet weak var currencySelectionButton: UIButton!
+    @IBOutlet weak var apiKeyButton: UIButton!
+    
+    private let apiKey: BehaviorRelay<String?> = BehaviorRelay(value: nil)
+    private let apiSecret: BehaviorRelay<String?> = BehaviorRelay(value: nil)
+    private let bag = DisposeBag()
     
     private var currentCoin: Coin?
     private var concernedDate: Date?
@@ -50,12 +57,22 @@ class HomeViewController: UIViewController {
         currentCurrency = .usd
         historicalPriceComparisonProvider = HistoricalPriceComparisonProvider()
         super.init(nibName: .none, bundle: .none)
+        commonInit()
     }
     
     required init?(coder: NSCoder) {
         currentCurrency = .usd
         historicalPriceComparisonProvider = HistoricalPriceComparisonProvider()
         super.init(coder: coder)
+        commonInit()
+    }
+    
+    private func commonInit() {
+        let userDefault = UserDefaults()
+        let apiKey = userDefault.string(forKey: UserDefaults.apiKeyPath)
+        self.apiKey.accept(apiKey)
+        let apiSecret = userDefault.string(forKey: UserDefaults.apiSecretPath)
+        self.apiSecret.accept(apiSecret)
     }
     
     override func viewDidLoad() {
@@ -85,6 +102,18 @@ class HomeViewController: UIViewController {
                 activityIndicator?.stopAnimating()
             }
         }
+        
+        Observable.combineLatest(
+            apiKey.asObservable(),
+            apiSecret.asObservable()
+        )
+        .map { $0 != nil && $1 != nil }
+        .subscribe(onNext: { [unowned self] enabled in
+            [self.coinButton, self.dateButton, self.currencySelectionButton]
+                .forEach { $0?.isEnabled = enabled
+            }
+        })
+        .disposed(by: bag)
     }
     
     @objc func screenTapped() {
@@ -212,6 +241,11 @@ class HomeViewController: UIViewController {
         selectDateViewController.viewDismissed = { [weak self] in
             self?.getHistoricalData()
         }
+    }
+    
+    @IBAction func apiKeyButtonPressed(_ sender: UIButton) {
+        let apiKeyViewController = APIKeyViewController(apiKey: apiKey, apiSecret: apiSecret)
+        dismissThenPresent(viewController: apiKeyViewController)
     }
     
     func formatDate(date: Date) {
