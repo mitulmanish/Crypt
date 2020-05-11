@@ -12,7 +12,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var coinButton: UIButton!
     @IBOutlet weak var dateButton: UIButton!
     @IBOutlet weak var contentScrollView: UIScrollView!
-    @IBOutlet weak var quantityTextField: UITextField!
+    @IBOutlet weak var quantityTextField: BlinkingTexField!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var resultsLabel: UILabel!
     
@@ -79,11 +79,6 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         let tapGesturerecognizer = UITapGestureRecognizer(target: self, action: #selector(screenTapped))
         view.addGestureRecognizer(tapGesturerecognizer)
-        quantityTextField.attributedPlaceholder = NSAttributedString(
-            string: "",
-            attributes: [NSAttributedString.Key.foregroundColor: UIColor.white]
-        )
-        quantityTextField.keyboardType = .decimalPad
         activityIndicator.isHidden = true
         activityIndicator.hidesWhenStopped = true
         quantityTextField.delegate = self
@@ -109,11 +104,25 @@ class HomeViewController: UIViewController {
         )
         .map { $0 != nil && $1 != nil }
         .subscribe(onNext: { [unowned self] enabled in
-            [self.coinButton, self.dateButton, self.currencySelectionButton]
-                .forEach { $0?.isEnabled = enabled
+            [
+                self.coinButton, self.dateButton, self.currencySelectionButton, self.quantityTextField]
+                .forEach { $0?.isEnabled = enabled }
+            if enabled == false {
+                self.apiKeyButton.startBlinking()
+            } else {
+                self.apiKeyButton.stopBlinking()
             }
         })
         .disposed(by: bag)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if apiKey.value == nil || apiSecret.value == nil {
+            let infoVC = InfoViewController(primaryText: "Please grab your API Keys before proceeding", ctaText: "OK")
+            dismissThenPresent(viewController: infoVC)
+        }
     }
     
     @objc func screenTapped() {

@@ -31,6 +31,32 @@ final class APIKeyViewController: ScrollingContainer {
         super.viewDidLoad()
         view.backgroundColor = .darkGray
         
+        confureSubviews()
+        
+        Observable.combineLatest(
+            apiKeyTextField.rx.text,
+            apiSecretTextField.rx.text
+        )
+        .filter { apiKey, apiSecret in
+            apiKey?.isEmpty == false
+            && apiSecret?.isEmpty == false
+        }
+        .map { (apiKey, apiSecret) -> Bool in
+            let apiKeyValid = apiKey?.count ?? 0 > 12
+            let apiSecretValid = apiSecret?.count ?? 0 > 12
+            return apiKeyValid && apiSecretValid
+        }
+        .subscribe(onNext: { [weak self] val in
+            DispatchQueue.main.async {
+                let color: UIColor = val ? .white : .gray
+                self?.saveButton.setTitleColor(color, for: .normal)
+                self?.saveButton.isEnabled = val
+            }
+        })
+        .disposed(by: bag)
+    }
+    
+    private func confureSubviews() {
         let savedAPIKey = apiKey.value
         let savedAPISecret = apiSecret.value
         
@@ -79,33 +105,11 @@ final class APIKeyViewController: ScrollingContainer {
         vStack.translatesAutoresizingMaskIntoConstraints = false
         
         [vStack.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 16),
-        vStack.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -16),
-        vStack.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
-        vStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)]
+         vStack.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -16),
+         vStack.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
+         vStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)]
             .forEach { $0.isActive = true
         }
-        
-        Observable.combineLatest(
-            apiKeyTextField.rx.text,
-            apiSecretTextField.rx.text
-        )
-        .filter { apiKey, apiSecret in
-            apiKey?.isEmpty == false
-            && apiSecret?.isEmpty == false
-        }
-        .map { (apiKey, apiSecret) -> Bool in
-            let apiKeyValid = apiKey?.count ?? 0 > 12
-            let apiSecretValid = apiSecret?.count ?? 0 > 12
-            return apiKeyValid && apiSecretValid
-        }
-        .subscribe(onNext: { [weak self] val in
-            DispatchQueue.main.async {
-                let color: UIColor = val ? .white : .gray
-                self?.saveButton.setTitleColor(color, for: .normal)
-                self?.saveButton.isEnabled = val
-            }
-        })
-        .disposed(by: bag)
     }
     
     @objc private func labelTapped() {

@@ -23,11 +23,9 @@
 		DD2D8AAB21F5F4530065FB50 /* SelectDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2D8AA921F5F4530065FB50 /* SelectDateViewController.swift */; };
 		DD2D8AAC21F5F4530065FB50 /* SelectDateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD2D8AAA21F5F4530065FB50 /* SelectDateViewController.xib */; };
 		DD2D8AAE21F5FB400065FB50 /* CurvedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2D8AAD21F5FB400065FB50 /* CurvedButton.swift */; };
-		DD3B2FA9245B124700676BEE /* Drawer in Frameworks */ = {isa = PBXBuildFile; productRef = DD3B2FA8245B124700676BEE /* Drawer */; };
 		DD40915823B25EAA0027D39B /* NetworkingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD40914F23B25EAA0027D39B /* NetworkingKit.framework */; };
 		DD40915F23B25EAA0027D39B /* NetworkingKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD40915E23B25EAA0027D39B /* NetworkingKitTests.swift */; };
 		DD40916123B25EAA0027D39B /* NetworkingKit.h in Headers */ = {isa = PBXBuildFile; fileRef = DD40915123B25EAA0027D39B /* NetworkingKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		DD40916423B25EAA0027D39B /* NetworkingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD40914F23B25EAA0027D39B /* NetworkingKit.framework */; };
 		DD40916523B25EAA0027D39B /* NetworkingKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DD40914F23B25EAA0027D39B /* NetworkingKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DD40916D23B25F150027D39B /* Networking+Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD40916C23B25F150027D39B /* Networking+Publisher.swift */; };
 		DD40916F23B280E20027D39B /* NetworkingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD40916E23B280E20027D39B /* NetworkingError.swift */; };
@@ -39,8 +37,6 @@
 		DD745CC8227D396E006ADA45 /* UIView+Anchor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD745CC7227D396E006ADA45 /* UIView+Anchor.swift */; };
 		DD745CCA227D4876006ADA45 /* Array+SafeAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD745CC9227D4876006ADA45 /* Array+SafeAccess.swift */; };
 		DD745CCC227D4888006ADA45 /* Result+Value.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD745CCB227D4888006ADA45 /* Result+Value.swift */; };
-		DD8C8DE6246352E000EBF5D1 /* CompactModal in Frameworks */ = {isa = PBXBuildFile; productRef = DD8C8DE5246352E000EBF5D1 /* CompactModal */; };
-		DD8C8DEC24674CC500EBF5D1 /* ScrollingContainer in Frameworks */ = {isa = PBXBuildFile; productRef = DD8C8DEB24674CC500EBF5D1 /* ScrollingContainer */; };
 		DD8C8DEE24674D1600EBF5D1 /* APIKeyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8C8DED24674D1600EBF5D1 /* APIKeyViewController.swift */; };
 		DD8C8DF024681B8700EBF5D1 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8C8DEF24681B8700EBF5D1 /* InfoViewController.swift */; };
 		DD97D2BC222E6E75004A72B5 /* ProfitCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD97D2BB222E6E75004A72B5 /* ProfitCalculator.swift */; };
@@ -48,11 +44,17 @@
 		DD97D2C4222E9CCE004A72B5 /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD97D2C2222E9CCE004A72B5 /* ResultsViewController.swift */; };
 		DD97D2C5222E9CCE004A72B5 /* ResultsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD97D2C3222E9CCE004A72B5 /* ResultsViewController.xib */; };
 		DD97D2C7222EA657004A72B5 /* ViewDismissalNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD97D2C6222EA657004A72B5 /* ViewDismissalNotifier.swift */; };
-		DDB3DAE22462FB520057E71C /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = DDB3DAE12462FB520057E71C /* RxSwift */; };
-		DDB3DAE42462FB520057E71C /* RxTest in Frameworks */ = {isa = PBXBuildFile; productRef = DDB3DAE32462FB520057E71C /* RxTest */; };
-		DDB3DAE62462FB520057E71C /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = DDB3DAE52462FB520057E71C /* RxRelay */; };
-		DDB3DAE82462FB520057E71C /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = DDB3DAE72462FB520057E71C /* RxCocoa */; };
-		DDB3DAEA2462FB520057E71C /* RxBlocking in Frameworks */ = {isa = PBXBuildFile; productRef = DDB3DAE92462FB520057E71C /* RxBlocking */; };
+		DD9C0A3D2468A4930061DF44 /* NetworkingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD40914F23B25EAA0027D39B /* NetworkingKit.framework */; };
+		DD9C0A402468A54B0061DF44 /* ScrollingContainer in Frameworks */ = {isa = PBXBuildFile; productRef = DD9C0A3F2468A54B0061DF44 /* ScrollingContainer */; };
+		DD9C0A432468A5680061DF44 /* Drawer in Frameworks */ = {isa = PBXBuildFile; productRef = DD9C0A422468A5680061DF44 /* Drawer */; };
+		DD9C0A462468A58B0061DF44 /* NetworkingKit in Frameworks */ = {isa = PBXBuildFile; productRef = DD9C0A452468A58B0061DF44 /* NetworkingKit */; };
+		DD9C0A492468A5FA0061DF44 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = DD9C0A482468A5FA0061DF44 /* RxSwift */; };
+		DD9C0A4B2468A5FA0061DF44 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = DD9C0A4A2468A5FA0061DF44 /* RxRelay */; };
+		DD9C0A4D2468A5FA0061DF44 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = DD9C0A4C2468A5FA0061DF44 /* RxCocoa */; };
+		DD9C0A4F2468A5FA0061DF44 /* RxBlocking in Frameworks */ = {isa = PBXBuildFile; productRef = DD9C0A4E2468A5FA0061DF44 /* RxBlocking */; };
+		DD9C0A522468A62E0061DF44 /* CompactModal in Frameworks */ = {isa = PBXBuildFile; productRef = DD9C0A512468A62E0061DF44 /* CompactModal */; };
+		DD9C0A5424694DC60061DF44 /* UIView+Blink.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9C0A5324694DC60061DF44 /* UIView+Blink.swift */; };
+		DD9C0A5624694DED0061DF44 /* BlinkingTexField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9C0A5524694DEC0061DF44 /* BlinkingTexField.swift */; };
 		DDB5159521C4FC3C009B9483 /* UIViiew+roundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB5159421C4FC3C009B9483 /* UIViiew+roundedCorners.swift */; };
 		DDB5159721C6008C009B9483 /* AllCoinsNetworkOperationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB5159621C6008C009B9483 /* AllCoinsNetworkOperationManager.swift */; };
 		DDC7A5F92257B5D10069FCF3 /* DecodingOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC7A5F82257B5D10069FCF3 /* DecodingOperation.swift */; };
@@ -160,6 +162,8 @@
 		DD97D2C2222E9CCE004A72B5 /* ResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
 		DD97D2C3222E9CCE004A72B5 /* ResultsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ResultsViewController.xib; sourceTree = "<group>"; };
 		DD97D2C6222EA657004A72B5 /* ViewDismissalNotifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDismissalNotifier.swift; sourceTree = "<group>"; };
+		DD9C0A5324694DC60061DF44 /* UIView+Blink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Blink.swift"; sourceTree = "<group>"; };
+		DD9C0A5524694DEC0061DF44 /* BlinkingTexField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlinkingTexField.swift; sourceTree = "<group>"; };
 		DDB5159421C4FC3C009B9483 /* UIViiew+roundedCorners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViiew+roundedCorners.swift"; sourceTree = "<group>"; };
 		DDB5159621C6008C009B9483 /* AllCoinsNetworkOperationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllCoinsNetworkOperationManager.swift; sourceTree = "<group>"; };
 		DDC7A5F82257B5D10069FCF3 /* DecodingOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodingOperation.swift; sourceTree = "<group>"; };
@@ -173,15 +177,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DD8C8DE6246352E000EBF5D1 /* CompactModal in Frameworks */,
-				DDB3DAE82462FB520057E71C /* RxCocoa in Frameworks */,
-				DDB3DAE62462FB520057E71C /* RxRelay in Frameworks */,
-				DD8C8DEC24674CC500EBF5D1 /* ScrollingContainer in Frameworks */,
-				DDB3DAE42462FB520057E71C /* RxTest in Frameworks */,
-				DDB3DAE22462FB520057E71C /* RxSwift in Frameworks */,
-				DD3B2FA9245B124700676BEE /* Drawer in Frameworks */,
-				DD40916423B25EAA0027D39B /* NetworkingKit.framework in Frameworks */,
-				DDB3DAEA2462FB520057E71C /* RxBlocking in Frameworks */,
+				DD9C0A4B2468A5FA0061DF44 /* RxRelay in Frameworks */,
+				DD9C0A432468A5680061DF44 /* Drawer in Frameworks */,
+				DD9C0A462468A58B0061DF44 /* NetworkingKit in Frameworks */,
+				DD9C0A4D2468A5FA0061DF44 /* RxCocoa in Frameworks */,
+				DD9C0A492468A5FA0061DF44 /* RxSwift in Frameworks */,
+				DD9C0A4F2468A5FA0061DF44 /* RxBlocking in Frameworks */,
+				DD9C0A402468A54B0061DF44 /* ScrollingContainer in Frameworks */,
+				DD9C0A3D2468A4930061DF44 /* NetworkingKit.framework in Frameworks */,
+				DD9C0A522468A62E0061DF44 /* CompactModal in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -226,6 +230,7 @@
 				DD40915023B25EAA0027D39B /* NetworkingKit */,
 				DD40915D23B25EAA0027D39B /* NetworkingKitTests */,
 				013A4702208F616700DBAEAE /* Products */,
+				DD9C0A2C2468A4930061DF44 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -267,6 +272,7 @@
 				DD745CC5227D31E9006ADA45 /* SelectCurrrecyTableViewController.swift */,
 				DD8C8DED24674D1600EBF5D1 /* APIKeyViewController.swift */,
 				DD8C8DEF24681B8700EBF5D1 /* InfoViewController.swift */,
+				DD9C0A5524694DEC0061DF44 /* BlinkingTexField.swift */,
 			);
 			path = Crypt;
 			sourceTree = "<group>";
@@ -305,6 +311,7 @@
 				DD745CC7227D396E006ADA45 /* UIView+Anchor.swift */,
 				DD745CC9227D4876006ADA45 /* Array+SafeAccess.swift */,
 				DD745CCB227D4888006ADA45 /* Result+Value.swift */,
+				DD9C0A5324694DC60061DF44 /* UIView+Blink.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -363,6 +370,13 @@
 			path = "Business Logic";
 			sourceTree = "<group>";
 		};
+		DD9C0A2C2468A4930061DF44 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -394,14 +408,14 @@
 			);
 			name = Crypt;
 			packageProductDependencies = (
-				DD3B2FA8245B124700676BEE /* Drawer */,
-				DDB3DAE12462FB520057E71C /* RxSwift */,
-				DDB3DAE32462FB520057E71C /* RxTest */,
-				DDB3DAE52462FB520057E71C /* RxRelay */,
-				DDB3DAE72462FB520057E71C /* RxCocoa */,
-				DDB3DAE92462FB520057E71C /* RxBlocking */,
-				DD8C8DE5246352E000EBF5D1 /* CompactModal */,
-				DD8C8DEB24674CC500EBF5D1 /* ScrollingContainer */,
+				DD9C0A3F2468A54B0061DF44 /* ScrollingContainer */,
+				DD9C0A422468A5680061DF44 /* Drawer */,
+				DD9C0A452468A58B0061DF44 /* NetworkingKit */,
+				DD9C0A482468A5FA0061DF44 /* RxSwift */,
+				DD9C0A4A2468A5FA0061DF44 /* RxRelay */,
+				DD9C0A4C2468A5FA0061DF44 /* RxCocoa */,
+				DD9C0A4E2468A5FA0061DF44 /* RxBlocking */,
+				DD9C0A512468A62E0061DF44 /* CompactModal */,
 			);
 			productName = Crypt;
 			productReference = 013A4701208F616700DBAEAE /* Crypt.app */;
@@ -524,10 +538,11 @@
 			);
 			mainGroup = 013A46F8208F616700DBAEAE;
 			packageReferences = (
-				DD3B2FA7245B124600676BEE /* XCRemoteSwiftPackageReference "Drawer" */,
-				DDB3DAE02462FB520057E71C /* XCRemoteSwiftPackageReference "RxSwift" */,
-				DD8C8DE4246352E000EBF5D1 /* XCRemoteSwiftPackageReference "CompactModal" */,
-				DD8C8DEA24674CC500EBF5D1 /* XCRemoteSwiftPackageReference "ScrollingContainer" */,
+				DD9C0A3E2468A54B0061DF44 /* XCRemoteSwiftPackageReference "ScrollingContainer" */,
+				DD9C0A412468A5680061DF44 /* XCRemoteSwiftPackageReference "Drawer" */,
+				DD9C0A442468A58B0061DF44 /* XCRemoteSwiftPackageReference "NetworkingKit" */,
+				DD9C0A472468A5FA0061DF44 /* XCRemoteSwiftPackageReference "RxSwift" */,
+				DD9C0A502468A62E0061DF44 /* XCRemoteSwiftPackageReference "CompactModal" */,
 			);
 			productRefGroup = 013A4702208F616700DBAEAE /* Products */;
 			projectDirPath = "";
@@ -624,8 +639,10 @@
 				01C259D2217C61050084617B /* RequestFactory.swift in Sources */,
 				DDE1489321BB9E9000CF8182 /* CoinTableViewCell.swift in Sources */,
 				DDB5159521C4FC3C009B9483 /* UIViiew+roundedCorners.swift in Sources */,
+				DD9C0A5424694DC60061DF44 /* UIView+Blink.swift in Sources */,
 				DD40917D23B4C8EF0027D39B /* HistoricalPriceComparisonProvider.swift in Sources */,
 				DD97D2BC222E6E75004A72B5 /* ProfitCalculator.swift in Sources */,
+				DD9C0A5624694DED0061DF44 /* BlinkingTexField.swift in Sources */,
 				01C259D7217C65DC0084617B /* NetworkOpeartion.swift in Sources */,
 				01C259D0217C60A10084617B /* EndpointConstructor.swift in Sources */,
 				DDFB14C7223F9050004C5B29 /* PriceRequestParams.swift in Sources */,
@@ -1136,23 +1153,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		DD3B2FA7245B124600676BEE /* XCRemoteSwiftPackageReference "Drawer" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/mitulmanish/Drawer";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
-		DD8C8DE4246352E000EBF5D1 /* XCRemoteSwiftPackageReference "CompactModal" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/mitulmanish/CompactModal";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
-		DD8C8DEA24674CC500EBF5D1 /* XCRemoteSwiftPackageReference "ScrollingContainer" */ = {
+		DD9C0A3E2468A54B0061DF44 /* XCRemoteSwiftPackageReference "ScrollingContainer" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/mitulmanish/ScrollingContainer.git";
 			requirement = {
@@ -1160,56 +1161,80 @@
 				minimumVersion = 1.0.4;
 			};
 		};
-		DDB3DAE02462FB520057E71C /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+		DD9C0A412468A5680061DF44 /* XCRemoteSwiftPackageReference "Drawer" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
+			repositoryURL = "https://github.com/mitulmanish/Drawer.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.1;
+			};
+		};
+		DD9C0A442468A58B0061DF44 /* XCRemoteSwiftPackageReference "NetworkingKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mitulmanish/NetworkingKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.4.0;
+			};
+		};
+		DD9C0A472468A5FA0061DF44 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 5.1.1;
 			};
 		};
+		DD9C0A502468A62E0061DF44 /* XCRemoteSwiftPackageReference "CompactModal" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mitulmanish/CompactModal";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		DD3B2FA8245B124700676BEE /* Drawer */ = {
+		DD9C0A3F2468A54B0061DF44 /* ScrollingContainer */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = DD3B2FA7245B124600676BEE /* XCRemoteSwiftPackageReference "Drawer" */;
-			productName = Drawer;
-		};
-		DD8C8DE5246352E000EBF5D1 /* CompactModal */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = DD8C8DE4246352E000EBF5D1 /* XCRemoteSwiftPackageReference "CompactModal" */;
-			productName = CompactModal;
-		};
-		DD8C8DEB24674CC500EBF5D1 /* ScrollingContainer */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = DD8C8DEA24674CC500EBF5D1 /* XCRemoteSwiftPackageReference "ScrollingContainer" */;
+			package = DD9C0A3E2468A54B0061DF44 /* XCRemoteSwiftPackageReference "ScrollingContainer" */;
 			productName = ScrollingContainer;
 		};
-		DDB3DAE12462FB520057E71C /* RxSwift */ = {
+		DD9C0A422468A5680061DF44 /* Drawer */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = DDB3DAE02462FB520057E71C /* XCRemoteSwiftPackageReference "RxSwift" */;
+			package = DD9C0A412468A5680061DF44 /* XCRemoteSwiftPackageReference "Drawer" */;
+			productName = Drawer;
+		};
+		DD9C0A452468A58B0061DF44 /* NetworkingKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DD9C0A442468A58B0061DF44 /* XCRemoteSwiftPackageReference "NetworkingKit" */;
+			productName = NetworkingKit;
+		};
+		DD9C0A482468A5FA0061DF44 /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DD9C0A472468A5FA0061DF44 /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxSwift;
 		};
-		DDB3DAE32462FB520057E71C /* RxTest */ = {
+		DD9C0A4A2468A5FA0061DF44 /* RxRelay */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = DDB3DAE02462FB520057E71C /* XCRemoteSwiftPackageReference "RxSwift" */;
-			productName = RxTest;
-		};
-		DDB3DAE52462FB520057E71C /* RxRelay */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = DDB3DAE02462FB520057E71C /* XCRemoteSwiftPackageReference "RxSwift" */;
+			package = DD9C0A472468A5FA0061DF44 /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxRelay;
 		};
-		DDB3DAE72462FB520057E71C /* RxCocoa */ = {
+		DD9C0A4C2468A5FA0061DF44 /* RxCocoa */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = DDB3DAE02462FB520057E71C /* XCRemoteSwiftPackageReference "RxSwift" */;
+			package = DD9C0A472468A5FA0061DF44 /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxCocoa;
 		};
-		DDB3DAE92462FB520057E71C /* RxBlocking */ = {
+		DD9C0A4E2468A5FA0061DF44 /* RxBlocking */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = DDB3DAE02462FB520057E71C /* XCRemoteSwiftPackageReference "RxSwift" */;
+			package = DD9C0A472468A5FA0061DF44 /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxBlocking;
+		};
+		DD9C0A512468A62E0061DF44 /* CompactModal */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DD9C0A502468A62E0061DF44 /* XCRemoteSwiftPackageReference "CompactModal" */;
+			productName = CompactModal;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

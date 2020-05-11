@@ -12,7 +12,7 @@
       },
       {
         "package": "Drawer",
-        "repositoryURL": "https://github.com/mitulmanish/Drawer",
+        "repositoryURL": "https://github.com/mitulmanish/Drawer.git",
         "state": {
           "branch": null,
           "revision": "7c9145d9597cc55e10e09c009bdd6a4c7a10eadc",
@@ -20,8 +20,17 @@
         }
       },
       {
+        "package": "NetworkingKit",
+        "repositoryURL": "https://github.com/mitulmanish/NetworkingKit.git",
+        "state": {
+          "branch": null,
+          "revision": "43e6d6b58128d84b76126b3fdeceb3a3c42da6e7",
+          "version": "0.4.0"
+        }
+      },
+      {
         "package": "RxSwift",
-        "repositoryURL": "https://github.com/ReactiveX/RxSwift.git",
+        "repositoryURL": "https://github.com/ReactiveX/RxSwift",
         "state": {
           "branch": null,
           "revision": "002d325b0bdee94e7882e1114af5ff4fe1e96afa",
