@@ -98,11 +98,11 @@ class HomeViewController: UIViewController {
             }
         }
         
-        Observable.combineLatest(
+        Observable.zip(
             apiKey.asObservable(),
             apiSecret.asObservable()
         )
-        .map { $0 != nil && $1 != nil }
+        .map { $0?.isEmpty == false && $1?.isEmpty == false }
         .subscribe(onNext: { [unowned self] enabled in
             [
                 self.coinButton, self.dateButton, self.currencySelectionButton, self.quantityTextField]
@@ -119,7 +119,7 @@ class HomeViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if apiKey.value == nil || apiSecret.value == nil {
+        if apiKey.value?.isEmpty == true || apiSecret.value?.isEmpty == true {
             let infoVC = InfoViewController(primaryText: "Please grab your API Keys before proceeding", ctaText: "OK")
             dismissThenPresent(viewController: infoVC)
         }

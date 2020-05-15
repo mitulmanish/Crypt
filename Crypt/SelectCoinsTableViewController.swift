@@ -152,7 +152,8 @@ UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegat
 
     func allCoins(coinCollection: CoinCollection?) {
         self.originalCoinCollection = coinCollection
-        guard let data = try? JSONEncoder().encode(coinCollection) else { return }
+        guard let data = try? JSONEncoder().encode(coinCollection),
+            coinCollection?.coins.isEmpty == false else { return }
         UserDefaults.standard.set(data, forKey: "coins")
         DispatchQueue.main.async {
             self.activityIndicator.removeFromSuperview()
@@ -195,13 +196,13 @@ UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegat
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 44
+        44
     }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         selectedCoin = nil
         let searchString = searchText.lowercased()
-        self.filteredCoinCollection = searchText.isEmpty
+        filteredCoinCollection = searchText.isEmpty
             ? originalCoinCollection : filteredCoins(searchString: searchString)
     }
 
